@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 11:09:51 by lryst             #+#    #+#             */
-/*   Updated: 2020/02/13 22:01:07 by lryst            ###   ########.fr       */
+/*   Updated: 2020/02/17 13:44:55 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,74 @@ void	init_cub3d(t_cub3d *ptr)
 	ft_bzero(ptr, sizeof(t_cub3d));
 }
 
-void	parse_line(char *line, t_cub3d *ptr)
+void	separate_r(char **tab, t_cub3d *ptr)
 {
-	char **tab;
 	int i;
 
 	i = 0;
+	if (ft_strcmp("R", (const char*)tab[i]) == 0)
+	{
+		if (tab[i + 1] != NULL && tab[i + 2] != NULL && tab[i + 3] == NULL)
+		{
+			if (tab[i + 1] > 0 && tab[i + 2] > 0 && tab[i + 3] == NULL)
+			{
+				ptr->width = ft_atoi(tab[i + 1]);
+				ptr->height= ft_atoi(tab[i + 2]);
+			}
+		}
+		ft_printf("W %d\n", ptr->width);
+		ft_printf("H %d\n", ptr->height);
+	}
+}
+
+void	check_texture(char **tab, t_cub3d *ptr)
+{
+	int i;
+
+	i = 0;
+	if (tab[i] != NULL && tab[i + 1] != NULL && tab[i + 2] == NULL)
+		ptr->no.path = ft_strdup(tab[i + 1]);
+}
+
+void	separate_texture(char **tab, t_cub3d *ptr)
+{
+	int i;
+
+	i = 0;
+	if (ft_strcmp("NO", (const char *)tab[i]) == 0)
+	{
+		check_texture(tab, ptr);
+		ft_printf("NO %s\n", ptr->no.path);
+	}
+	if (ft_strcmp("SO", (const char *)tab[i]) == 0)
+	{
+		check_texture(tab, ptr);
+		ft_printf("SO %s\n", ptr->so.path);
+	}
+	if (ft_strcmp("we", (const char *)tab[i]) == 0)
+	{
+		check_texture(tab, ptr);
+		ft_printf("we %s\n", ptr->we.path);
+	}
+	if (ft_strcmp("EA", (const char *)tab[i]) == 0)
+	{
+		check_texture(tab, ptr);
+		ft_printf("EA %s\n", ptr->ea.path);
+	}		
+}
+
+void	parse_line(char *line, t_cub3d *ptr)
+{
+	char **tab;
+	
 	tab = ft_split((const char*)line, ' ');
-	strcmp('R', tab[i]) == 0 ? 
+	separate_r(tab, ptr);
+	separate_texture(tab, ptr);
+	// int i;
+	// i = -1;
+	// ft_printf("\n---------\n");
+	// while (tab[++i])
+	// 	ft_printf("->%s<- ", tab[i]);
 
 }
 

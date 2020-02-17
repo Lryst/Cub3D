@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 18:38:04 by lryst             #+#    #+#             */
-/*   Updated: 2020/02/13 20:24:51 by lryst            ###   ########.fr       */
+/*   Updated: 2020/02/17 13:29:45 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,10 @@ typedef struct
 }        		t_cub3d;
 
 
-void		parsing(int fd);
+void	parsing(int fd);
+void	separate_r(char **tab, t_cub3d *ptr);
+void	parse_line(char *line, t_cub3d *ptr);
+void	init_cub3d(t_cub3d *ptr);
+
 
 #endif
