@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 18:38:04 by lryst             #+#    #+#             */
-/*   Updated: 2020/02/17 13:29:45 by lryst            ###   ########.fr       */
+/*   Updated: 2020/02/17 18:55:50 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,12 @@
 # include <stdio.h>
 # include "libft/libft.h"
 
-typedef int color;
+typedef struct
+{
+	int	red;
+	int	green;
+	int	blue;
+}				t_color;
 
 typedef struct
 {
@@ -36,9 +41,9 @@ typedef struct
 	t_texture so;
 	t_texture we;
 	t_texture ea;
-	t_texture sprite;
-	color f;
-	color c;
+	t_texture s;
+	t_color f;
+	t_color c;
 	int mapx;
 	int mapy;
 }        		t_cub3d;

@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 20:22:52 by lryst             #+#    #+#             */
-/*   Updated: 2020/02/13 22:01:00 by lryst            ###   ########.fr       */
+/*   Updated: 2020/02/17 18:41:47 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,4 +17,6 @@ int main(int ac, char **av)
     if (ac != 2)
         return (0);
     parsing(open(av[1], O_RDONLY));
+    //printf("%d\n", atoi("223,45,0"));
+    system("leaks a.out");
 }
