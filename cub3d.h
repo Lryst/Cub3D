@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 18:38:04 by lryst             #+#    #+#             */
-/*   Updated: 2020/02/17 18:55:50 by lryst            ###   ########.fr       */
+/*   Updated: 2020/02/18 17:53:03 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include "libft/libft.h"
+# include <mlx.h>
 
 typedef struct
 {
@@ -44,15 +45,34 @@ typedef struct
 	t_texture s;
 	t_color f;
 	t_color c;
-	int mapx;
-	int mapy;
+	char **map;
 }        		t_cub3d;
 
+typedef struct
+{
+	int width;
+	int height;
+	int no;
+	int so;
+	int we;
+	int ea;
+	int s;
+	int f;
+	int c;
+	int map;
+}				t_check_struct;
 
-void	parsing(int fd);
-void	separate_r(char **tab, t_cub3d *ptr);
-void	parse_line(char *line, t_cub3d *ptr);
+void	separate_color_f(char **tab, t_cub3d *ptr, t_check_struct *ret);
+void	separate_color_c(char **tab, t_cub3d *ptr, t_check_struct *ret);
+
+
 void	init_cub3d(t_cub3d *ptr);
+void	check_map(char **tab, t_cub3d *ptr, t_check_struct *ret);
+void	parse_line(char *line, t_cub3d *ptr);
+void	parsing(int fd);
 
+void	separate_r(char **tab, t_cub3d *ptr, t_check_struct *ret);
+
+void	separate_texture(char **tab, t_cub3d *ptr, t_check_struct *ret);
 
 #endif
