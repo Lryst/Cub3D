@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 11:09:51 by lryst             #+#    #+#             */
-/*   Updated: 2020/02/21 11:10:47 by lryst            ###   ########.fr       */
+/*   Updated: 2020/02/21 11:36:25 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,23 +74,16 @@ void	parsing(int fd)
 	}
 	ft_printf("NBR DE LINE : %d\n", count);
 	//ft_printf("line -> %s\n", line);
-	while (get_next_line(fd, &line) == 1 && i < count && check_struct(&ret) == 0)
+	while (get_next_line(fd, &line) == 1 && start < count && check_struct(&ret) == 0)
 	{
+		write(1, "ok\n", 3);
 		tab = ft_split(line, ' ');
-		if (check_struct(&ret) == 0)
-		{
-			//write(1, "ok\n", 3);
-			parse_line(tab, &ptr, &ret);
-		}
-		ft_printf(" tab [i] ----> %s\n", tab[i]);
-		if (ft_strcmp("1", (const char *)tab[i]) == 0 && ret.map == -1 && check_struct(&ret) == 1)
-		{
-			write(1, "ok\n", 3);
-			//while(tab[i++] == (char *)'1')
-				ret.map = i;
-			ft_printf("NBR DE LINE : %d\n", ret.map);
-		}
+		write(1, "ok\n", 3);
+		parse_line(tab, &ptr, &ret);
+		start++;
 	}
+	ft_printf("NBR DE LINE INFO : %d\n", start);
+	
 }
 
 /*int i;
