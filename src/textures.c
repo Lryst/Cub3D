@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 17:11:05 by lryst             #+#    #+#             */
-/*   Updated: 2020/02/20 19:04:20 by lryst            ###   ########.fr       */
+/*   Updated: 2020/02/21 09:55:33 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,6 @@ void	separate_texture_s(char **tab, t_cub3d *ptr, t_check_struct *ret)
 	}
 	else
 	{
-		write(1, "\nok\n", 4);
 		ft_printf("ERREURE TEXTURE s, DESO BRO ...\n");
 		return;
 	}

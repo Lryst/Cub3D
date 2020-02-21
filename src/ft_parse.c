@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 11:09:51 by lryst             #+#    #+#             */
-/*   Updated: 2020/02/20 18:55:56 by lryst            ###   ########.fr       */
+/*   Updated: 2020/02/21 09:54:56 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void	parse_line(char **tab, t_cub3d *ptr, t_check_struct *ret)
 			separate_texture_we(tab, ptr, ret);
 		if (ft_strcmp("EA", (const char *)tab[i]) == 0)
 			separate_texture_ea(tab, ptr, ret);
+		if (ft_strcmp("S", (const char *)tab[i]) == 0)
+			separate_texture_s(tab, ptr, ret);
 		if (ft_strcmp("F", (const char *)tab[i]) == 0)
 			separate_color_f(tab, ptr, ret);
 		if (ft_strcmp("C", (const char *)tab[i]) == 0)
