@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 18:38:04 by lryst             #+#    #+#             */
-/*   Updated: 2020/02/20 18:12:28 by lryst            ###   ########.fr       */
+/*   Updated: 2020/02/21 10:10:10 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct
 	int s;
 	int f;
 	int c;
+	int map;
 }				t_check_struct;
 
 void	separate_color_f(char **tab, t_cub3d *ptr, t_check_struct *ret);
@@ -77,5 +78,9 @@ void	separate_texture_so(char **tab, t_cub3d *ptr, t_check_struct *ret);
 void	separate_texture_we(char **tab, t_cub3d *ptr, t_check_struct *ret);
 void	separate_texture_ea(char **tab, t_cub3d *ptr, t_check_struct *ret);
 void	separate_texture_s(char **tab, t_cub3d *ptr, t_check_struct *ret);
+
+void	init_check_struct(t_check_struct *ret);
+void	init_cub3d(t_cub3d *ptr);
+int		check_struct(t_check_struct *ret);
 
 #endif
