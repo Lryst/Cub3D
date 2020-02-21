@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 18:38:04 by lryst             #+#    #+#             */
-/*   Updated: 2020/02/21 10:10:10 by lryst            ###   ########.fr       */
+/*   Updated: 2020/02/21 16:03:37 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,16 @@
 # include <stdio.h>
 # include "libft/libft.h"
 # include <mlx.h>
+# define SET "NWES012"
+# define ISSPACE "\t \v \r \f"
+
+typedef struct
+{
+	int width;
+	int hight;
+	int error;
+	char **line;
+}				t_map;
 
 typedef struct
 {
@@ -45,7 +55,7 @@ typedef struct
 	t_texture s;
 	t_color f;
 	t_color c;
-	char **map;
+	t_map map;
 }        		t_cub3d;
 
 typedef struct

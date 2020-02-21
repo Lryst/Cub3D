@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 10:05:33 by lryst             #+#    #+#             */
-/*   Updated: 2020/02/21 11:18:06 by lryst            ###   ########.fr       */
+/*   Updated: 2020/02/21 13:40:49 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		check_struct(t_check_struct *ret)
 	 ret->so == 1 && ret->we == 1 && ret->ea == 1 && ret->s == 1 
 	 && ret->f == 1 && ret->c == 1)
 	 {
-		write(1, "OK\n", 3);
+		//write(1, "OK\n", 3);
 		return (1);
 	 }
 	return (0);
