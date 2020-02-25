@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 11:09:51 by lryst             #+#    #+#             */
-/*   Updated: 2020/02/21 16:24:45 by lryst            ###   ########.fr       */
+/*   Updated: 2020/02/25 21:43:34 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	parse_line(char **tab, t_cub3d *ptr, t_check_struct *ret)
 		return;
 	if (tab[i] != NULL)
 	{
-		//printf("\n\n   TAB[I]     ->   {%s}\n\n", tab[i]);
 		if (ft_strcmp("R", (const char *)tab[i]) == 0)
 			separate_r(tab, ptr, ret);
 		if (ft_strcmp("NO", (const char *)tab[i]) == 0)
@@ -44,104 +43,123 @@ void	parse_line(char **tab, t_cub3d *ptr, t_check_struct *ret)
 	
 }
 
-
 int	ft_strsame(char *s1, char *s2)
 {
 	int i;
-	int j;
-	
+	int j;	
 
 	i = 0;
-	write(1, "ok\n", 3);
+	j = 0;
 	if (s1 == NULL || s2 == NULL)
 		return (0);
 	while (s1[i])
 	{
-		j = 0;
-		while (s1[i] == s2[j])
+		while (s1[i] == ' ' || s1[i] == '\t')
 			i++;
+		if (s1[i] == s2[j])
+		{
+			i++;
+			j = 0;
+		}
 		if (s1[i] != s2[j])
 			j++;
 		if (s2[j] == '\0')
-			write(1, "0\n", 2);	
+			return (0);
 	}
-	write(1, "1\n", 2);
-	return (0);
+	return (1);
 }
 
-
-/*void	save_map(char **tab, t_cub3d *ptr)
+char	*ft_skip_space(char *str)
 {
+	char *tmp;
+	int count;
 	int i;
-	int k;
-	static int index = 0;
-	
+	int j;
+
+	j = 0;
 	i = 0;
-	k = 0;
-	if (tab[i] && ft_strsame(set, tab[i]) == 1)
+	count = 0;
+	if (str == NULL)
+		return (NULL);
+	while (str[i] == '\t' || str[i] == ' ')
+		i++;
+	while (str[i])
 	{
-		ptr->map[i] = ft_strdup(tab[i]);
+		if (ft_strspn(ISSPACE, str[i]))
+			count++;
 		i++;
 	}
-	ft_printf("ptr->map :{%s}\n", ptr->map[index]);
-}*/
+	if (!(tmp = (char*)malloc(sizeof(char) * ft_strlen(str) - count + 1)))
+		return (NULL);
+	i = 0;
+	while (str[i] == '\t' || str[i] == ' ')
+		tmp[j++] = str[i++];
+	while (str[i])
+	{
+		if (!ft_strspn(ISSPACE, str[i]))
+			tmp[j++] = str[i++];
+		else
+			i++;
+	}
+	tmp[j] = '\0';
+	return (tmp);
+}
+
 void	parsing(int fd)
 {
 	t_cub3d ptr;
 	t_check_struct ret;
 	char *line;
-	char**tab;
+	char **tab;
+	char *tmp;
+	char *str;
 	int i;
 	int count;
-	int start;
 	
 	count = 0;
-	start = 0;
 	i = 0;
 	init_cub3d(&ptr);
 	init_check_struct(&ret);
-	/*while (get_next_line(fd, &line) == 1)
-	{
-		while (line[i])
-		{
-			if (check_line == 1)
-				count++;
-			i++;
-		}
-		i = 0;
-		free(line);
-		line = NULL;
-	}
-	ft_printf("NBR DE LINE : %d\n", count);
-	//ft_printf("line -> %s\n", line);*/
+	tmp = ft_newstring(0);
 	while (get_next_line(fd, &line) == 1)
 	{
+		if (ft_strspn(FLINE, line[i]) == 0 && check_struct(&ret) == 1 && ret.map == 1)
+		{
+			write(1, "CHAUSSETTE\n", 11);
+			return;
+		}
+		if (ft_strspn(FLINE, line[i]) == 1 && check_struct(&ret) == 1 && ptr.map.error != 1)
+		{
+			if (ft_strsame(line, SET) == 1)
+			{
+				str = ft_skip_space(line);
+				tmp = ft_strjoinfree_separate(tmp, str, '*');
+				free(str);
+				//ft_printf("tmp : \n{%s}\n", tmp);
+					count++;
+				ret.map = 1;
+			}
+			if (ft_strsame(line, SET) == 0 && ret.map == 1)
+				ptr.map.error = 1;
+		}
 		if (check_struct(&ret) == 0)
 		{
 			tab = ft_split_set(line, ISSPACE);
 			parse_line(tab, &ptr, &ret);
 			free(tab);
 			tab = NULL;
-		}
-		if (check_struct(&ret) == 1 && ptr.map.error != 1)
-		{
-			
-			if (ft_strsame(line, SET) == 1)
-			{
-				write(1, "ok\n", 3);
-				ptr.map.line[i] = ft_strdup(line);
-				ft_printf("MAP.LINE[I] -> {%s}\n", ptr.map.line[i]);
-				i++;
-			}
-			else
-				ptr.map.error = 1;			
+			//ft_printf("line -> %s\n", line);
 		}
 		free(line);
 		line = NULL;
 	}
-	//free(&ptr);
-	//ft_printf("NBR DE LINE INFO : %d\n", start);
-	
+	if (tmp != NULL && check_struct(&ret) == 1)
+	{
+		//ft_printf("TMP-> {%s}\n", tmp);
+		check_map(tmp, &ptr, count);
+		//free(tmp);
+		//tmp = NULL;
+	}
 }
 
 /*int i;

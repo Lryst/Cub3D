@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 18:38:04 by lryst             #+#    #+#             */
-/*   Updated: 2020/02/21 16:03:37 by lryst            ###   ########.fr       */
+/*   Updated: 2020/02/25 21:01:20 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,11 @@
 # include <stdio.h>
 # include "libft/libft.h"
 # include <mlx.h>
-# define SET "NWES012"
-# define ISSPACE "\t \v \r \f"
 
 typedef struct
 {
 	int width;
-	int hight;
+	int height;
 	int error;
 	char **line;
 }				t_map;
@@ -77,7 +75,7 @@ void	separate_color_c(char **tab, t_cub3d *ptr, t_check_struct *ret);
 
 
 void	init_cub3d(t_cub3d *ptr);
-void	check_map(char **tab, t_cub3d *ptr, t_check_struct *ret);
+void	check_map(char *str, t_cub3d *ptr, int count);
 void	parse_line(char **tab, t_cub3d *ptr, t_check_struct *ret);
 void	parsing(int fd);
 
