@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 17:12:03 by lryst             #+#    #+#             */
-/*   Updated: 2020/02/20 19:02:57 by lryst            ###   ########.fr       */
+/*   Updated: 2020/02/26 20:03:21 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	separate_r(char **tab, t_cub3d *ptr, t_check_struct *ret)
 	if (ret->width == 1 || ret->height == 1)
 	{
 		ft_printf("IL Y A DEJA UNE resolution POTO\n");
-		EXIT_FAILURE ;
+		return;
 	}
 	if (ret->width == -1 || ret->height == -1)
 	{
@@ -44,6 +44,6 @@ void	separate_r(char **tab, t_cub3d *ptr, t_check_struct *ret)
 	else
 	{
 		//ft_printf("EURREURE RESOLUTION DOMMAGE...\n");
-		return ;
+		return;
 	}
 }

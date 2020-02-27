@@ -115,7 +115,7 @@ int get_mouse_button(NSEventType eventtype)
   //  printf("**mlx flag low part : %d  - %x\n", flag&0xFFFF, flag&0xFFFF);
 
   if (!(val = (keyflag|flag)&(~(keyflag&flag))))
-    return ;   // no change - can happen when loosing focus on special key pressed, then re-pressed later
+    return;   // no change - can happen when loosing focus on special key pressed, then re-pressed later
   the_key = 1;
   while (((val >> (the_key-1)) & 0x01)==0)
     the_key ++;
@@ -155,7 +155,7 @@ int get_mouse_button(NSEventType eventtype)
 - (void) keyDown:(NSEvent *)theEvent
 {
   if (keyrepeat==0 && [theEvent isARepeat])
-    return ;
+    return;
   //  printf("Key Down: %d\n", [theEvent keyCode]);
   if (event_funct[2] != NULL)
     event_funct[2]([theEvent keyCode], event_param[2]);
@@ -294,7 +294,7 @@ int get_mouse_button(NSEventType eventtype)
   float	  sens;
 
   if (event_funct[4] == NULL)
-    return ;
+    return;
 
   button = 0;
   thepoint = [theEvent locationInWindow];
@@ -613,7 +613,7 @@ int get_mouse_button(NSEventType eventtype)
 - (void) mlx_gl_draw
 {
   if (pixel_nb <= 0)
-    return ;
+    return;
 
   glUseProgram(glsl.pixel_program);
 

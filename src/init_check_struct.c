@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 10:05:33 by lryst             #+#    #+#             */
-/*   Updated: 2020/02/21 13:40:49 by lryst            ###   ########.fr       */
+/*   Updated: 2020/02/27 16:25:35 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	init_check_struct(t_check_struct *ret)
 	ret->f = -1;
 	ret->c = -1;
     ret->map = -1;
+	ret->position = 0;
 }
 
 void	init_cub3d(t_cub3d *ptr)
@@ -43,3 +44,8 @@ int		check_struct(t_check_struct *ret)
 	return (0);
 		
 }
+
+/*void	ft_check_and_free(t_cub3d *ptr)
+{
+	
+}*/

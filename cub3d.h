@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 18:38:04 by lryst             #+#    #+#             */
-/*   Updated: 2020/02/25 21:01:20 by lryst            ###   ########.fr       */
+/*   Updated: 2020/02/27 17:24:47 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ typedef struct
 {
 	int width;
 	int height;
+	int posx;
+	int posy;
+	int map_height;
+	int map_width;
 	t_texture no;
 	t_texture so;
 	t_texture we;
@@ -54,6 +58,7 @@ typedef struct
 	t_color f;
 	t_color c;
 	t_map map;
+	char **closed_map;
 }        		t_cub3d;
 
 typedef struct
@@ -68,6 +73,9 @@ typedef struct
 	int f;
 	int c;
 	int map;
+	int position;
+	int posx;
+	int posy;
 }				t_check_struct;
 
 void	separate_color_f(char **tab, t_cub3d *ptr, t_check_struct *ret);

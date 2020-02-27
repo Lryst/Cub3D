@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 17:09:41 by lryst             #+#    #+#             */
-/*   Updated: 2020/02/20 18:15:50 by lryst            ###   ########.fr       */
+/*   Updated: 2020/02/26 20:03:53 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	separate_color_f(char **tab, t_cub3d *ptr, t_check_struct *ret)
 	else
 	{
 		//ft_printf("EURREURE color f DOMMAGE...\n");
-		return ;
+		return;
 	}
 	//ft_printf("F %s\n", ptr->f);
 }
@@ -95,7 +95,7 @@ void	separate_color_c(char **tab, t_cub3d *ptr, t_check_struct *ret)
 	else
 	{
 		//ft_printf("EURREURE color c DOMMAGE...\n");
-		return ;
+		return;
 	}
 	//ft_printf("F %s\n", ptr->f);
 }

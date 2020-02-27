@@ -116,7 +116,7 @@ void mlx_loop(mlx_ptr_t *mlx_ptr)
 void mlx_pixel_put(mlx_ptr_t *mlx_ptr, mlx_win_list_t *win_ptr, int x, int y, int color)
 {
   if (!win_ptr->pixmgt)
-    return ;
+    return;
   [(id)(win_ptr->winid) selectGLContext];
   [(id)(win_ptr->winid) pixelPutColor:color X:x Y:y];
   win_ptr->nb_flush ++;
@@ -138,7 +138,7 @@ void	mlx_int_loop_once()
       if (event == nil)
 	{
 	  [thedate release];
-	  return ;
+	  return;
 	}
       [NSApp sendEvent:event];
       [NSApp updateWindows];
