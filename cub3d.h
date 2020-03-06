@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 18:38:04 by lryst             #+#    #+#             */
-/*   Updated: 2020/03/06 15:40:15 by lryst            ###   ########.fr       */
+/*   Updated: 2020/03/06 21:39:30 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,12 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <stdio.h>
+# include <math.h>
 # include "libft/libft.h"
 # include "mlx.h"
 //# include "ressources/minilibx/mlx.h"
+
+# define ABS(x) (x > 0 ? (x) : (-x))
 
 typedef struct
 {
@@ -45,6 +48,50 @@ typedef struct
 
 typedef struct
 {
+	int forward;
+	int backward;
+	int turnleft;
+	int turnright;
+} 	t_move;
+
+
+typedef	struct 
+{
+	double posx;
+	double posy;
+	double dirx;
+	double diry;
+	double planex;
+	double planey;
+	double time;
+	double oldtime;
+	double camerax;
+	double rayDirx;
+	double rayDiry;
+	int mapy;
+	int mapx;
+	double sideDistx;
+    double sideDisty;
+	double deltaDistx;
+	double deltaDisty;
+	double perpWallDist;
+	int stepx;
+	int stepy;
+	int hit;
+	int side;
+	double frametime;
+	double movespeed;
+	double rotspeed;
+	double oldDirx;
+	double oldplanex;
+	int	lineHeight;
+	int drawStart;
+	int drawEnd;
+	int color;
+}				t_player;
+
+typedef struct
+{
 	int width;
 	int height;
 	int posx;
@@ -60,6 +107,15 @@ typedef struct
 	t_color c;
 	t_map map;
 	char **closed_map;
+	void *mlx_ptr;
+	void *win_ptr;
+	void *img;
+	void *img_ptr;
+	int sl;
+	int endian;
+	int bpp;
+	t_player p;
+	t_move move;
 }        		t_cub3d;
 
 typedef struct
@@ -77,6 +133,7 @@ typedef struct
 	int position;
 	int posx;
 	int posy;
+	int count;
 }				t_check_struct;
 
 void	separate_color_f(char **tab, t_cub3d *ptr, t_check_struct *ret);
@@ -86,7 +143,7 @@ void	separate_color_c(char **tab, t_cub3d *ptr, t_check_struct *ret);
 void	init_cub3d(t_cub3d *ptr);
 void	check_map(char *str, t_cub3d *ptr, int count);
 void	parse_line(char **tab, t_cub3d *ptr, t_check_struct *ret);
-void	parsing(int fd);
+void	parsing(int fd, t_cub3d *ptr);
 
 void	separate_r(char **tab, t_cub3d *ptr, t_check_struct *ret);
 
@@ -99,5 +156,11 @@ void	separate_texture_s(char **tab, t_cub3d *ptr, t_check_struct *ret);
 void	init_check_struct(t_check_struct *ret);
 void	init_cub3d(t_cub3d *ptr);
 int		check_struct(t_check_struct *ret);
+
+void    ray_caster(t_cub3d *q, t_player *p);
+void 	turnRight(t_cub3d *ptr);
+void 	turnLeft(t_cub3d *ptr);
+void 	forward(t_cub3d *ptr);
+void 	backward(t_cub3d *ptr);
 
 #endif

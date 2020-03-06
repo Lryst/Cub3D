@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 11:09:51 by lryst             #+#    #+#             */
-/*   Updated: 2020/02/27 17:54:27 by lryst            ###   ########.fr       */
+/*   Updated: 2020/03/06 20:47:14 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,26 +52,6 @@ int	ft_strsame(char *s1, char *s2)
 	j = 0;
 	if (s1 == NULL || s2 == NULL || !s1[0] || !s2[0])
 		return (0);
-	//ft_printf("ret->position : %d\n", ret->position);
-	/*while (s1[i])
-	{
-		
-		//ft_printf("ret->position : %d\n", ret->position);
-		if (ft_strspn(POSITION, s1[i]) == 1 && ret->position == 1 && check_struct(ret) == 1)
-		{
-			ft_printf("POSITION : %c\n", s1[i]);
-			write(1, "ERROR MULTI POSITIONS\n", 22);
-			return (0);
-		}
-		else if (ft_strspn(POSITION, s1[i]) == 1 && ret->position == -1 && check_struct(ret) == 1)
-		{
-			ft_printf("\n\nPOSITION : %c\n", s1[i]);
-			i++;
-			ft_printf("\n\nPOSITION : %c\n", s1[i]);
-			ret->position = 1;
-		}
-	
-	}*/
 	while (s1[i])
 	{
 		if (s1[i] == s2[j])
@@ -83,11 +63,9 @@ int	ft_strsame(char *s1, char *s2)
 			j++;
 		if (s2[j] == '\0')
         {
-            //write(1, "0\n", 2);
 			return (0);
         }
 	}
-    //write(1, "1\n", 2);
 	return (1);
 }
 
@@ -139,27 +117,26 @@ int		check_position(char *str, t_check_struct *ret)
 		if (ft_strspn(POSITION, str[i]) == 1)
 		{
 			++ret->position;
-			ret->posx = i;
+			ret->posy = i;
+			ret->posx = ret->count;
 		}
 		i++;
 	}
 	return(1);
 }
 
-void	parsing(int fd)
+void	parsing(int fd, t_cub3d *ptr)
 {
-	t_cub3d ptr;
 	t_check_struct ret;
 	char *line;
 	char **tab;
 	char *tmp;
-	//char *str;
 	int i;
 	int count;
 	
 	count = 0;
 	i = 0;
-	init_cub3d(&ptr);
+	init_cub3d(ptr);
 	init_check_struct(&ret);
 	tmp = ft_newstring(0);
 	while (get_next_line(fd, &line) == 1)
@@ -171,15 +148,10 @@ void	parsing(int fd)
 		}
 		if (ft_strsame(line, SET) == 1 && check_struct(&ret) == 1)
 		{
-			//---------------------------------------------------------------------
-			//write(1, "ok\n",3);
-			//str = ft_skip_space(line);
 			tmp = ft_strjoinfree_separate(tmp, line, '*');
-			
-			check_position(line, &ret) ? ret.posy = count - 1 : 0;
-			//free(str);
-			//ft_printf("line : \n{%s}\n", line);
-				count++;
+			ret.count = count;
+			check_position(line, &ret);
+			count++;
 			ret.map = 1;
 		}
 		if (ft_strsame(line, SET) == 0 && ret.map == 1 && check_struct(&ret) == 1)
@@ -190,7 +162,7 @@ void	parsing(int fd)
 		if (check_struct(&ret) == 0)
 		{
 			tab = ft_split_set(line, ISSPACE);
-			parse_line(tab, &ptr, &ret);
+			parse_line(tab, ptr, &ret);
 			free(tab);
 			tab = NULL;
 			//ft_printf("line -> %s\n", line);
@@ -221,13 +193,13 @@ void	parsing(int fd)
 		write(1, "ERROR 4 MAP\n", 10);
 		return;
 	}
-	ptr.posx = ret.posx;
-	ptr.posy = ret.posy;
-	ptr.map_height = count - 1;
+	ptr->posx = ret.posx;
+	ptr->posy = ret.posy;
+	ptr->map_height = count - 1;
 	if (tmp != NULL && check_struct(&ret) == 1 && ret.position == 1)
 	{
 		//ft_printf("TMP-> {%s}\n", tmp);
-		check_map(tmp, &ptr, count);
+		check_map(tmp, ptr, count);
 		free(tmp);
 		tmp = NULL;
 	}

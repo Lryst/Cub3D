@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 10:38:37 by lryst             #+#    #+#             */
-/*   Updated: 2020/02/27 18:32:57 by lryst            ###   ########.fr       */
+/*   Updated: 2020/03/06 20:48:40 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		check_closed_map(t_cub3d *c)
 	i = -1;
 	while (++i < c->map.height)
 		c->closed_map[i] = ft_strdup(c->map.line[i]);
-	int ret = parcour_closed_map(c->closed_map, c->posy, c->posx, c->map_height);
+	int ret = parcour_closed_map(c->closed_map, c->posx, c->posy, c->map_height);
 	i = -1;
 	ft_printf("\n");
 	while (++i <= c->map_height)
@@ -78,4 +78,6 @@ void	check_map(char *str, t_cub3d *ptr, int count)
 	}
 	if (!check_closed_map(ptr))
 		ft_printf("AAAAAAAAAHHH!!!!nana NANA\nnot closed map\n");
+	else
+		ft_printf("closed map\n");
 }

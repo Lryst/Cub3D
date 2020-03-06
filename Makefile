@@ -6,14 +6,15 @@
 #    By: lryst <lryst@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/12 18:37:25 by lryst             #+#    #+#              #
-#    Updated: 2020/03/06 15:45:02 by lryst            ###   ########.fr        #
+#    Updated: 2020/03/06 21:08:03 by lryst            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 
 SRC_PATH = src
-SRC_NAME = main.c ft_parse.c color.c init_check_struct.c resolution.c save_map.c textures.c
+SRC_NAME = main.c ft_parse.c color.c init_check_struct.c resolution.c\
+save_map.c textures.c ray_casting.c move.c
 
 OBJ_PATH = obj
 OBJ_NAME = $(SRC_NAME:.c=.o)
