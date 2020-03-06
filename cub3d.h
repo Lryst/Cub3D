@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 18:38:04 by lryst             #+#    #+#             */
-/*   Updated: 2020/02/27 17:24:47 by lryst            ###   ########.fr       */
+/*   Updated: 2020/03/06 15:40:15 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include "libft/libft.h"
-# include <mlx.h>
+# include "mlx.h"
+//# include "ressources/minilibx/mlx.h"
 
 typedef struct
 {

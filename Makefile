@@ -6,14 +6,14 @@
 #    By: lryst <lryst@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/12 18:37:25 by lryst             #+#    #+#              #
-#    Updated: 2020/02/13 20:52:29 by lryst            ###   ########.fr        #
+#    Updated: 2020/03/06 15:45:02 by lryst            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 
 SRC_PATH = src
-SRC_NAME = main.c ft_parse.c
+SRC_NAME = main.c ft_parse.c color.c init_check_struct.c resolution.c save_map.c textures.c
 
 OBJ_PATH = obj
 OBJ_NAME = $(SRC_NAME:.c=.o)
@@ -23,6 +23,10 @@ CFLAGS = #-Wall -Werror -Wextra
 
 LIB_DIR = libft
 LIB = $(LIB_DIR)/libft.a
+
+MLX_DIR = ressources/minilibx
+MLX = $(MLX_DIR)/libmlx.a
+MLX_LIBS = -lmlx -framework OpenGL -framework AppKit -lz
 
 SRC = $(addprefix $(SRC_PATH)/,$(SR_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
@@ -34,7 +38,7 @@ $(LIB):
 
 $(NAME): $(OBJ)
 	@printf "\n"
-	@$(CC) $^ $(LIB) -o $@
+	@$(CC) $^ $(LIB) -lmlx -framework OpenGL -framework AppKit -lz -o $@
 	@echo "Compilation of \033[33;1m$(NAME)\033[0;1m: [\033[1;32mOK\033[0;1m]"
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
