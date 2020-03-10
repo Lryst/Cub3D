@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 20:22:52 by lryst             #+#    #+#             */
-/*   Updated: 2020/03/06 21:40:01 by lryst            ###   ########.fr       */
+/*   Updated: 2020/03/10 15:23:49 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ int key_pressed(int key, t_cub3d *ptr)
 	
 	key == 13 ? ptr->move.forward = 1 : 0;
 	key == 1 ? ptr->move.backward = 1 : 0;
-	key == 2 ? ptr->move.turnright = 1 : 0;
-	key == 0 ? ptr->move.turnleft = 1 : 0;
+	key == 124 ? ptr->move.turnright = 1 : 0;
+	key == 123 ? ptr->move.turnleft = 1 : 0;
+	key == 2 ? ptr->move.rightward = 1 : 0;
+	key == 0 ? ptr->move.leftward = 1 : 0;
     return (0);
 }
 
@@ -40,8 +42,10 @@ int key_release(int key, t_cub3d *ptr)
 {
 	key == 13 ? ptr->move.forward = 0 : 0;
 	key == 1 ? ptr->move.backward = 0 : 0;
-	key == 2 ? ptr->move.turnright = 0 : 0;
-	key == 0 ? ptr->move.turnleft = 0 : 0;
+	key == 124 ? ptr->move.turnright = 0 : 0;
+	key == 123 ? ptr->move.turnleft = 0 : 0;
+	key == 2 ? ptr->move.rightward = 0 : 0;
+	key == 0 ? ptr->move.leftward = 0 : 0;
 	return (0);
 }
 
@@ -52,6 +56,8 @@ int		print_screen(t_cub3d *ptr)
 	ptr->move.turnleft ? turnLeft(ptr) : 0;
 	ptr->move.forward ? forward(ptr) : 0;
 	ptr->move.backward ? backward(ptr) : 0;
+	ptr->move.rightward ? rightward(ptr) : 0;
+	ptr->move.leftward ? leftward(ptr) : 0;
 	mlx_put_image_to_window(ptr->mlx_ptr, ptr->win_ptr, ptr->img, 0, 0);
 	return (1);
 }

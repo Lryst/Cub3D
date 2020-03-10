@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 18:38:04 by lryst             #+#    #+#             */
-/*   Updated: 2020/03/06 21:39:30 by lryst            ###   ########.fr       */
+/*   Updated: 2020/03/10 15:24:27 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct
 	int backward;
 	int turnleft;
 	int turnright;
+	int rightward;
+	int leftward;
 } 	t_move;
 
 
@@ -162,5 +164,7 @@ void 	turnRight(t_cub3d *ptr);
 void 	turnLeft(t_cub3d *ptr);
 void 	forward(t_cub3d *ptr);
 void 	backward(t_cub3d *ptr);
+void	rightward(t_cub3d *ptr);
+void    leftward(t_cub3d *ptr);
 
 #endif

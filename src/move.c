@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 21:06:00 by lryst             #+#    #+#             */
-/*   Updated: 2020/03/06 21:41:19 by lryst            ###   ########.fr       */
+/*   Updated: 2020/03/10 15:24:19 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,3 +52,29 @@ void backward(t_cub3d *ptr)
     if(ptr->closed_map[(int)ptr->p.posx][(int)(ptr->p.posy - ptr->p.diry * moveSpeed)] == '.')
         ptr->p.posy -= ptr->p.diry * moveSpeed;
 }
+
+void rightward(t_cub3d *ptr)
+{
+    double moveSpeed = 0.2;
+    if(ptr->closed_map[(int)(ptr->p.posx + ptr->p.planex * moveSpeed)][(int)ptr->p.posy] == '.')
+        ptr->p.posx += ptr->p.planex * moveSpeed;
+    if(ptr->closed_map[(int)ptr->p.posx][(int)(ptr->p.posy + ptr->p.planey * moveSpeed)] == '.')
+        ptr->p.posy += ptr->p.planey * moveSpeed;
+}
+
+void    leftward(t_cub3d *ptr)
+{
+    double moveSpeed = 0.2;
+    if(ptr->closed_map[(int)(ptr->p.posx - ptr->p.planex * moveSpeed)][(int)ptr->p.posy] == '.')
+        ptr->p.posx -= ptr->p.planex * moveSpeed;
+    if(ptr->closed_map[(int)ptr->p.posx][(int)(ptr->p.posy - ptr->p.planey * moveSpeed)] == '.')
+        ptr->p.posy -= ptr->p.planey * moveSpeed;
+}
+
+/*
+reculer
+if (keyDown (SDLK_DOWN))
+    {
+      if (worldMap [int (posX - dirX * moveSpeed)] [int (posY)] == false) posX - = dirX * moveSpeed;
+      if (worldMap [int (posX)] [int (posY - dirY * moveSpeed)] == false) posY - = dirY * moveSpeed;
+    }*/
