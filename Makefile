@@ -14,7 +14,7 @@ NAME = cub3d
 
 SRC_PATH = src
 SRC_NAME = main.c ft_parse.c color.c init_check_struct.c resolution.c\
-save_map.c textures.c ray_casting.c move.c
+save_map.c textures.c ray_casting.c move.c set_texture.c
 
 OBJ_PATH = obj
 OBJ_NAME = $(SRC_NAME:.c=.o)
@@ -27,7 +27,7 @@ LIB = $(LIB_DIR)/libft.a
 
 MLX_DIR = ressources/minilibx
 MLX = $(MLX_DIR)/libmlx.a
-MLX_LIBS = -lmlx -framework OpenGL -framework AppKit -lz
+MLX_LIBS = -lmlx -lXext -lX11
 
 SRC = $(addprefix $(SRC_PATH)/,$(SR_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
@@ -39,7 +39,7 @@ $(LIB):
 
 $(NAME): $(OBJ)
 	@printf "\n"
-	@$(CC) $^ $(LIB) -lmlx -framework OpenGL -framework AppKit -lz -o $@
+	@$(CC) -o $(NAME) $(OBJ) $(LIB) $(MLX) -framework OpenGL -framework AppKit
 	@echo "Compilation of \033[33;1m$(NAME)\033[0;1m: [\033[1;32mOK\033[0;1m]"
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c

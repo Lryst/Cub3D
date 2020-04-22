@@ -15,14 +15,14 @@
 void	init_player(t_player *p, t_cub3d *q)
 {
 	
-    p->posx = (double)q->posx;
-    p->posy = (double)q->posy;
-    p->planex = 0;
-    p->planey = 0.66;
+    p->posX = (double)q->posX;
+    p->posY = (double)q->posY;
+    p->planeX = 0;
+    p->planeY = 0.66;
 	p->time = 0;
 	p->oldtime = 0;
-	p->dirx = -1;
-	p->diry = 0;
+	p->dirX = -1;
+	p->dirY = 0;
 }
 
 int key_pressed(int key, t_cub3d *ptr)
@@ -51,7 +51,10 @@ int key_release(int key, t_cub3d *ptr)
 
 int		print_screen(t_cub3d *ptr)
 {
-	ray_caster(ptr, &ptr->p);
+	ptr->img = mlx_new_image(ptr->mlx_ptr, ptr->width, ptr->height);
+	ptr->img_ptr = mlx_get_data_addr(ptr->img, &ptr->bpp, &ptr->sl, &ptr->endian);
+	ray_caster(ptr, &ptr->player);
+	//printf("coucou 13\n");
 	ptr->move.turnright ? turnRight(ptr) : 0;
 	ptr->move.turnleft ? turnLeft(ptr) : 0;
 	ptr->move.forward ? forward(ptr) : 0;
@@ -59,15 +62,19 @@ int		print_screen(t_cub3d *ptr)
 	ptr->move.rightward ? rightward(ptr) : 0;
 	ptr->move.leftward ? leftward(ptr) : 0;
 	mlx_put_image_to_window(ptr->mlx_ptr, ptr->win_ptr, ptr->img, 0, 0);
+	if (ptr->img != NULL)
+		mlx_destroy_image(ptr->mlx_ptr, ptr->img);
 	return (1);
 }
 
 void	mlx_handle(t_cub3d *ptr, char *av)
 {
+	printf("coucou 1\n");
     ptr->mlx_ptr = mlx_init();
+	printf("coucou 2\n");
     ptr->win_ptr = mlx_new_window(ptr->mlx_ptr, ptr->width, ptr->height, av);
-    ptr->img = mlx_new_image(ptr->mlx_ptr, ptr->width, ptr->height);
-    ptr->img_ptr = mlx_get_data_addr(ptr->img, &ptr->bpp, &ptr->sl, &ptr->endian);
+	printf("coucou 3\n");
+	set_img(ptr);
 	//mlx_key_hook(ptr->win_ptr, key_pressed, ptr);
 
 	mlx_hook(ptr->win_ptr, 2, 0, key_pressed, ptr);
@@ -83,7 +90,7 @@ int main(int ac, char **av)
 	if (ac != 2)
 		return (0);
 	parsing(open(av[1], O_RDONLY), &ptr);
-	init_player(&ptr.p, &ptr);
+	init_player(&ptr.player, &ptr);
 	mlx_handle(&ptr, av[1]);
 	//printf("%d\n", atoi("223,45,0"));
 	//system("leaks a.out");

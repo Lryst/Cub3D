@@ -117,8 +117,8 @@ int		check_position(char *str, t_check_struct *ret)
 		if (ft_strspn(POSITION, str[i]) == 1)
 		{
 			++ret->position;
-			ret->posy = i;
-			ret->posx = ret->count;
+			ret->posY = i;
+			ret->posX = ret->count;
 		}
 		i++;
 	}
@@ -193,8 +193,8 @@ void	parsing(int fd, t_cub3d *ptr)
 		write(1, "ERROR 4 MAP\n", 10);
 		return;
 	}
-	ptr->posx = ret.posx;
-	ptr->posy = ret.posy;
+	ptr->posX = ret.posX;
+	ptr->posY = ret.posY;
 	ptr->map_height = count - 1;
 	if (tmp != NULL && check_struct(&ret) == 1 && ret.position == 1)
 	{

@@ -15,60 +15,60 @@
 void  turnRight(t_cub3d *ptr)
 {
     double rotSpeed = 0.1;
-	ptr->p.oldDirx = ptr->p.dirx;
-	ptr->p.dirx = ptr->p.dirx * cos(-rotSpeed) - ptr->p.diry * sin(-rotSpeed);
-	ptr->p.diry = ptr->p.oldDirx * sin(-rotSpeed) + ptr->p.diry * cos(-rotSpeed);
-	double oldPlanex = ptr->p.planex;
-	ptr->p.planex = ptr->p.planex * cos(-rotSpeed) - ptr->p.planey * sin(-rotSpeed);
-	ptr->p.planey = oldPlanex * sin(-rotSpeed) + ptr->p.planey * cos(-rotSpeed);
+	ptr->p.oldDirx = ptr->p.dirX;
+	ptr->p.dirX = ptr->p.dirX * cos(-rotSpeed) - ptr->p.dirY * sin(-rotSpeed);
+	ptr->p.dirY = ptr->p.oldDirx * sin(-rotSpeed) + ptr->p.dirY * cos(-rotSpeed);
+	double oldPlanex = ptr->p.planeX;
+	ptr->p.planeX = ptr->p.planeX * cos(-rotSpeed) - ptr->p.planeY * sin(-rotSpeed);
+	ptr->p.planeY = oldPlanex * sin(-rotSpeed) + ptr->p.planeY * cos(-rotSpeed);
 }
 
 void turnLeft(t_cub3d *ptr)
 {
     double rotSpeed = 0.1;    
       //both camera direction and camera plane must be rotated
-      ptr->p.oldDirx = ptr->p.dirx;
-      ptr->p.dirx = ptr->p.dirx * cos(rotSpeed) - ptr->p.diry * sin(rotSpeed);
-      ptr->p.diry = ptr->p.oldDirx * sin(rotSpeed) + ptr->p.diry * cos(rotSpeed);
-      ptr->p.oldplanex = ptr->p.planex;
-      ptr->p.planex = ptr->p.planex * cos(rotSpeed) - ptr->p.planey * sin(rotSpeed);
-      ptr->p.planey = ptr->p.oldplanex * sin(rotSpeed) + ptr->p.planey * cos(rotSpeed);
+      ptr->p.oldDirx = ptr->p.dirX;
+      ptr->p.dirX = ptr->p.dirX * cos(rotSpeed) - ptr->p.dirY * sin(rotSpeed);
+      ptr->p.dirY = ptr->p.oldDirx * sin(rotSpeed) + ptr->p.dirY * cos(rotSpeed);
+      ptr->p.oldplaneX = ptr->p.planeX;
+      ptr->p.planeX = ptr->p.planeX * cos(rotSpeed) - ptr->p.planeY * sin(rotSpeed);
+      ptr->p.planeY = ptr->p.oldplaneX * sin(rotSpeed) + ptr->p.planeY * cos(rotSpeed);
 }
 
 void forward(t_cub3d *ptr)
 {
     double moveSpeed = 0.2;
-    if(ptr->closed_map[(int)(ptr->p.posx + ptr->p.dirx * moveSpeed)][(int)ptr->p.posy] == '.')
-        ptr->p.posx += ptr->p.dirx * moveSpeed;
-    if(ptr->closed_map[(int)ptr->p.posx][(int)(ptr->p.posy + ptr->p.diry * moveSpeed)] == '.')
-        ptr->p.posy += ptr->p.diry * moveSpeed;
+    if(ptr->closed_map[(int)(ptr->p.posX + ptr->p.dirX * moveSpeed)][(int)ptr->p.posY] == '.')
+        ptr->p.posX += ptr->p.dirX * moveSpeed;
+    if(ptr->closed_map[(int)ptr->p.posX][(int)(ptr->p.posY + ptr->p.dirY * moveSpeed)] == '.')
+        ptr->p.posY += ptr->p.dirY * moveSpeed;
 }
 
 void backward(t_cub3d *ptr)
 {
     double moveSpeed = 0.2;
-    if(ptr->closed_map[(int)(ptr->p.posx - ptr->p.dirx * moveSpeed)][(int)ptr->p.posy] == '.')
-        ptr->p.posx -= ptr->p.dirx * moveSpeed;
-    if(ptr->closed_map[(int)ptr->p.posx][(int)(ptr->p.posy - ptr->p.diry * moveSpeed)] == '.')
-        ptr->p.posy -= ptr->p.diry * moveSpeed;
+    if(ptr->closed_map[(int)(ptr->p.posX - ptr->p.dirX * moveSpeed)][(int)ptr->p.posY] == '.')
+        ptr->p.posX -= ptr->p.dirX * moveSpeed;
+    if(ptr->closed_map[(int)ptr->p.posX][(int)(ptr->p.posY - ptr->p.dirY * moveSpeed)] == '.')
+        ptr->p.posY -= ptr->p.dirY * moveSpeed;
 }
 
 void rightward(t_cub3d *ptr)
 {
     double moveSpeed = 0.2;
-    if(ptr->closed_map[(int)(ptr->p.posx + ptr->p.planex * moveSpeed)][(int)ptr->p.posy] == '.')
-        ptr->p.posx += ptr->p.planex * moveSpeed;
-    if(ptr->closed_map[(int)ptr->p.posx][(int)(ptr->p.posy + ptr->p.planey * moveSpeed)] == '.')
-        ptr->p.posy += ptr->p.planey * moveSpeed;
+    if(ptr->closed_map[(int)(ptr->p.posX + ptr->p.planeX * moveSpeed)][(int)ptr->p.posY] == '.')
+        ptr->p.posX += ptr->p.planeX * moveSpeed;
+    if(ptr->closed_map[(int)ptr->p.posX][(int)(ptr->p.posY + ptr->p.planeY * moveSpeed)] == '.')
+        ptr->p.posY += ptr->p.planeY * moveSpeed;
 }
 
 void    leftward(t_cub3d *ptr)
 {
     double moveSpeed = 0.2;
-    if(ptr->closed_map[(int)(ptr->p.posx - ptr->p.planex * moveSpeed)][(int)ptr->p.posy] == '.')
-        ptr->p.posx -= ptr->p.planex * moveSpeed;
-    if(ptr->closed_map[(int)ptr->p.posx][(int)(ptr->p.posy - ptr->p.planey * moveSpeed)] == '.')
-        ptr->p.posy -= ptr->p.planey * moveSpeed;
+    if(ptr->closed_map[(int)(ptr->p.posX - ptr->p.planeX * moveSpeed)][(int)ptr->p.posY] == '.')
+        ptr->p.posX -= ptr->p.planeX * moveSpeed;
+    if(ptr->closed_map[(int)ptr->p.posX][(int)(ptr->p.posY - ptr->p.planeY * moveSpeed)] == '.')
+        ptr->p.posY -= ptr->p.planeY * moveSpeed;
 }
 
 /*

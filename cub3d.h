@@ -20,7 +20,7 @@
 # include <stdio.h>
 # include <math.h>
 # include "libft/libft.h"
-# include "mlx.h"
+# include "ressources/minilibx/mlx.h"
 //# include "ressources/minilibx/mlx.h"
 
 # define ABS(x) (x > 0 ? (x) : (-x))
@@ -42,8 +42,23 @@ typedef struct
 
 typedef struct
 {
-	char   *path;
-	int    **texture;//jai un doute
+	void	*texture;
+	void	*adr;
+	char	*path;
+	int		*iadr;
+	int		**tab_adr;
+	int		width;
+	int		height;
+	int		size_line;
+	int		endian;
+	int		bits_per_pixel;
+	double	wallX;
+	int		texX;
+	int		texY;
+	double	texPos;
+	int		**cast_tab;
+
+	//jai un doute
 }               t_texture;
 
 typedef struct
@@ -59,12 +74,12 @@ typedef struct
 
 typedef	struct 
 {
-	double posx;
-	double posy;
-	double dirx;
-	double diry;
-	double planex;
-	double planey;
+	double posX;
+	double posY;
+	double dirX;
+	double dirY;
+	double planeX;
+	double planeY;
 	double time;
 	double oldtime;
 	double camerax;
@@ -85,7 +100,7 @@ typedef	struct
 	double movespeed;
 	double rotspeed;
 	double oldDirx;
-	double oldplanex;
+	double oldplaneX;
 	int	lineHeight;
 	int drawStart;
 	int drawEnd;
@@ -96,8 +111,8 @@ typedef struct
 {
 	int width;
 	int height;
-	int posx;
-	int posy;
+	int posX;
+	int posY;
 	int map_height;
 	int map_width;
 	t_texture no;
@@ -116,7 +131,7 @@ typedef struct
 	int sl;
 	int endian;
 	int bpp;
-	t_player p;
+	t_player player;
 	t_move move;
 }        		t_cub3d;
 
@@ -133,8 +148,8 @@ typedef struct
 	int c;
 	int map;
 	int position;
-	int posx;
-	int posy;
+	int posX;
+	int posY;
 	int count;
 }				t_check_struct;
 
@@ -166,5 +181,6 @@ void 	forward(t_cub3d *ptr);
 void 	backward(t_cub3d *ptr);
 void	rightward(t_cub3d *ptr);
 void    leftward(t_cub3d *ptr);
+void    set_img(t_cub3d *cub);
 
 #endif

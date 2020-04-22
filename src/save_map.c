@@ -39,7 +39,7 @@ int		check_closed_map(t_cub3d *c)
 	i = -1;
 	while (++i < c->map.height)
 		c->closed_map[i] = ft_strdup(c->map.line[i]);
-	int ret = parcour_closed_map(c->closed_map, c->posx, c->posy, c->map_height);
+	int ret = parcour_closed_map(c->closed_map, c->posX, c->posY, c->map_height);
 	i = -1;
 	ft_printf("\n");
 	while (++i <= c->map_height)
