@@ -1,5 +1,48 @@
 #include "../cub3d.h"
 
+/* void	put_textures_in_tab(t_cub3d *cub)
+{
+	int i;
+	printf("coucou 34\n");
+	if (!(cub->tab_textures = (int**)malloc(sizeof(int*) * 4)))
+		return;
+	printf("coucou 35\n");
+	//printf("1 [%p]\n", cub->tab_textures);
+	
+	if (!(cub->tab_textures[0] = (int*)malloc(sizeof(int) * 4096)))
+		return;
+	i = 0;
+	while(i++ < 4096)
+		cub->tab_textures[0][i] = cub->so.iadr[i];
+	printf("coucou 36\n");
+	
+	
+	
+	 if (!(cub->tab_textures[1] = (int*)malloc(sizeof(int) * 4096)))
+		return;
+	i = 0;
+	//printf("cub->ea.iadr = {%d}\n", cub->ea.iadr);
+	while(i++ < 4096)
+		cub->tab_textures[1][i] = cub->ea.iadr[i];
+	printf("coucou 37\n");
+	
+	
+	
+	if (!(cub->tab_textures[2] = (int*)malloc(sizeof(int) * 4096)))
+		return;
+	i = 0;
+	while(i++ < 4096)
+		cub->tab_textures[2][i] = cub->no.iadr[i];
+	printf("coucou 38\n");
+	
+	
+	if (!(cub->tab_textures[3] = (int*)malloc(sizeof(int) * 4096)))
+		return;
+	i = 0;
+	while(i++ < 4096)
+		cub->tab_textures[3][i] = cub->we.iadr[i]; 
+} */
+
 void    ray_caster(t_cub3d *cub, t_player *player)
 {
 	int x;
@@ -7,14 +50,11 @@ void    ray_caster(t_cub3d *cub, t_player *player)
 	double wallX;
 	int texX;
 	int **texture;
-
-	
 	int buffer[cub->height][cub->width];
 	
 	x = -1;
 	y = -1;
-	//xcolor = x *
-	
+	//put_textures_in_tab(cub);	
 	while (++x < cub->width)
 	{
 		y = -1;
@@ -82,16 +122,19 @@ void    ray_caster(t_cub3d *cub, t_player *player)
       	player->drawEnd = player->lineHeight / 2 + cub->height / 2;
       	if(player->drawEnd >= cub->height)
 			player->drawEnd = cub->height - 1;
+
+		//int texNum = cub->closed_map[player->mapx][player->mapy] -1;
 		if (player->side == 0)
 			wallX = player->posY + player->perpWallDist * player->rayDiry;
-		if(player->side == 1)
-			wallX = player->posY + player->perpWallDist * player->rayDiry;
-		texX = (int)(wallX * (double)cub->no.width);
+		else
+			wallX = player->posX + player->perpWallDist * player->rayDirx;
+		wallX -= floor((wallX));
+		texX = (int)(wallX * (double)64);
 		if (player->side == 0 && player->rayDirx > 0)
-			texX = cub->no.width - texX - 1;
-		if (player->side == 1 && player->rayDiry)
-			texX = cub->no.width - texX - 1;
-		int step = 1 * cub->no.height / player->lineHeight;
+			texX = 64 - texX - 1;
+		if (player->side == 1 && player->rayDiry < 0)
+			texX = 64 - texX - 1;
+		int step = 1 * 64 / player->lineHeight;
 		int texPos = (player->drawStart - cub->height / 2 + player->lineHeight / 2) * step;
 
 		while (++y < cub->height)
@@ -99,10 +142,13 @@ void    ray_caster(t_cub3d *cub, t_player *player)
 			//printf("coucou pouet !\n");
 			if (y >= player->drawStart && y <= player->drawEnd)
 			{
-				int texY = (int)texPos & (cub->no.height - 1);
+				int texY = (int)texPos & (64 - 1);
 				texPos+= step;
-				player->color = cub->no.tab_adr[64 * texY][texX];
-				*(int*)(cub->img_ptr + y * 4 * cub->width + x * 4) = player->color;
+				player->color = cub->tab_textures[0][64 * texY + texX];
+				buffer[y][x] = player->color;
+				//char *dest = cub->no.adr + (y * 64 + x * (cub->no.bits_per_pixel / 8));
+				//player->color = *(int*)dest;
+				*(int*)(cub->img_ptr + y * 4 * cub->width + x * 4) = buffer[y][x];
 			}
 			else
 			{
@@ -110,10 +156,10 @@ void    ray_caster(t_cub3d *cub, t_player *player)
 			}
 		}
 		//printf("on est là\n");
-		//double step = 1.0 * cub->no.height / (cub->height - (player->drawStart + player->drawEnd));
+		//double step = 1.0 * 64 / (cub->height - (player->drawStart + player->drawEnd));
 		//y = y * step;
 		/*write(1, "OK\n", 3);
-		cub->no.texture = mlx_xpm_file_to_image (cub->mlx_ptr, cub->no.path, &cub->no.height, &cub->no.width );
+		cub->no.texture = mlx_xpm_file_to_image (cub->mlx_ptr, cub->no.path, &cub->no.height, &64 );
 		//printf("cub->no.path = [%s]\n cub->no.height = [%d]\n cub->no.width = [%d]\n cub->no.texture = [%s]\n", cub->no.path, cub->no.height, cub->no.width, cub->no.texture);
 		cub->no.adr = mlx_get_data_addr(cub->no.texture, &cub->no.bits_per_pixel, &cub->no.size_line, &cub->no.endian);
 

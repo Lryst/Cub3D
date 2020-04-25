@@ -133,6 +133,7 @@ typedef struct
 	int bpp;
 	t_player player;
 	t_move move;
+	int **tab_textures;
 }        		t_cub3d;
 
 typedef struct
@@ -182,5 +183,6 @@ void 	backward(t_cub3d *ptr);
 void	rightward(t_cub3d *ptr);
 void    leftward(t_cub3d *ptr);
 void    set_img(t_cub3d *cub);
+void	put_textures_in_tab(t_cub3d *cub);
 
 #endif
