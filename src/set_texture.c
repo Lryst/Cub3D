@@ -19,7 +19,7 @@ void    tab_to_adr(t_texture *tex, int **tab)
         while (b < tex->width)
         {
             tex->tab_adr[a][b] = tex->iadr[c];
-            printf("tex->iadr[%d] = {%d}\n", c, tex->iadr[c]);
+            //printf("tex->iadr[%d] = {%d}\n", c, tex->iadr[c]);
             c++;
             b++;
         }
