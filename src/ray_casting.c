@@ -1,48 +1,5 @@
 #include "../cub3d.h"
 
-/* void	put_textures_in_tab(t_cub3d *cub)
-{
-	int i;
-	printf("coucou 34\n");
-	if (!(cub->tab_textures = (int**)malloc(sizeof(int*) * 4)))
-		return;
-	printf("coucou 35\n");
-	//printf("1 [%p]\n", cub->tab_textures);
-	
-	if (!(cub->tab_textures[0] = (int*)malloc(sizeof(int) * 4096)))
-		return;
-	i = 0;
-	while(i++ < 4096)
-		cub->tab_textures[0][i] = cub->so.iadr[i];
-	printf("coucou 36\n");
-	
-	
-	
-	 if (!(cub->tab_textures[1] = (int*)malloc(sizeof(int) * 4096)))
-		return;
-	i = 0;
-	//printf("cub->ea.iadr = {%d}\n", cub->ea.iadr);
-	while(i++ < 4096)
-		cub->tab_textures[1][i] = cub->ea.iadr[i];
-	printf("coucou 37\n");
-	
-	
-	
-	if (!(cub->tab_textures[2] = (int*)malloc(sizeof(int) * 4096)))
-		return;
-	i = 0;
-	while(i++ < 4096)
-		cub->tab_textures[2][i] = cub->no.iadr[i];
-	printf("coucou 38\n");
-	
-	
-	if (!(cub->tab_textures[3] = (int*)malloc(sizeof(int) * 4096)))
-		return;
-	i = 0;
-	while(i++ < 4096)
-		cub->tab_textures[3][i] = cub->we.iadr[i]; 
-} */
-
 void    ray_caster(t_cub3d *cub, t_player *player)
 {
 	int x;
@@ -54,7 +11,6 @@ void    ray_caster(t_cub3d *cub, t_player *player)
 	
 	x = -1;
 	y = -1;
-	//put_textures_in_tab(cub);	
 	while (++x < cub->width)
 	{
 		y = -1;
@@ -155,41 +111,6 @@ void    ray_caster(t_cub3d *cub, t_player *player)
 				*(int*)(cub->img_ptr + y * 4 * cub->width + x * 4) = y < player->drawStart ? 0x33D1FF : 0x0BB62F;
 			}
 		}
-		//printf("on est là\n");
-		//double step = 1.0 * 64 / (cub->height - (player->drawStart + player->drawEnd));
-		//y = y * step;
-		/*write(1, "OK\n", 3);
-		cub->no.texture = mlx_xpm_file_to_image (cub->mlx_ptr, cub->no.path, &cub->no.height, &64 );
-		//printf("cub->no.path = [%s]\n cub->no.height = [%d]\n cub->no.width = [%d]\n cub->no.texture = [%s]\n", cub->no.path, cub->no.height, cub->no.width, cub->no.texture);
-		cub->no.adr = mlx_get_data_addr(cub->no.texture, &cub->no.bits_per_pixel, &cub->no.size_line, &cub->no.endian);
-
-		cub->no.iadr = (int*)cub->no.adr;
-		tab_to_adr(&cub->no);*/
-		//printf("cub->no.tab_adr[y][x] = {%d}\n", cub->no.tab_adr[y][x]);
-		/* while (++y < cub->height)
-		{
-			if (y >= player->drawStart && y <= player->drawEnd)
-			{
-				*(int*)(cub->img_ptr + y * 4 * cub->width + x * 4) = cub->no.tab_adr[0][0];
-				//y > 63 ? y = 0 : y++;
-
-				int pixelRepetition = ABS(((player->drawStart - player->drawEnd)) / 64);
-				printf("%d\n", pixelRepetition);
-				
-				k = -1;
-				while (j >= player->drawStart && j <= player->drawEnd && ++k != pixelRepetition && j < cub->height) {
-					*(int*)(cub->img_ptr + j * 4 * cub->width + i * 4) = cub->no.tab_adr[y][x];
-					j++;
-				}
-				y++;
-				if (y > 64)
-					y = 0; 
-			}
-			else
-			{
-				*(int*)(cub->img_ptr + y * 4 * cub->width + x * 4) = y < player->drawStart ? 0x33D1FF : 0x0BB62F;
-			}
-		}*/
 	}
 	
 }
