@@ -34,14 +34,9 @@ void    tab_to_adr(t_texture *tex, int **tab)
 
 void    get_inf(t_texture *tex, void *mlx_ptr, int **tab)
 {
-    printf("coucou 5\n");
     tex->texture = mlx_xpm_file_to_image(mlx_ptr, tex->path, &tex->width, &tex->height);
-    printf("coucou 6\n");
-    tex->adr = mlx_get_data_addr(tex->texture, &tex->bits_per_pixel, &tex->size_line, &tex->endian);
-    printf("coucou 7\n");
-    tex->iadr = (int*)tex->adr;
-    tab_to_adr(tex, tab);
-    printf("tex->adr {%s}\n", tex->adr);
+    *tab = (int*) mlx_get_data_addr(tex->texture, &tex->bits_per_pixel, &tex->size_line, &tex->endian);
+
 }
 
 void    set_img(t_cub3d *cub)

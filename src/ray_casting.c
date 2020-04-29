@@ -90,8 +90,8 @@ void    ray_caster(t_cub3d *cub, t_player *player)
 			texX = 64 - texX - 1;
 		if (player->side == 1 && player->rayDiry < 0)
 			texX = 64 - texX - 1;
-		int step = 1 * 64 / player->lineHeight;
-		int texPos = (player->drawStart - cub->height / 2 + player->lineHeight / 2) * step;
+		double step = 1.0 * 64 / player->lineHeight;
+		double texPos = (player->drawStart - cub->height / 2 + player->lineHeight / 2) * step;
 
 		while (++y < cub->height)
 		{
