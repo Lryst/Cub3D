@@ -30,8 +30,6 @@ int	ft_unsigned_len(unsigned int nb)
 	size_t		size;
 
 	size = 1;
-	if (nb < 0)
-		size++;
 	while ((nb /= 10))
 		size++;
 	return (size);
