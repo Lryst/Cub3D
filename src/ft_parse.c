@@ -105,7 +105,7 @@ char	*ft_skip_space(char *str)
 	return (tmp);
 }
 
-int		check_position(char *str, t_check_struct *ret)
+int		check_position(char *str, t_check_struct *ret, t_cub3d *cub)
 {
 	int i;
 
@@ -118,6 +118,8 @@ int		check_position(char *str, t_check_struct *ret)
 		{
 			++ret->position;
 			ret->posY = i;
+			cub->orientation = str[i];
+			printf("orientation = [%c]\n", str[i]);
 			ret->posX = ret->count;
 		}
 		i++;
@@ -150,7 +152,7 @@ void	parsing(int fd, t_cub3d *ptr)
 		{
 			tmp = ft_strjoinfree_separate(tmp, line, '*');
 			ret.count = count;
-			check_position(line, &ret);
+			check_position(line, &ret, ptr);
 			count++;
 			ret.map = 1;
 		}
@@ -182,7 +184,7 @@ void	parsing(int fd, t_cub3d *ptr)
 		//---------------------------------------------------------------------
 		//str = ft_skip_space(line);
 		tmp = ft_strjoinfree_separate(tmp, line, '*');
-		check_position(line, &ret);
+		check_position(line, &ret, ptr);
 		//free(str);
 		//ft_printf("tmp : \n{%s}\n", tmp);
 			count++;

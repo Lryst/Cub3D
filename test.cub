@@ -1,16 +1,16 @@
 R 1920 1080
 S /Users/lulu/Lryst/Cub3D/ressources/path_to_the_sprite_texture
 
-    NO /Users/lulu/Lryst/Cub3D/ressources/texture_wall_north.xpm
-SO /Users/lulu/Lryst/Cub3D/ressources/texture_wall_south.xpm
+    NO ./ressources/texture_wall_south.xpm
+SO ./ressources/texture_wall_north.xpm
 
 
 
 
 
 
-    WE /Users/lulu/Lryst/Cub3D/ressources/texture_wall_west.xpm
-EA /Users/lulu/Lryst/Cub3D/ressources/texture_wall_east.xpm
+    WE ./ressources/texture_wall_west.xpm
+EA ./ressources/texture_wall_east.xpm
 
 F 250,100,0
 C 225,30,0
@@ -23,7 +23,7 @@ C 225,30,0
 11111111111111111111111111111
 10000000001100000000000000001
 10110000011100000020000010001
-1001000000000000000N000010001
+10010000000000000000000010001
 10110000011100000000000010001
 10000000001100000111011110001
 11110111111111011100000011111
@@ -32,5 +32,5 @@ C 225,30,0
 10002000000000000000000000001
 10000000000000001101010010001
 11000000110101011111011110001
-11110111111101011111011110001
+1111S111111101011111011110001
 11111111111111111111111111111

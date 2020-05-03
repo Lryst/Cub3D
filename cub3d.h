@@ -74,6 +74,8 @@ typedef struct
 
 typedef	struct 
 {
+	int x;
+	int y;
 	double posX;
 	double posY;
 	double dirX;
@@ -134,6 +136,7 @@ typedef struct
 	t_player player;
 	t_move move;
 	int **tab_textures;
+	char orientation;
 }        		t_cub3d;
 
 typedef struct
@@ -162,6 +165,7 @@ void	init_cub3d(t_cub3d *ptr);
 void	check_map(char *str, t_cub3d *ptr, int count);
 void	parse_line(char **tab, t_cub3d *ptr, t_check_struct *ret);
 void	parsing(int fd, t_cub3d *ptr);
+int		check_position(char *str, t_check_struct *ret, t_cub3d *cub);
 
 void	separate_r(char **tab, t_cub3d *ptr, t_check_struct *ret);
 

@@ -1,46 +1,14 @@
 #include "../cub3d.h"
 
-void    tab_to_adr(t_texture *tex, int **tab)
-{
-    int a;
-    int b;
-    int c;
-
-    a = 0;
-    b = 0;
-    c = 0;
-    if (!(tex->tab_adr = (int**)malloc(sizeof(int*) * tex->height)))
-        return;
-    while (a++ < tex->height)
-    {
-        b = 0;
-        if (!(tex->tab_adr[a] = (int*)malloc(sizeof(int) * tex->width)))
-            return;
-        while (b < tex->width)
-        {
-            tex->tab_adr[a][b] = tex->iadr[c];
-            //printf("tex->iadr[%d] = {%d}\n", c, tex->iadr[c]);
-            c++;
-            b++;
-        }
-    }
-    c = -1;
-    /*attention il peut y avoir des leaks par rqapport a ce malloc*/
-    if (!(*tab = (int*)malloc(sizeof(int) * 4097)))
-        return;
-    *tab = tex->iadr;
-    //printf()
-}
-
 void    get_inf(t_texture *tex, void *mlx_ptr, int **tab)
 {
     tex->texture = mlx_xpm_file_to_image(mlx_ptr, tex->path, &tex->width, &tex->height);
     *tab = (int*) mlx_get_data_addr(tex->texture, &tex->bits_per_pixel, &tex->size_line, &tex->endian);
-
 }
 
 void    set_img(t_cub3d *cub)
 {
+    printf("coucou 4\n");
     if (!(cub->tab_textures = (int**)malloc(sizeof(int) * 4)))
         return;
     if (cub->no.path != NULL)

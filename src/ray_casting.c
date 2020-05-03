@@ -11,6 +11,26 @@ void    ray_caster(t_cub3d *cub, t_player *player)
 	
 	x = -1;
 	y = -1;
+	/*if (cub->orientation == 'N')
+	{
+		player->dirX = 0;
+		player->dirY = 1;
+	}
+	if (cub->orientation == 'E')
+	{
+		player->dirX = 1;
+		player->dirY = 0;
+	}
+	if (cub->orientation == 'S')
+	{
+		player->dirX = 0;
+		player->dirY = -1;
+	}
+	if (cub->orientation == 'W')
+	{
+		player->dirX = -1;
+		player->dirY = 0;
+	}*/
 	while (++x < cub->width)
 	{
 		y = -1;
@@ -62,8 +82,18 @@ void    ray_caster(t_cub3d *cub, t_player *player)
 			//Check if ray has hit a wall
 			cub->closed_map[player->mapx][player->mapy] != '.' ? player->hit = 1 : 0;
 		}
+		if (player->side == 1)
+		{
+			if (player->rayDiry < 0)
+				player->side += 2;
+		}
+		else
+		{
+			if (player->rayDirx < 0)
+				player->side += 2;
+		}
 		//Calculate distance projected on camera dir
-		if(player->side == 0)
+		if(player->side == 0 || player->side == 2)
 			player->perpWallDist = (player->mapx - player->posX + (1 - player->stepx) / 2) / player->rayDirx;
       	else
 			player->perpWallDist = (player->mapy - player->posY + (1 - player->stepy) / 2) / player->rayDiry;
@@ -80,35 +110,97 @@ void    ray_caster(t_cub3d *cub, t_player *player)
 			player->drawEnd = cub->height - 1;
 
 		//int texNum = cub->closed_map[player->mapx][player->mapy] -1;
-		if (player->side == 0)
+		if (player->side == 0 || player-> side == 2)
 			wallX = player->posY + player->perpWallDist * player->rayDiry;
 		else
 			wallX = player->posX + player->perpWallDist * player->rayDirx;
 		wallX -= floor((wallX));
-		texX = (int)(wallX * (double)64);
-		if (player->side == 0 && player->rayDirx > 0)
-			texX = 64 - texX - 1;
-		if (player->side == 1 && player->rayDiry < 0)
-			texX = 64 - texX - 1;
-		double step = 1.0 * 64 / player->lineHeight;
-		double texPos = (player->drawStart - cub->height / 2 + player->lineHeight / 2) * step;
-
-		while (++y < cub->height)
+		//texX = (int)(wallX * (double)cub->no.width);
+		if (player->side == 0)
 		{
-			//printf("coucou pouet !\n");
-			if (y >= player->drawStart && y <= player->drawEnd)
+			texX = (int)(wallX * (double)cub->no.width);
+			texX = cub->no.width - texX - 1;double step = 1.0 * cub->no.height / player->lineHeight;
+			double texPos = (player->drawStart - cub->height / 2 + player->lineHeight / 2) * step;
+
+			while (++y < cub->height)
 			{
-				int texY = (int)texPos & (64 - 1);
-				texPos+= step;
-				player->color = cub->tab_textures[0][64 * texY + texX];
-				buffer[y][x] = player->color;
-				//char *dest = cub->no.adr + (y * 64 + x * (cub->no.bits_per_pixel / 8));
-				//player->color = *(int*)dest;
-				*(int*)(cub->img_ptr + y * 4 * cub->width + x * 4) = buffer[y][x];
+				if (y >= player->drawStart && y <= player->drawEnd)
+				{
+					int texY = (int)texPos & (cub->no.height - 1);
+					texPos+= step;
+					player->color = cub->tab_textures[0][cub->no.height * texY + texX];
+					*(int*)(cub->img_ptr + y * 4 * cub->width + x * 4) = player->color;
+				}
+				else
+				{
+					*(int*)(cub->img_ptr + y * 4 * cub->width + x * 4) = y < player->drawStart ? 0x33D1FF : 0x0BB62F;
+				}
 			}
-			else
+		}
+		if (player->side == 2)
+		{
+			texX = (int)(wallX * (double)cub->so.width);
+			texX = cub->so.width - texX - 1;
+			double step = 1.0 * cub->so.height / player->lineHeight;
+			double texPos = (player->drawStart - cub->height / 2 + player->lineHeight / 2) * step;
+
+			while (++y < cub->height)
 			{
-				*(int*)(cub->img_ptr + y * 4 * cub->width + x * 4) = y < player->drawStart ? 0x33D1FF : 0x0BB62F;
+				if (y >= player->drawStart && y <= player->drawEnd)
+				{
+					int texY = (int)texPos & (cub->so.height - 1);
+					texPos+= step;
+					player->color = cub->tab_textures[2][cub->so.height * texY + texX];
+					*(int*)(cub->img_ptr + y * 4 * cub->width + x * 4) = player->color;
+				}
+				else
+				{
+					*(int*)(cub->img_ptr + y * 4 * cub->width + x * 4) = y < player->drawStart ? 0x33D1FF : 0x0BB62F;
+				}
+			}
+		}
+		if (player->side == 1)
+		{
+			texX = (int)(wallX * (double)cub->ea.width);
+			texX = cub->ea.width - texX - 1;
+			double step = 1.0 * cub->ea.height / player->lineHeight;
+			double texPos = (player->drawStart - cub->height / 2 + player->lineHeight / 2) * step;
+
+			while (++y < cub->height)
+			{
+				if (y >= player->drawStart && y <= player->drawEnd)
+				{
+					int texY = (int)texPos & (cub->ea.height - 1);
+					texPos+= step;
+					player->color = cub->tab_textures[1][cub->ea.height * texY + texX];
+					*(int*)(cub->img_ptr + y * 4 * cub->width + x * 4) = player->color;
+				}
+				else
+				{
+					*(int*)(cub->img_ptr + y * 4 * cub->width + x * 4) = y < player->drawStart ? 0x33D1FF : 0x0BB62F;
+				}
+			}
+		}
+		if (player->side == 3)
+		{
+			texX = (int)(wallX * (double)cub->we.width);
+			texX = cub->we.width - texX - 1;
+			double step = 1.0 * cub->we.height / player->lineHeight;
+			double texPos = (player->drawStart - cub->height / 2 + player->lineHeight / 2) * step;
+
+			while (++y < cub->height)
+			{
+				if (y >= player->drawStart && y <= player->drawEnd)
+				{
+					int texY = (int)texPos & (cub->we.height - 1);
+					texPos+= step;
+					player->color = cub->tab_textures[3][cub->we.height * texY + texX];
+					*(int*)(cub->img_ptr + y * 4 * cub->width + x * 4) = player->color;
+				}
+				else
+				{
+					*(int*)(cub->img_ptr + y * 4 * cub->width + x * 4) = y < player->drawStart ? 0x33D1FF : 0x0BB62F;
+				}
 			}
 		}
 	}

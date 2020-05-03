@@ -12,17 +12,17 @@
 
 #include "../cub3d.h"
 
-void	init_player(t_player *p, t_cub3d *q)
+void	init_player(t_player *player, t_cub3d *cub)
 {
 	
-    p->posX = (double)q->posX;
-    p->posY = (double)q->posY;
-    p->planeX = 0;
-    p->planeY = 0.66;
-	p->time = 0;
-	p->oldtime = 0;
-	p->dirX = -1;
-	p->dirY = 0;
+    player->posX = (double)cub->posX + 0.5;
+    player->posY = (double)cub->posY + 0.5;
+    player->planeX = 0;
+    player->planeY = 0.66;
+	player->time = 0;
+	player->oldtime = 0;
+	player->dirX = -1;
+	player->dirY = 0;
 }
 
 int key_pressed(int key, t_cub3d *cub)
