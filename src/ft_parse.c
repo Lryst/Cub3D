@@ -40,7 +40,6 @@ void	parse_line(char **tab, t_cub3d *ptr, t_check_struct *ret)
 			separate_color_c(tab, ptr, ret);
 		return;
 	}
-	
 }
 
 int	ft_strsame(char *s1, char *s2)
@@ -165,11 +164,8 @@ void	parsing(int fd, t_cub3d *ptr)
 		{
 			tab = ft_split_set(line, ISSPACE);
 			parse_line(tab, ptr, &ret);
-			free(tab);
-			tab = NULL;
 			//ft_printf("line -> %s\n", line);
 		}
-		free(line);
 		line = NULL;
 	}
 	if (ft_strsame(line, FLINE) == 1 && ret.map == 1)
@@ -198,12 +194,11 @@ void	parsing(int fd, t_cub3d *ptr)
 	ptr->posX = ret.posX;
 	ptr->posY = ret.posY;
 	ptr->map_height = count - 1;
+	ptr->map_width = ft_strlen(line);
 	if (tmp != NULL && check_struct(&ret) == 1 && ret.position == 1)
 	{
 		//ft_printf("TMP-> {%s}\n", tmp);
 		check_map(tmp, ptr, count);
-		free(tmp);
-		tmp = NULL;
 	}
 	if (ret.position != 1)
 	{

@@ -14,7 +14,7 @@ NAME = cub3d
 
 SRC_PATH = src
 SRC_NAME = main.c ft_parse.c color.c init_check_struct.c resolution.c\
-save_map.c textures.c ray_casting.c move.c set_texture.c
+save_map.c textures.c ray_casting.c move.c set_texture.c\
 
 OBJ_PATH = obj
 OBJ_NAME = $(SRC_NAME:.c=.o)

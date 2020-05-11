@@ -40,8 +40,6 @@ void	separate_color_f(char **tab, t_cub3d *ptr, t_check_struct *ret)
 						}
 					}
 				}
-				free(*color);
-				*color = NULL;
 			}
 			ft_printf("F.red %d\n", ptr->f.red);
 			ft_printf("F.green %d\n", ptr->f.green);
@@ -84,8 +82,6 @@ void	separate_color_c(char **tab, t_cub3d *ptr, t_check_struct *ret)
 						}
 					}
 				}
-				free(*color);
-				*color = NULL;
 			}
 			ft_printf("C.red %d\n", ptr->c.red);
 			ft_printf("C.green %d\n", ptr->c.green);

@@ -4,45 +4,27 @@ void    ray_caster(t_cub3d *cub, t_player *player)
 {
 	int x;
 	int y;
+	int a;
 	double wallX;
 	int texX;
 	int **texture;
+	double zbuffer[cub->width];
+	int *spriteOrder;
+	double *spriteDistance;
 	int buffer[cub->height][cub->width];
 	
 	x = -1;
 	y = -1;
-	/*if (cub->orientation == 'N')
-	{
-		player->dirX = 0;
-		player->dirY = 1;
-	}
-	if (cub->orientation == 'E')
-	{
-		player->dirX = 1;
-		player->dirY = 0;
-	}
-	if (cub->orientation == 'S')
-	{
-		player->dirX = 0;
-		player->dirY = -1;
-	}
-	if (cub->orientation == 'W')
-	{
-		player->dirX = -1;
-		player->dirY = 0;
-	}*/
 	while (++x < cub->width)
 	{
 		y = -1;
-		//printf("coucou ok on est pas si nulle\n");
 		player->camerax = 2 * x / (double)cub->width - 1;
 		player->rayDirx = player->dirX + player->planeX * player->camerax;
 		player->rayDiry = player->dirY + player->planeY * player->camerax;
 		player->mapx = (int)player->posX;
 		player->mapy = (int)player->posY;
-		player->deltaDistx = ABS(1 / player->rayDirx);
-		player->deltaDisty = ABS(1 / player->rayDiry);
-		//player->perpWallDist;
+		player->deltaDistx = sqrt(1 + (player->rayDiry * player->rayDiry) / (player->rayDirx * player->rayDirx));
+		player->deltaDisty = sqrt(1 + (player->rayDirx * player->rayDirx) / (player->rayDiry * player->rayDiry));
 		player->hit = 0;
 		if (player->rayDirx < 0)
 		{
@@ -56,6 +38,7 @@ void    ray_caster(t_cub3d *cub, t_player *player)
 		}
 		if(player->rayDiry < 0)
 		{
+			//printf("POUET\n");
 			player->stepy = -1;
 			player->sideDisty = (player->posY - player->mapy) * player->deltaDisty;
 		}
@@ -80,7 +63,7 @@ void    ray_caster(t_cub3d *cub, t_player *player)
 				player->side = 1;
 			}
 			//Check if ray has hit a wall
-			cub->closed_map[player->mapx][player->mapy] != '.' ? player->hit = 1 : 0;
+			cub->map.line[player->mapx][player->mapy] == '1' ? player->hit = 1 : 0;
 		}
 		if (player->side == 1)
 		{
@@ -181,6 +164,7 @@ void    ray_caster(t_cub3d *cub, t_player *player)
 				}
 			}
 		}
+		//printf("youpi\n");
 		if (player->side == 3)
 		{
 			texX = (int)(wallX * (double)cub->we.width);
@@ -203,6 +187,120 @@ void    ray_caster(t_cub3d *cub, t_player *player)
 				}
 			}
 		}
+		zbuffer[x] = player->perpWallDist;
+		int i;
+		int b;
+
+		i = 0;
+		spriteOrder = (int*)malloc(sizeof(int) * cub->map.sprite.sprite_nbr);
+		spriteDistance = (double*)malloc(sizeof(double) * cub->map.sprite.sprite_nbr);
+		while (i < cub->map.sprite.sprite_nbr)
+		{
+			spriteOrder[i] = i;
+			spriteDistance[i] = ((player->posX - cub->map.sprite.pos_sprite[i][0]) * (player->posX - cub->map.sprite.pos_sprite[i][0]) + (player->posY - cub->map.sprite.pos_sprite[i][1]) * (player->posY - cub->map.sprite.pos_sprite[i][1]));
+			//printf("distance [%f]\n", (player->posX - cub->map.sprite.pos_sprite[i][0]) * (player->posX - cub->map.sprite.pos_sprite[i][0]) + (player->posY - cub->map.sprite.pos_sprite[i][1]) * (player->posY - cub->map.sprite.pos_sprite[i][1]));
+			//printf("spriteorder [%d], spritedisctance [%f]\n", spriteOrder[i], spriteDistance[i]);
+			i++;
+		}
+		//printf("youpi yeah\n");
+		double stock;
+		i = 0;
+		while (i < cub->map.sprite.sprite_nbr)
+		{
+			//printf("prout\n");
+			a = i + 1;
+			while (a < cub->map.sprite.sprite_nbr)
+			{
+				if (spriteDistance[a] > spriteDistance[i])
+				{
+					stock = spriteDistance[i];
+					spriteDistance[i] = spriteDistance[a];
+					spriteDistance[a] = stock;
+				}
+				a++;
+			}
+			i++;
+		}
+		i = 0;
+		while (i < cub->map.sprite.sprite_nbr)
+		{
+			//printf("coucou %d\n", i);
+			cub->map.sprite.x = cub->map.sprite.pos_sprite[spriteOrder[i]][0] - player->posX;
+			//printf("cub->map.sprite.pos_sprite[spriteOrder[i]][0] = [%d]\n", cub->map.sprite.pos_sprite[spriteOrder[i]][0]);
+			//printf("player->posX = [%f]\n", player->posX);
+			cub->map.sprite.y = cub->map.sprite.pos_sprite[spriteOrder[i]][1] - player->posY;
+			
+			cub->map.sprite.inDet = 1.0 / (player->planeX * player->dirY - player->dirX * player->planeY);
+			
+			cub->map.sprite.transX = cub->map.sprite.inDet * (player->dirY * cub->map.sprite.x - player->dirX * cub->map.sprite.y);
+			cub->map.sprite.transY = cub->map.sprite.inDet * (-player->planeY * cub->map.sprite.x + player->planeX * cub->map.sprite.y);
+			cub->map.sprite.screenX = (int)((cub->width / 2) * (1 + cub->map.sprite.transX / cub->map.sprite.transY));
+			
+			//double vmove = 0.0;
+			//int vmovescreen = (int)(vmove / cub->map.sprite.transX);
+			//calcul de la heuteur de mon sprite
+			//printf("pouet %d\n", i);
+			cub->map.sprite.height = abs((int)(cub->height / (cub->map.sprite.transY)));
+			cub->map.sprite.drawstartY = -cub->map.sprite.height / 2 + cub->height / 2;
+			if (cub->map.sprite.drawstartY < 0)
+				cub->map.sprite.drawstartY = 0;
+			cub->map.sprite.drawendY = cub->map.sprite.height / 2 + cub->height / 2;
+			if (cub->map.sprite.drawendY >= cub->height)
+				cub->map.sprite.drawendY = cub->height - 1;
+			
+			//calcul de la largeur de mon sprite
+			//printf("ok %d\n", i);
+			cub->map.sprite.width = abs((int)(cub->height / (cub->map.sprite.transY)));
+			cub->map.sprite.drawstartX = -cub->map.sprite.width / 2 + cub->map.sprite.screenX;
+			if (cub->map.sprite.drawstartX < 0)
+				cub->map.sprite.drawstartX = 0;
+			cub->map.sprite.drawendX = cub->map.sprite.width / 2 + cub->map.sprite.screenX;
+			if (cub->map.sprite.drawendX >= cub->width)
+				cub->map.sprite.drawendX = cub->width -1;
+
+			//int stripe = cub->map.sprite.drawstartX;
+			//printf("ta mere %d\n", i);
+			while (cub->map.sprite.drawstartX < cub->map.sprite.drawendX)
+			{
+				//printf("coucou youpi yeah\n");
+				cub->map.sprite.texX = (int)(((256 * cub->map.sprite.drawstartX - (cub->map.sprite.screenX - cub->map.sprite.width / 2 )) * cub->s.width / cub->map.sprite.width) / 256);
+				//cub->map.sprite.texX = (int)(256 * (cub->map.sprite.drawstartX - (-cub->map.sprite.width / 2 + cub->map.sprite.screenX)) * cub->s.width / cub->map.sprite.width) / 256;
+				//cub->map.sprite.drawendY = cub->height / 2 - cub->map.sprite.height / 2;
+				/*if (cub->map.sprite.drawstartY < 0)
+					cub->map.sprite.drawstartY = 0;
+				while (cub->map.sprite.drawstartY < cub->map.sprite.drawendY && cub->map.sprite.transY > 0 && cub->map.sprite.drawstartX < cub->width && cub->map.sprite.transY < player->perpWallDist)
+				{
+					//int see[i] = 1;
+					cub->map.sprite.texY = (((cub->map.sprite.drawstartY * 256 - cub->height * 128 + cub->map.sprite.height * 128) * cub->s.height) / cub->map.sprite.height) / 256;
+					if (*(int)(cub->img_ptr[(int)(cub->s.width * cub->map.sprite.texY + cub->map.sprite.texX)]) != -16777216)
+						*(int)(cub->img_ptr[cub->map.sprite.drawstartX + cub->width * cub->map.sprite.drawstartY]) = cub->img_ptr[(int)(cub->s.width * cub->map.sprite.texY + cub->map.sprite.texY)]
+					cub->map.sprite.drawstartY++;
+				}*/
+
+				
+				if (cub->map.sprite.transY > 0 && cub->map.sprite.drawstartX > 0 && cub->map.sprite.drawstartX < cub->width && cub->map.sprite.transY < zbuffer[cub->map.sprite.drawstartX])
+				{
+					//printf("boucle\n");
+					int y = cub->map.sprite.drawstartY;
+					while (y < cub->map.sprite.drawendX)
+					{
+						//printf("zboub\n");
+						int d = (y) * 256 - cub->height * 128 + cub->map.sprite.height * 128;
+						cub->map.sprite.texY = ((d * cub->s.height) / cub->map.sprite.height) / 256;
+						player->color = cub->tab_textures[4][cub->s.width * cub->map.sprite.texY + cub->map.sprite.texX];
+						if ((player->color &  0x00FFFFFF) != 0)
+						{
+							//mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, x, y, player->color);
+							*(int*)(cub->img_ptr + y * 4 * cub->width + cub->map.sprite.texY * 4) = player->color;
+							// *(int*)(cub->img_ptr + (y * cub->s.size_line + stripe * (cub->s.bits_per_pixel / 8))) = player->color;
+						}
+						//printf("bonjour\n");
+						y++;
+					}
+				}
+				cub->map.sprite.drawstartX++;
+			}
+			i++;
+		}
 	}
-	
 }

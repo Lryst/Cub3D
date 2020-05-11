@@ -24,6 +24,25 @@
 //# include "ressources/minilibx/mlx.h"
 
 # define ABS(x) (x > 0 ? (x) : (-x))
+typedef struct
+{
+	int sprite_nbr;
+	int **pos_sprite;
+	double y;
+	double x;
+	double inDet;
+	double transX;
+	double transY;
+	int screenX;
+	int	height;
+	int width;
+	int drawstartX;
+	int drawstartY;
+	int drawendX;
+	int drawendY;
+	int texX;
+	int texY;
+}				t_sprite;
 
 typedef struct
 {
@@ -31,6 +50,8 @@ typedef struct
 	int height;
 	int error;
 	char **line;
+	t_sprite sprite;
+	
 }				t_map;
 
 typedef struct
@@ -69,7 +90,7 @@ typedef struct
 	int turnright;
 	int rightward;
 	int leftward;
-} 	t_move;
+} 				t_move;
 
 
 typedef	struct 
@@ -126,6 +147,7 @@ typedef struct
 	t_color c;
 	t_map map;
 	char **closed_map;
+	char **map_adjusted;
 	void *mlx_ptr;
 	void *win_ptr;
 	void *img;
@@ -135,7 +157,7 @@ typedef struct
 	int bpp;
 	t_player player;
 	t_move move;
-	int **tab_textures;
+	int *tab_textures[5];
 	char orientation;
 }        		t_cub3d;
 
