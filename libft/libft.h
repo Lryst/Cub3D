@@ -20,9 +20,9 @@
 # include <sys/types.h>
 # include <fcntl.h>
 # include <sys/stat.h>
-# define SET "012SWEN"
+# define SET " 012SWEN"
 # define ISSPACE "\t \v \r \f"
-# define FLINE " \t\n0"
+# define FLINE "\t\n"
 # define POSITION "SWEN"
 
 # define GNL_BUF_SIZE 4000

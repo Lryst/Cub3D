@@ -144,6 +144,6 @@ int main(int ac, char **av)
 	init_player(&cub.player, &cub);
 	init_position(&cub);
 	mlx_handle(&cub, av[1]);
-	//printf("%d\n", atoi("223,45,0"));
-	//system("leaks a.out");
+	printf("						coucou\n");
+	system("leaks a.out");
 }
