@@ -91,14 +91,11 @@ void    ray_caster(t_cub3d *cub, t_player *player)
       	player->drawEnd = player->lineHeight / 2 + cub->height / 2;
       	if(player->drawEnd >= cub->height)
 			player->drawEnd = cub->height - 1;
-
-		//int texNum = cub->closed_map[player->mapx][player->mapy] -1;
 		if (player->side == 0 || player-> side == 2)
 			wallX = player->posY + player->perpWallDist * player->rayDiry;
 		else
 			wallX = player->posX + player->perpWallDist * player->rayDirx;
 		wallX -= floor((wallX));
-		//texX = (int)(wallX * (double)cub->no.width);
 		if (player->side == 0)
 		{
 			texX = (int)(wallX * (double)cub->no.width);
@@ -164,7 +161,6 @@ void    ray_caster(t_cub3d *cub, t_player *player)
 				}
 			}
 		}
-		//printf("youpi\n");
 		if (player->side == 3)
 		{
 			texX = (int)(wallX * (double)cub->we.width);
@@ -188,86 +184,92 @@ void    ray_caster(t_cub3d *cub, t_player *player)
 			}
 		}
 		zbuffer[x] = player->perpWallDist;
-		int i;
-		int b;
+	}
+	int i;
+	int b;
 
-		i = 0;
-		spriteOrder = (int*)malloc(sizeof(int) * cub->map.sprite.sprite_nbr);
-		spriteDistance = (double*)malloc(sizeof(double) * cub->map.sprite.sprite_nbr);
-		while (i < cub->map.sprite.sprite_nbr)
+	i = 0;
+	spriteOrder = (int*)malloc(sizeof(int) * cub->map.sprite.sprite_nbr);
+	spriteDistance = (double*)malloc(sizeof(double) * cub->map.sprite.sprite_nbr);
+	while (i < cub->map.sprite.sprite_nbr)
+	{
+		spriteOrder[i] = i;
+		spriteDistance[i] = ((player->posX - cub->map.sprite.pos_sprite[i][0]) * (player->posX - cub->map.sprite.pos_sprite[i][0]) + (player->posY - cub->map.sprite.pos_sprite[i][1]) * (player->posY - cub->map.sprite.pos_sprite[i][1]));
+		i++;
+	}
+	double stock_d;
+	int stock;
+	i = 0;
+	while (i < cub->map.sprite.sprite_nbr)
+	{
+		if (i + 1 < cub->map.sprite.sprite_nbr && spriteDistance[i] < spriteDistance[i + 1])
 		{
-			spriteOrder[i] = i;
-			spriteDistance[i] = ((player->posX - cub->map.sprite.pos_sprite[i][0]) * (player->posX - cub->map.sprite.pos_sprite[i][0]) + (player->posY - cub->map.sprite.pos_sprite[i][1]) * (player->posY - cub->map.sprite.pos_sprite[i][1]));
-			i++;
+			stock = spriteOrder[i + 1];
+			stock_d = spriteDistance[i + 1];
+			spriteOrder[i + 1] = spriteOrder[i];
+			spriteDistance[i + 1] = spriteDistance[i];
+			spriteOrder[i] = stock;
+			spriteDistance[i] = stock_d;
+			i = -1;
 		}
-		double stock;
-		i = 0;
-		while (i < cub->map.sprite.sprite_nbr)
+		i++;
+	}
+
+	i = 0;
+	while (i < cub->map.sprite.sprite_nbr)
+	{
+		//printf("order [%d], distance [%f]\n", spriteOrder[i], spriteDistance[i]);
+		i++;
+	}
+
+	i = 0;
+	while (i < cub->map.sprite.sprite_nbr)
+	{
+		
+		cub->map.sprite.x = cub->map.sprite.pos_sprite[spriteOrder[i]][0] - player->posX + 0.5;
+		cub->map.sprite.y = cub->map.sprite.pos_sprite[spriteOrder[i]][1] - player->posY + 0.5;
+
+		cub->map.sprite.inDet = 1.0 / (player->planeX * player->dirY - player->dirX * player->planeY);
+
+		cub->map.sprite.transX = cub->map.sprite.inDet * (player->dirY * cub->map.sprite.x - player->dirX * cub->map.sprite.y);
+		cub->map.sprite.transY = cub->map.sprite.inDet * (-player->planeY * cub->map.sprite.x + player->planeX * cub->map.sprite.y);
+		cub->map.sprite.screenX = (int)((cub->width / 2) * (1 + cub->map.sprite.transX / cub->map.sprite.transY));
+
+		cub->map.sprite.height = abs((int)(cub->height / (cub->map.sprite.transY)));
+		cub->map.sprite.drawstartY = -cub->map.sprite.height / 2 + cub->height / 2;
+		if (cub->map.sprite.drawstartY < 0)
+			cub->map.sprite.drawstartY = 0;
+		cub->map.sprite.drawendY = cub->map.sprite.height / 2 + cub->height / 2;
+		if (cub->map.sprite.drawendY >= cub->height)
+			cub->map.sprite.drawendY = cub->height - 1;
+		
+		
+		cub->map.sprite.width = abs((int)(cub->height / (cub->map.sprite.transY)));
+		cub->map.sprite.drawstartX = - cub->map.sprite.width / 2 + cub->map.sprite.screenX;
+		if (cub->map.sprite.drawstartX < 0)
+			cub->map.sprite.drawstartX = 0;
+		cub->map.sprite.drawendX = cub->map.sprite.width / 2 + cub->map.sprite.screenX;
+		if (cub->map.sprite.drawendX >= cub->width)
+			cub->map.sprite.drawendX = cub->width - 1;
+		while (cub->map.sprite.drawstartX < cub->map.sprite.drawendX)
 		{
-			a = i + 1;
-			while (a < cub->map.sprite.sprite_nbr)
-			{
-				if (spriteDistance[a] > spriteDistance[i])
-				{
-					stock = spriteDistance[i];
-					spriteDistance[i] = spriteDistance[a];
-					spriteDistance[a] = stock;
-				}
-				a++;
-			}
-			i++;
-		}
-		i = 0;
-
-		while (i < cub->map.sprite.sprite_nbr)
-		{
-			
-			cub->map.sprite.x = cub->map.sprite.pos_sprite[spriteOrder[i]][0] - player->posX;
-			cub->map.sprite.y = cub->map.sprite.pos_sprite[spriteOrder[i]][1] - player->posY;
-
-			cub->map.sprite.inDet = 1.0 / (player->planeX * player->dirY - player->dirX * player->planeY);
-
-			cub->map.sprite.transX = cub->map.sprite.inDet * (player->dirY * cub->map.sprite.x - player->dirX * cub->map.sprite.y);
-			cub->map.sprite.transY = cub->map.sprite.inDet * (-player->planeY * cub->map.sprite.x + player->planeX * cub->map.sprite.y);
-			cub->map.sprite.screenX = (int)((cub->width / 2) * (1 + cub->map.sprite.transX / cub->map.sprite.transY));
-
-			cub->map.sprite.height = abs((int)(cub->height / (cub->map.sprite.transY)));
-			cub->map.sprite.drawstartY = -cub->map.sprite.height / 2 + cub->height / 2;
+			cub->map.sprite.texX = (int)((256 * (cub->map.sprite.drawstartX - (cub->map.sprite.screenX - cub->map.sprite.width / 2 )) * cub->s.width / cub->map.sprite.width) / 256);
+			cub->map.sprite.drawstartY = cub->height / 2 - cub->map.sprite.height / 2;
 			if (cub->map.sprite.drawstartY < 0)
 				cub->map.sprite.drawstartY = 0;
-			cub->map.sprite.drawendY = cub->map.sprite.height / 2 + cub->height / 2;
-			if (cub->map.sprite.drawendY >= cub->height)
-				cub->map.sprite.drawendY = cub->height - 1;
-			
-			
-			cub->map.sprite.width = abs((int)(cub->height / (cub->map.sprite.transY)));
-			cub->map.sprite.drawstartX = - cub->map.sprite.width / 2 + cub->map.sprite.screenX;
-			if (cub->map.sprite.drawstartX < 0)
-				cub->map.sprite.drawstartX = 0;
-			cub->map.sprite.drawendX = cub->map.sprite.width / 2 + cub->map.sprite.screenX;
-			if (cub->map.sprite.drawendX >= cub->width)
-				cub->map.sprite.drawendX = cub->width - 1;
-			while (cub->map.sprite.drawstartX < cub->map.sprite.drawendX)
+			while (cub->map.sprite.drawstartY < cub->map.sprite.drawendY && cub->map.sprite.transY > 0 && cub->map.sprite.drawstartX > 0 && cub->map.sprite.drawstartX < cub->width && cub->map.sprite.transY < zbuffer[cub->map.sprite.drawstartX])
 			{
-				cub->map.sprite.texX = (int)((256 * (cub->map.sprite.drawstartX - (cub->map.sprite.screenX - cub->map.sprite.width / 2 )) * cub->s.width / cub->map.sprite.width) / 256);
-				cub->map.sprite.drawstartY = cub->height / 2 - cub->map.sprite.height / 2;
-				if (cub->map.sprite.drawstartY < 0)
-					cub->map.sprite.drawstartY = 0;
-				while (cub->map.sprite.drawstartY < cub->map.sprite.drawendY && cub->map.sprite.transY > 0 && cub->map.sprite.drawstartX > 0 && cub->map.sprite.drawstartX < cub->width && cub->map.sprite.transY < zbuffer[cub->map.sprite.drawstartX])
+				int d = 256 * cub->map.sprite.drawstartY - cub->height * 128 + cub->map.sprite.height * 128;
+				cub->map.sprite.texY = ((d * cub->s.height) / cub->map.sprite.height) / 256;
+				player->color = cub->tab_textures[4][cub->s.width * cub->map.sprite.texY + cub->map.sprite.texX];
+				if ((player->color & 0x00FFFFFF) != 0)
 				{
-					int d = 256 * cub->map.sprite.drawstartY - cub->height * 128 + cub->map.sprite.height * 128;
-					cub->map.sprite.texY = ((d * cub->s.height) / cub->map.sprite.height) / 256;
-					player->color = cub->tab_textures[4][cub->s.width * cub->map.sprite.texY + cub->map.sprite.texX];
-					if ((player->color & 0x00FFFFFF) != 0)
-					{
-						*(int*)(cub->img_ptr + cub->map.sprite.drawstartY * 4 * cub->width + cub->map.sprite.drawstartX * 4) = player->color;
-					}
-					cub->map.sprite.drawstartY++;
+					*(int*)(cub->img_ptr + cub->map.sprite.drawstartY * 4 * cub->width + cub->map.sprite.drawstartX * 4) = player->color;
 				}
-				cub->map.sprite.drawstartX++;
+				cub->map.sprite.drawstartY++;
 			}
-			i++;
-			
+			cub->map.sprite.drawstartX++;
 		}
+		i++;
 	}
 }

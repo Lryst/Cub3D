@@ -37,7 +37,7 @@ void	get_position_sprite(t_cub3d*cub)
 				cub->map.sprite.pos_sprite[a] = (int*)malloc(sizeof(int) * 2);
 				cub->map.sprite.pos_sprite[a][0] = x;
 				cub->map.sprite.pos_sprite[a][1] = y;
-				ft_printf("nbr [%d], x [%d], y [%d]\n", a, cub->map.sprite.pos_sprite[a][0], cub->map.sprite.pos_sprite[a][1]);
+				printf("nbr [%d], x [%d], y [%d]\n", a, cub->map.sprite.pos_sprite[a][0], cub->map.sprite.pos_sprite[a][1]);
 				a++;
 			}
 			y++;

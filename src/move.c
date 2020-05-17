@@ -12,92 +12,92 @@
 
 #include "../cub3d.h"
 
-void  turnRight(t_cub3d *ptr)
+void  turnRight(t_cub3d *cub)
 {
     double rotSpeed;
 
     rotSpeed = 0.1;
-    if (ptr->orientation == 'N' || ptr->orientation == 'W' || ptr->orientation == 'S')
+    if (cub->orientation == 'N' || cub->orientation == 'W' || cub->orientation == 'S')
     {
-        ptr->player.oldDirx = ptr->player.dirX;
-        ptr->player.dirX = ptr->player.dirX * cos(-rotSpeed) - ptr->player.dirY * sin(-rotSpeed);
-        ptr->player.dirY = ptr->player.oldDirx * sin(-rotSpeed) + ptr->player.dirY * cos(-rotSpeed);
-        ptr->player.oldplaneX = ptr->player.planeX;
-        ptr->player.planeX = ptr->player.planeX * cos(-rotSpeed) - ptr->player.planeY * sin(-rotSpeed);
-        ptr->player.planeY = ptr->player.oldplaneX * sin(-rotSpeed) + ptr->player.planeY * cos(-rotSpeed);
+        cub->player.oldDirx = cub->player.dirX;
+        cub->player.dirX = cub->player.dirX * cos(-rotSpeed) - cub->player.dirY * sin(-rotSpeed);
+        cub->player.dirY = cub->player.oldDirx * sin(-rotSpeed) + cub->player.dirY * cos(-rotSpeed);
+        cub->player.oldplaneX = cub->player.planeX;
+        cub->player.planeX = cub->player.planeX * cos(-rotSpeed) - cub->player.planeY * sin(-rotSpeed);
+        cub->player.planeY = cub->player.oldplaneX * sin(-rotSpeed) + cub->player.planeY * cos(-rotSpeed);
     }
     else
     {
-        ptr->player.oldDirx = ptr->player.dirX;
-        ptr->player.dirX = ptr->player.dirX * cos(rotSpeed) - ptr->player.dirY * sin(rotSpeed);
-        ptr->player.dirY = ptr->player.oldDirx * sin(rotSpeed) + ptr->player.dirY * cos(rotSpeed);
-        ptr->player.oldplaneX = ptr->player.planeX;
-        ptr->player.planeX = ptr->player.planeX * cos(rotSpeed) - ptr->player.planeY * sin(rotSpeed);
-        ptr->player.planeY = ptr->player.oldplaneX * sin(rotSpeed) + ptr->player.planeY * cos(rotSpeed);
+        cub->player.oldDirx = cub->player.dirX;
+        cub->player.dirX = cub->player.dirX * cos(rotSpeed) - cub->player.dirY * sin(rotSpeed);
+        cub->player.dirY = cub->player.oldDirx * sin(rotSpeed) + cub->player.dirY * cos(rotSpeed);
+        cub->player.oldplaneX = cub->player.planeX;
+        cub->player.planeX = cub->player.planeX * cos(rotSpeed) - cub->player.planeY * sin(rotSpeed);
+        cub->player.planeY = cub->player.oldplaneX * sin(rotSpeed) + cub->player.planeY * cos(rotSpeed);
     }
     
 }
 
-void turnLeft(t_cub3d *ptr)
+void turnLeft(t_cub3d *cub)
 {
     double rotSpeed;
 
     rotSpeed = 0.1;    
       //both camera direction and camera plane must be rotated
-    if (ptr->orientation == 'N' || ptr->orientation == 'W' || ptr->orientation == 'S')
+    if (cub->orientation == 'N' || cub->orientation == 'W' || cub->orientation == 'S')
     {
-        ptr->player.oldDirx = ptr->player.dirX;
-        ptr->player.dirX = ptr->player.dirX * cos(rotSpeed) - ptr->player.dirY * sin(rotSpeed);
-        ptr->player.dirY = ptr->player.oldDirx * sin(rotSpeed) + ptr->player.dirY * cos(rotSpeed);
-        ptr->player.oldplaneX = ptr->player.planeX;
-        ptr->player.planeX = ptr->player.planeX * cos(rotSpeed) - ptr->player.planeY * sin(rotSpeed);
-        ptr->player.planeY = ptr->player.oldplaneX * sin(rotSpeed) + ptr->player.planeY * cos(rotSpeed);
+        cub->player.oldDirx = cub->player.dirX;
+        cub->player.dirX = cub->player.dirX * cos(rotSpeed) - cub->player.dirY * sin(rotSpeed);
+        cub->player.dirY = cub->player.oldDirx * sin(rotSpeed) + cub->player.dirY * cos(rotSpeed);
+        cub->player.oldplaneX = cub->player.planeX;
+        cub->player.planeX = cub->player.planeX * cos(rotSpeed) - cub->player.planeY * sin(rotSpeed);
+        cub->player.planeY = cub->player.oldplaneX * sin(rotSpeed) + cub->player.planeY * cos(rotSpeed);
     }
     else
     {
-        ptr->player.oldDirx = ptr->player.dirX;
-        ptr->player.dirX = ptr->player.dirX * cos(-rotSpeed) - ptr->player.dirY * sin(-rotSpeed);
-        ptr->player.dirY = ptr->player.oldDirx * sin(-rotSpeed) + ptr->player.dirY * cos(-rotSpeed);
-        ptr->player.oldplaneX = ptr->player.planeX;
-        ptr->player.planeX = ptr->player.planeX * cos(-rotSpeed) - ptr->player.planeY * sin(-rotSpeed);
-        ptr->player.planeY = ptr->player.oldplaneX * sin(-rotSpeed) + ptr->player.planeY * cos(-rotSpeed);
+        cub->player.oldDirx = cub->player.dirX;
+        cub->player.dirX = cub->player.dirX * cos(-rotSpeed) - cub->player.dirY * sin(-rotSpeed);
+        cub->player.dirY = cub->player.oldDirx * sin(-rotSpeed) + cub->player.dirY * cos(-rotSpeed);
+        cub->player.oldplaneX = cub->player.planeX;
+        cub->player.planeX = cub->player.planeX * cos(-rotSpeed) - cub->player.planeY * sin(-rotSpeed);
+        cub->player.planeY = cub->player.oldplaneX * sin(-rotSpeed) + cub->player.planeY * cos(-rotSpeed);
     }
 }
 
-void forward(t_cub3d *ptr)
+void forward(t_cub3d *cub)
 {
     double moveSpeed = 0.2;
-    if(ptr->closed_map[(int)(ptr->player.posX + ptr->player.dirX * moveSpeed)][(int)ptr->player.posY] == '.')
-        ptr->player.posX += ptr->player.dirX * moveSpeed;
-    if(ptr->closed_map[(int)ptr->player.posX][(int)(ptr->player.posY + ptr->player.dirY * moveSpeed)] == '.')
-        ptr->player.posY += ptr->player.dirY * moveSpeed;
+    if(cub->closed_map[(int)(cub->player.posX + cub->player.dirX * moveSpeed)][(int)cub->player.posY] == '.')
+        cub->player.posX += cub->player.dirX * moveSpeed;
+    if(cub->closed_map[(int)cub->player.posX][(int)(cub->player.posY + cub->player.dirY * moveSpeed)] == '.')
+        cub->player.posY += cub->player.dirY * moveSpeed;
 }
 
-void backward(t_cub3d *ptr)
+void backward(t_cub3d *cub)
 {
     double moveSpeed = 0.2;
-    if(ptr->closed_map[(int)(ptr->player.posX - ptr->player.dirX * moveSpeed)][(int)ptr->player.posY] == '.')
-        ptr->player.posX -= ptr->player.dirX * moveSpeed;
-    if(ptr->closed_map[(int)ptr->player.posX][(int)(ptr->player.posY - ptr->player.dirY * moveSpeed)] == '.')
-        ptr->player.posY -= ptr->player.dirY * moveSpeed;
+    if(cub->closed_map[(int)(cub->player.posX - cub->player.dirX * moveSpeed)][(int)cub->player.posY] == '.')
+        cub->player.posX -= cub->player.dirX * moveSpeed;
+    if(cub->closed_map[(int)cub->player.posX][(int)(cub->player.posY - cub->player.dirY * moveSpeed)] == '.')
+        cub->player.posY -= cub->player.dirY * moveSpeed;
 }
 
-void rightward(t_cub3d *ptr)
+void rightward(t_cub3d *cub)
 {
     double moveSpeed = 0.2;
-    if(ptr->closed_map[(int)(ptr->player.posX + ptr->player.planeX * moveSpeed)][(int)ptr->player.posY] == '.')
-        ptr->player.posX += ptr->player.planeX * moveSpeed;
-    if(ptr->closed_map[(int)ptr->player.posX][(int)(ptr->player.posY + ptr->player.planeY * moveSpeed)] == '.')
-        ptr->player.posY += ptr->player.planeY * moveSpeed;
+    if(cub->closed_map[(int)(cub->player.posX + cub->player.planeX * moveSpeed)][(int)cub->player.posY] == '.')
+        cub->player.posX += cub->player.planeX * moveSpeed;
+    if(cub->closed_map[(int)cub->player.posX][(int)(cub->player.posY + cub->player.planeY * moveSpeed)] == '.')
+        cub->player.posY += cub->player.planeY * moveSpeed;
 }
 
-void    leftward(t_cub3d *ptr)
+void    leftward(t_cub3d *cub)
 {
     double moveSpeed = 0.2;
-    if(ptr->closed_map[(int)(ptr->player.posX - ptr->player.planeX * moveSpeed)][(int)ptr->player.posY] == '.')
-        ptr->player.posX -= ptr->player.planeX * moveSpeed;
-    if(ptr->closed_map[(int)ptr->player.posX][(int)(ptr->player.posY - ptr->player.planeY * moveSpeed)] == '.')
-        ptr->player.posY -= ptr->player.planeY * moveSpeed;
+    if(cub->closed_map[(int)(cub->player.posX - cub->player.planeX * moveSpeed)][(int)cub->player.posY] == '.')
+        cub->player.posX -= cub->player.planeX * moveSpeed;
+    if(cub->closed_map[(int)cub->player.posX][(int)(cub->player.posY - cub->player.planeY * moveSpeed)] == '.')
+        cub->player.posY -= cub->player.planeY * moveSpeed;
 }
 
 /*
