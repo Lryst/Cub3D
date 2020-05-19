@@ -73,7 +73,6 @@ typedef struct
 	int		size_line;
 	int		endian;
 	int		bits_per_pixel;
-	double	wallX;
 	int		texX;
 	int		texY;
 	double	texPos;
@@ -97,6 +96,10 @@ typedef	struct
 {
 	int x;
 	int y;
+	int texX;
+	int texY;
+	double texPos;
+	double wallX;
 	double posX;
 	double posY;
 	double dirX;
@@ -117,6 +120,7 @@ typedef	struct
 	double perpWallDist;
 	int stepx;
 	int stepy;
+	double step;
 	int hit;
 	int side;
 	double frametime;
@@ -128,6 +132,9 @@ typedef	struct
 	int drawStart;
 	int drawEnd;
 	int color;
+	int *s_order;
+	double *s_dist;
+	double *zbuffer;
 }				t_player;
 
 typedef struct
@@ -201,7 +208,20 @@ void	init_check_struct(t_check_struct *ret);
 void	init_cub3d(t_cub3d *ptr);
 int		check_struct(t_check_struct *ret);
 
-void    ray_caster(t_cub3d *q, t_player *p);
+void	sprites_gestion(t_cub3d *cub, t_player *player);
+void	sort_sprites(t_cub3d *cub, t_player *player);
+void	start_sprites(t_cub3d *cub, t_player *player);
+void	init_sprites_1(t_cub3d *cub, t_player *player);
+void	init_sprites_2(t_cub3d *cub, t_player *player);
+void	draw_sprites(t_cub3d *cub, t_player *player);
+
+void	draw_plan(t_cub3d *cub, t_player *player);
+void 	check_wall_hit_2(t_cub3d*cub, t_player *player);
+void	check_wall_hit(t_cub3d *cub, t_player *player);
+void	get_side_dist(t_cub3d *cub, t_player *player);
+void	init_raycasting(t_cub3d *cub, t_player *player);
+void    start_ray_casting(t_cub3d *cub, t_player *player);
+
 void 	turnRight(t_cub3d *ptr);
 void 	turnLeft(t_cub3d *ptr);
 void 	forward(t_cub3d *ptr);
@@ -210,5 +230,10 @@ void	rightward(t_cub3d *ptr);
 void    leftward(t_cub3d *ptr);
 void    set_img(t_cub3d *cub);
 void	put_textures_in_tab(t_cub3d *cub);
+
+void	side_0(t_cub3d *cub, t_player *player);
+void	side_1(t_cub3d *cub, t_player *player);
+void	side_2(t_cub3d *cub, t_player *player);
+void	side_3(t_cub3d *cub, t_player *player);
 
 #endif

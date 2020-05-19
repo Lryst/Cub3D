@@ -89,7 +89,7 @@ int		print_screen(t_cub3d *cub)
 	}
 	cub->img = mlx_new_image(cub->mlx_ptr, cub->width, cub->height);
 	cub->img_ptr = mlx_get_data_addr(cub->img, &cub->bpp, &cub->sl, &cub->endian);
-	ray_caster(cub, &cub->player);
+	start_ray_casting(cub, &cub->player);
 	//printf("coucou 13\n");
 	cub->move.turnright ? turnRight(cub) : 0;
 	cub->move.turnleft ? turnLeft(cub) : 0;
