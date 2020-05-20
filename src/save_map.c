@@ -23,7 +23,7 @@ void	get_position_sprite(t_cub3d*cub)
 	y = 0;
 	if (!(cub->map.sprite.pos_sprite = (int**)malloc(sizeof(int*) * cub->map.sprite.sprite_nbr)))
 	{
-		ft_printf("erreur malloc tab of sprite\n");
+		//ft_printf("erreur malloc tab of sprite\n");
 		return;
 	}
 	while (x < cub->map_height)
@@ -37,7 +37,7 @@ void	get_position_sprite(t_cub3d*cub)
 				cub->map.sprite.pos_sprite[a] = (int*)malloc(sizeof(int) * 2);
 				cub->map.sprite.pos_sprite[a][0] = x;
 				cub->map.sprite.pos_sprite[a][1] = y;
-				printf("nbr [%d], x [%d], y [%d]\n", a, cub->map.sprite.pos_sprite[a][0], cub->map.sprite.pos_sprite[a][1]);
+				//printf("nbr [%d], x [%d], y [%d]\n", a, cub->map.sprite.pos_sprite[a][0], cub->map.sprite.pos_sprite[a][1]);
 				a++;
 			}
 			y++;
@@ -99,10 +99,10 @@ int		check_closed_map(t_cub3d *c)
 	int ret = parcour_closed_map(c->closed_map, c->posX, c->posY, c->map_height);
 	i = -1;
 	check_nbr_of_sprite(c);
-	ft_printf("\n");
-	ft_printf("nombre sprite [%d]\n", c->map.sprite.sprite_nbr);
-	while (++i <= c->map_height)
-		ft_printf("map: %s\n", c->closed_map[i]);
+	//ft_printf("\n");
+	//ft_printf("nombre sprite [%d]\n", c->map.sprite.sprite_nbr);
+	//while (++i <= c->map_height)
+		//ft_printf("map: %s\n", c->closed_map[i]);
 	return (ret);
 }
 
@@ -131,7 +131,7 @@ void	check_map(char *str, t_cub3d *ptr, int count)
 		if (!(ptr->map.line[j] = (char*)malloc(sizeof(char) * (len + 1))))
 			return;
 		ptr->map.line[j] = ft_strdup(tab[i]);
-		ft_printf("line %s\n", ptr->map.line[j]);
+		//ft_printf("line %s\n", ptr->map.line[j]);
 		i++;
 		j++;
 	}
@@ -139,6 +139,6 @@ void	check_map(char *str, t_cub3d *ptr, int count)
 		ft_printf("AAAAAAAAAHHH!!!!nana NANA\nnot closed map\n");
 	else
 	{
-		ft_printf("closed map\n");
+		//ft_printf("closed map\n");
 	}
 }

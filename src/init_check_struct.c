@@ -44,8 +44,3 @@ int		check_struct(t_check_struct *ret)
 	return (0);
 		
 }
-
-/*void	ft_check_and_free(t_cub3d *ptr)
-{
-	
-}*/

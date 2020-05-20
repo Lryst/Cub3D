@@ -193,6 +193,8 @@ void	separate_color_c(char **tab, t_cub3d *ptr, t_check_struct *ret);
 void	init_cub3d(t_cub3d *ptr);
 void	check_map(char *str, t_cub3d *ptr, int count);
 void	parse_line(char **tab, t_cub3d *ptr, t_check_struct *ret);
+char	*ft_skip_space(char *str);
+char	*ft_skip_space_2(char *str, int count);
 void	parsing(int fd, t_cub3d *ptr);
 int		check_position(char *str, t_check_struct *ret, t_cub3d *cub);
 

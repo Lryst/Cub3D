@@ -35,15 +35,15 @@ void	separate_r(char **tab, t_cub3d *ptr, t_check_struct *ret)
 					ptr->height = ft_atoi(tab[i + 2]);
 					ret->width = 1;
 					ret->height = 1;
-					ft_printf("Width %d\n",ptr->width);
-					ft_printf("Height %d\n", ptr->height);
+					//ft_printf("Width %d\n",ptr->width);
+					//ft_printf("Height %d\n", ptr->height);
 				}
 			}
 		}
 	}
 	else
 	{
-		//ft_printf("EURREURE RESOLUTION DOMMAGE...\n");
+		ft_printf("EURREURE RESOLUTION DOMMAGE...\n");
 		return;
 	}
 }

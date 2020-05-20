@@ -12,7 +12,7 @@
 
 #include "../cub3d.h"
 
-void	parse_line(char **tab, t_cub3d *ptr, t_check_struct *ret)
+void	parse_line(char **tab, t_cub3d *cub, t_check_struct *ret)
 {
 	int i;
 
@@ -23,21 +23,21 @@ void	parse_line(char **tab, t_cub3d *ptr, t_check_struct *ret)
 	if (tab[i] != NULL)
 	{
 		if (ft_strcmp("R", (const char *)tab[i]) == 0)
-			separate_r(tab, ptr, ret);
+			separate_r(tab, cub, ret);
 		if (ft_strcmp("NO", (const char *)tab[i]) == 0)
-			separate_texture_no(tab, ptr, ret);
+			separate_texture_no(tab, cub, ret);
 		if (ft_strcmp("SO", (const char *)tab[i]) == 0)
-			separate_texture_so(tab, ptr, ret);
+			separate_texture_so(tab, cub, ret);
 		if (ft_strcmp("WE", (const char *)tab[i]) == 0)
-			separate_texture_we(tab, ptr, ret);
+			separate_texture_we(tab, cub, ret);
 		if (ft_strcmp("EA", (const char *)tab[i]) == 0)
-			separate_texture_ea(tab, ptr, ret);
+			separate_texture_ea(tab, cub, ret);
 		if (ft_strcmp("S", (const char *)tab[i]) == 0)
-			separate_texture_s(tab, ptr, ret);
+			separate_texture_s(tab, cub, ret);
 		if (ft_strcmp("F", (const char *)tab[i]) == 0)
-			separate_color_f(tab, ptr, ret);
+			separate_color_f(tab, cub, ret);
 		if (ft_strcmp("C", (const char *)tab[i]) == 0)
-			separate_color_c(tab, ptr, ret);
+			separate_color_c(tab, cub, ret);
 		return;
 	}
 }
@@ -68,6 +68,26 @@ int	ft_strsame(char *s1, char *s2)
 	return (1);
 }
 
+char	*ft_skip_space_2(char *str, int count)
+{
+	char *tmp;
+	int i;
+	int j;
+
+	if (!(tmp = (char*)malloc(sizeof(char) * ft_strlen(str) - count + 1)))
+		return (NULL);
+	i = 0;
+	while (str[i] == '\t' || str[i] == ' ')
+		tmp[j++] = str[i++];
+	while (str[i++])
+	{
+		if (!ft_strspn(ISSPACE, str[i]))
+			tmp[j++] = str[i++];
+	}
+	tmp[j] = '\0';
+	return (tmp);
+}
+
 char	*ft_skip_space(char *str)
 {
 	char *tmp;
@@ -82,25 +102,12 @@ char	*ft_skip_space(char *str)
 		return (NULL);
 	while (str[i] == '\t' || str[i] == ' ')
 		i++;
-	while (str[i])
+	while (str[i++])
 	{
 		if (ft_strspn(ISSPACE, str[i]))
 			count++;
-		i++;
 	}
-	if (!(tmp = (char*)malloc(sizeof(char) * ft_strlen(str) - count + 1)))
-		return (NULL);
-	i = 0;
-	while (str[i] == '\t' || str[i] == ' ')
-		tmp[j++] = str[i++];
-	while (str[i])
-	{
-		if (!ft_strspn(ISSPACE, str[i]))
-			tmp[j++] = str[i++];
-		i++;
-	}
-	tmp[j] = '\0';
-	return (tmp);
+	return (ft_skip_space_2(str, count));
 }
 
 int		check_position(char *str, t_check_struct *ret, t_cub3d *cub)
@@ -117,7 +124,7 @@ int		check_position(char *str, t_check_struct *ret, t_cub3d *cub)
 			++ret->position;
 			ret->posY = i;
 			cub->orientation = str[i];
-			printf("orientation = [%c]\n", str[i]);
+			//printf("orientation = [%c]\n", str[i]);
 			ret->posX = ret->count;
 		}
 		i++;
@@ -125,7 +132,7 @@ int		check_position(char *str, t_check_struct *ret, t_cub3d *cub)
 	return(1);
 }
 
-void	parsing(int fd, t_cub3d *ptr)
+void	parsing(int fd, t_cub3d *cub)
 {
 	t_check_struct ret;
 	char *line;
@@ -136,7 +143,7 @@ void	parsing(int fd, t_cub3d *ptr)
 	
 	count = 0;
 	i = 0;
-	init_cub3d(ptr);
+	init_cub3d(cub);
 	init_check_struct(&ret);
 	tmp = ft_newstring(0);
 	while (get_next_line(fd, &line) == 1)
@@ -150,7 +157,7 @@ void	parsing(int fd, t_cub3d *ptr)
 		{
 			tmp = ft_strjoinfree_separate(tmp, line, '*');
 			ret.count = count;
-			check_position(line, &ret, ptr);
+			check_position(line, &ret, cub);
 			count++;
 			ret.map = 1;
 		}
@@ -162,8 +169,7 @@ void	parsing(int fd, t_cub3d *ptr)
 		if (check_struct(&ret) == 0)
 		{
 			tab = ft_split_set(line, ISSPACE);
-			parse_line(tab, ptr, &ret);
-			//ft_printf("line -> %s\n", line);
+			parse_line(tab, cub, &ret);
 		}
 		line = NULL;
 	}
@@ -172,17 +178,15 @@ void	parsing(int fd, t_cub3d *ptr)
 		write(1, "ERROR 3 MAP\n", 11);
 		return;
 	}
-	
-	//write(1, "ok\n", 3);
 	if (ft_strsame(line, SET) == 1)
 	{
-		//---------------------------------------------------------------------
-		//str = ft_skip_space(line);
 		tmp = ft_strjoinfree_separate(tmp, line, '*');
-		check_position(line, &ret, ptr);
-		//free(str);
-		//ft_printf("tmp : \n{%s}\n", tmp);
-			count++;
+		if (ft_strsame(line, POSITION) == 1)
+		{
+			printf("bad possition, last line\n");
+			return;
+		}
+		count++;
 		ret.map = 1;
 	}
 	if (ft_strsame(line, SET) == 0 && ret.map == 1)
@@ -190,33 +194,18 @@ void	parsing(int fd, t_cub3d *ptr)
 		write(1, "ERROR 4 MAP\n", 10);
 		return;
 	}
-	ptr->posX = ret.posX;
-	ptr->posY = ret.posY;
-	ptr->map_height = count - 1;
-	ptr->map_width = ft_strlen(line);
+	cub->posX = ret.posX;
+	cub->posY = ret.posY;
+	cub->map_height = count - 1;
+	cub->map_width = ft_strlen(line);
 	if (tmp != NULL && check_struct(&ret) == 1 && ret.position == 1)
 	{
-		//ft_printf("TMP-> {%s}\n", tmp);
-		check_map(tmp, ptr, count);
+		check_map(tmp, cub, count);
 	}
 	if (ret.position != 1)
 	{
 		ft_printf("ERROR!!! bad position : [%d]\n", ret.position);
-		return;
+		exit(EXIT_FAILURE);
 	}
 	return;
 }
-
-/*int i;
-	i = -1;
-	ft_printf("\n---------\n");
-	while (tab[++i])
-		ft_printf("->%s<- ", tab[i]);
-		
-		if (ft_strsame(line, FLINE) == 1)
-			{
-				write(1, "ERROR 1 MAP\n", 11);
-				return;
-			}
-		
-		|| check_struct(&ret) == 0*/

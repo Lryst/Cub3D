@@ -26,7 +26,7 @@ void	separate_texture_no(char **tab, t_cub3d *ptr, t_check_struct *ret)
 				ptr->no.path = ft_strdup(tab[i + 1]);
 				ret->no = 1;
 			}
-			ft_printf("NO %s\n", ptr->no.path);
+			//ft_printf("NO %s\n", ptr->no.path);
 		}
 	}
 	else
@@ -50,7 +50,7 @@ void	separate_texture_so(char **tab, t_cub3d *ptr, t_check_struct *ret)
 				ptr->so.path = ft_strdup(tab[i + 1]);
 				ret->so = 1;
 			}
-			ft_printf("SO %s\n", ptr->so.path);
+			//ft_printf("SO %s\n", ptr->so.path);
 		}
 	}
 	else
@@ -74,7 +74,7 @@ void	separate_texture_we(char **tab, t_cub3d *ptr, t_check_struct *ret)
 				ptr->we.path = ft_strdup(tab[i + 1]);
 				ret->we = 1;
 			}
-			ft_printf("WE %s\n", ptr->we.path);
+			//ft_printf("WE %s\n", ptr->we.path);
 		}
 	}
 	else
@@ -98,7 +98,7 @@ void	separate_texture_ea(char **tab, t_cub3d *ptr, t_check_struct *ret)
 				ptr->ea.path = ft_strdup(tab[i + 1]);
 				ret->ea = 1;
 			}
-			ft_printf("EA %s\n", ptr->ea.path);
+			//ft_printf("EA %s\n", ptr->ea.path);
 		}
 	}
 	else
@@ -122,12 +122,12 @@ void	separate_texture_s(char **tab, t_cub3d *ptr, t_check_struct *ret)
 				ptr->s.path = ft_strdup(tab[i + 1]);
 				ret->s = 1;
 			}
-			ft_printf("S %s\n", ptr->s.path);
+			//ft_printf("S %s\n", ptr->s.path);
 		}
 	}
 	else
 	{
-		ft_printf("ERREURE TEXTURE s, DESO BRO ...\n");
+		//ft_printf("ERREURE TEXTURE s, DESO BRO ...\n");
 		return;
 	}
 }
