@@ -97,8 +97,7 @@ char	*ft_skip_space(char *str)
 	{
 		if (!ft_strspn(ISSPACE, str[i]))
 			tmp[j++] = str[i++];
-		else
-			i++;
+		i++;
 	}
 	tmp[j] = '\0';
 	return (tmp);

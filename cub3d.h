@@ -208,12 +208,12 @@ void	init_check_struct(t_check_struct *ret);
 void	init_cub3d(t_cub3d *ptr);
 int		check_struct(t_check_struct *ret);
 
-void	sprites_gestion(t_cub3d *cub, t_player *player);
-void	sort_sprites(t_cub3d *cub, t_player *player);
-void	start_sprites(t_cub3d *cub, t_player *player);
-void	init_sprites_1(t_cub3d *cub, t_player *player);
-void	init_sprites_2(t_cub3d *cub, t_player *player);
-void	draw_sprites(t_cub3d *cub, t_player *player);
+void	check_dist_sprite(t_cub3d *cub, t_player *player);
+void	sort_sprite(t_cub3d*cub, t_player *player);
+void	draw_sprite(t_cub3d *cub, t_player *player, double *zbuffer);
+void	init_sprite(t_cub3d *cub, t_player *player);
+void	init_sprite_2(t_cub3d *cub, t_player *player);
+void	gestion_sprite(t_cub3d *cub, t_player *player, double *zbuffer);
 
 void	draw_plan(t_cub3d *cub, t_player *player);
 void 	check_wall_hit_2(t_cub3d*cub, t_player *player);
