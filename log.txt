@@ -1,0 +1,89 @@
+==17967== Memcheck, a memory error detector
+==17967== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==17967== Using Valgrind-3.16.0.GIT and LibVEX; rerun with -h for copyright info
+==17967== Command: ./cub3d ./ressources/test.cub
+==17967== 
+--17967-- UNKNOWN fcntl 101!
+--17967-- UNKNOWN fcntl 101! (repeated 2 times)
+--17967-- UNKNOWN fcntl 101! (repeated 4 times)
+==17967== Use of uninitialised value of size 8
+==17967==    at 0x100088463: bcmp (in /usr/lib/dyld)
+==17967==    by 0x10004F5AB: ImageLoaderMachO::validateFirstPages(linkedit_data_command const*, int, unsigned char const*, unsigned long, long long, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==17967==    by 0x100055445: ImageLoaderMachOCompressed::instantiateFromFile(char const*, int, unsigned char const*, unsigned long, unsigned long long, unsigned long long, stat const&, unsigned int, unsigned int, linkedit_data_command const*, encryption_info_command const*, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==17967==    by 0x10004E637: ImageLoaderMachO::instantiateFromFile(char const*, int, unsigned char const*, unsigned long, unsigned long long, unsigned long long, stat const&, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==17967==    by 0x100039E22: dyld::loadPhase6(int, stat const&, char const*, dyld::LoadContext const&) (in /usr/lib/dyld)
+==17967==    by 0x100041A7E: dyld::loadPhase5(char const*, char const*, dyld::LoadContext const&, unsigned int&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==17967==    by 0x10004148E: dyld::loadPhase4(char const*, char const*, dyld::LoadContext const&, unsigned int&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==17967==    by 0x1000411F8: dyld::loadPhase3(char const*, char const*, dyld::LoadContext const&, unsigned int&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==17967==    by 0x1000408B2: dyld::loadPhase1(char const*, char const*, dyld::LoadContext const&, unsigned int&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==17967==    by 0x1000399BA: dyld::loadPhase0(char const*, char const*, dyld::LoadContext const&, unsigned int&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==17967==    by 0x100039577: dyld::load(char const*, dyld::LoadContext const&, unsigned int&) (in /usr/lib/dyld)
+==17967==    by 0x100042212: dyld::libraryLocator(char const*, bool, char const*, ImageLoader::RPathChain const*, unsigned int&) (in /usr/lib/dyld)
+==17967== 
+==17967== Use of uninitialised value of size 8
+==17967==    at 0x100088468: bcmp (in /usr/lib/dyld)
+==17967==    by 0x10004F5AB: ImageLoaderMachO::validateFirstPages(linkedit_data_command const*, int, unsigned char const*, unsigned long, long long, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==17967==    by 0x100055445: ImageLoaderMachOCompressed::instantiateFromFile(char const*, int, unsigned char const*, unsigned long, unsigned long long, unsigned long long, stat const&, unsigned int, unsigned int, linkedit_data_command const*, encryption_info_command const*, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==17967==    by 0x10004E637: ImageLoaderMachO::instantiateFromFile(char const*, int, unsigned char const*, unsigned long, unsigned long long, unsigned long long, stat const&, ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==17967==    by 0x100039E22: dyld::loadPhase6(int, stat const&, char const*, dyld::LoadContext const&) (in /usr/lib/dyld)
+==17967==    by 0x100041A7E: dyld::loadPhase5(char const*, char const*, dyld::LoadContext const&, unsigned int&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==17967==    by 0x10004148E: dyld::loadPhase4(char const*, char const*, dyld::LoadContext const&, unsigned int&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==17967==    by 0x1000411F8: dyld::loadPhase3(char const*, char const*, dyld::LoadContext const&, unsigned int&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==17967==    by 0x1000408B2: dyld::loadPhase1(char const*, char const*, dyld::LoadContext const&, unsigned int&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==17967==    by 0x1000399BA: dyld::loadPhase0(char const*, char const*, dyld::LoadContext const&, unsigned int&, std::__1::vector<char const*, std::__1::allocator<char const*> >*) (in /usr/lib/dyld)
+==17967==    by 0x100039577: dyld::load(char const*, dyld::LoadContext const&, unsigned int&) (in /usr/lib/dyld)
+==17967==    by 0x100042212: dyld::libraryLocator(char const*, bool, char const*, ImageLoader::RPathChain const*, unsigned int&) (in /usr/lib/dyld)
+==17967== 
+--17967-- UNKNOWN fcntl 101! (repeated 8 times)
+--17967-- UNKNOWN fcntl 101! (repeated 16 times)
+--17967-- UNKNOWN fcntl 101! (repeated 32 times)
+--17967-- UNKNOWN fcntl 101! (repeated 64 times)
+--17967-- UNKNOWN fcntl 101! (repeated 128 times)
+==17967== valgrind: Unrecognised instruction at address 0x10623ba73.
+==17967==    at 0x10623BA73: __pthread_init.cold.2 (in /usr/lib/system/libsystem_pthread.dylib)
+==17967==    by 0x1019F972D: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==17967==    by 0x1000511E2: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==17967==    by 0x1000515ED: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==17967==    by 0x10004C00A: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==17967==    by 0x10004BF75: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==17967==    by 0x10004A013: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==17967==    by 0x10004A0B3: ImageLoader::runInitializers(ImageLoader::LinkContext const&, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==17967==    by 0x10003859F: dyld::initializeMainExecutable() (in /usr/lib/dyld)
+==17967==    by 0x10003DAF7: dyld::_main(macho_header const*, unsigned long, int, char const**, char const**, char const**, unsigned long*) (in /usr/lib/dyld)
+==17967==    by 0x100037226: dyldbootstrap::start(dyld3::MachOLoaded const*, int, char const**, dyld3::MachOLoaded const*, unsigned long*) (in /usr/lib/dyld)
+==17967==    by 0x100037024: _dyld_start (in /usr/lib/dyld)
+==17967== Your program just tried to execute an instruction that Valgrind
+==17967== did not recognise.  There are two possible reasons for this.
+==17967== 1. Your program has a bug and erroneously jumped to a non-code
+==17967==    location.  If you are running Memcheck and you just saw a
+==17967==    warning about a bad jump, it's probably your program's fault.
+==17967== 2. The instruction is legitimate but Valgrind doesn't handle it,
+==17967==    i.e. it's Valgrind's fault.  If you think this is the case or
+==17967==    you are not sure, please let us know and we'll try to fix it.
+==17967== Either way, Valgrind will now raise a SIGILL signal which will
+==17967== probably kill your program.
+==17967== 
+==17967== Process terminating with default action of signal 4 (SIGILL)
+==17967==  Illegal opcode at address 0x10623BA73
+==17967==    at 0x10623BA73: __pthread_init.cold.2 (in /usr/lib/system/libsystem_pthread.dylib)
+==17967==    by 0x1019F972D: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==17967==    by 0x1000511E2: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==17967==    by 0x1000515ED: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==17967==    by 0x10004C00A: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==17967==    by 0x10004BF75: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==17967==    by 0x10004A013: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==17967==    by 0x10004A0B3: ImageLoader::runInitializers(ImageLoader::LinkContext const&, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==17967==    by 0x10003859F: dyld::initializeMainExecutable() (in /usr/lib/dyld)
+==17967==    by 0x10003DAF7: dyld::_main(macho_header const*, unsigned long, int, char const**, char const**, char const**, unsigned long*) (in /usr/lib/dyld)
+==17967==    by 0x100037226: dyldbootstrap::start(dyld3::MachOLoaded const*, int, char const**, dyld3::MachOLoaded const*, unsigned long*) (in /usr/lib/dyld)
+==17967==    by 0x100037024: _dyld_start (in /usr/lib/dyld)
+==17967== 
+==17967== HEAP SUMMARY:
+==17967==     in use at exit: 0 bytes in 0 blocks
+==17967==   total heap usage: 0 allocs, 0 frees, 0 bytes allocated
+==17967== 
+==17967== All heap blocks were freed -- no leaks are possible
+==17967== 
+==17967== Use --track-origins=yes to see where uninitialised values come from
+==17967== For lists of detected and suppressed errors, rerun with: -s
+==17967== ERROR SUMMARY: 24 errors from 2 contexts (suppressed: 29 from 2)

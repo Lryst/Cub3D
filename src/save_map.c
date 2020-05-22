@@ -23,7 +23,6 @@ void	get_position_sprite(t_cub3d*cub)
 	y = 0;
 	if (!(cub->map.sprite.pos_sprite = (int**)malloc(sizeof(int*) * cub->map.sprite.sprite_nbr)))
 	{
-		//ft_printf("erreur malloc tab of sprite\n");
 		return;
 	}
 	while (x < cub->map_height)
@@ -106,7 +105,7 @@ int		check_closed_map(t_cub3d *c)
 	return (ret);
 }
 
-void	check_map(char *str, t_cub3d *ptr, int count)
+void	check_map(char *str, t_cub3d *cub, int count)
 {
 	char **tab;
 	int i;
@@ -122,23 +121,23 @@ void	check_map(char *str, t_cub3d *ptr, int count)
 	l = 0;
 	tab = ft_split((const char*)str, '*');
 	ft_strlen(str);
-	ptr->map.height = count;
-	if (!(ptr->map.line = (char**)malloc(sizeof(ptr->map.line) * (count + 1))))
+	cub->map.height = count;
+	if (!(cub->map.line = (char**)malloc(sizeof(cub->map.line) * (count + 1))))
 		return;
 	while (tab[i])
 	{
 		len = ft_strlen(tab[i]);
-		if (!(ptr->map.line[j] = (char*)malloc(sizeof(char) * (len + 1))))
+		if (!(cub->map.line[j] = (char*)malloc(sizeof(char) * (len + 1))))
 			return;
-		ptr->map.line[j] = ft_strdup(tab[i]);
+		cub->map.line[j] = ft_strdup(tab[i]);
 		//ft_printf("line %s\n", ptr->map.line[j]);
 		i++;
 		j++;
 	}
-	if (!check_closed_map(ptr))
+	if (!check_closed_map(cub))
 		ft_printf("AAAAAAAAAHHH!!!!nana NANA\nnot closed map\n");
 	else
 	{
-		//ft_printf("closed map\n");
+		//free(cub->map.line);
 	}
 }

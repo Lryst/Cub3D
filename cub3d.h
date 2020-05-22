@@ -76,7 +76,6 @@ typedef struct
 	int		texX;
 	int		texY;
 	double	texPos;
-	int		**cast_tab;
 
 	//jai un doute
 }               t_texture;
@@ -154,7 +153,6 @@ typedef struct
 	t_color c;
 	t_map map;
 	char **closed_map;
-	char **map_adjusted;
 	void *mlx_ptr;
 	void *win_ptr;
 	void *img;
@@ -166,6 +164,10 @@ typedef struct
 	t_move move;
 	int *tab_textures[5];
 	char orientation;
+	char *line;
+	char **tab;
+	char *tmp;
+	int count;
 }        		t_cub3d;
 
 typedef struct
@@ -186,44 +188,65 @@ typedef struct
 	int count;
 }				t_check_struct;
 
+//color;
 void	separate_color_f(char **tab, t_cub3d *ptr, t_check_struct *ret);
 void	separate_color_c(char **tab, t_cub3d *ptr, t_check_struct *ret);
 
-
+//save_map.c
 void	init_cub3d(t_cub3d *ptr);
 void	check_map(char *str, t_cub3d *ptr, int count);
-void	parse_line(char **tab, t_cub3d *ptr, t_check_struct *ret);
-char	*ft_skip_space(char *str);
-char	*ft_skip_space_2(char *str, int count);
-void	parsing(int fd, t_cub3d *ptr);
-int		check_position(char *str, t_check_struct *ret, t_cub3d *cub);
+int		check_closed_map(t_cub3d *c);
+int 	parcour_closed_map(char **map, int j, int i, int height);
+void	check_nbr_of_sprite(t_cub3d *cub);
+void	get_position_sprite(t_cub3d*cub);
 
+//outils.c
+int		ft_strsame(char *s1, char *s2);
+//char	*ft_skip_space_2(char *str, int count);
+//char	*ft_skip_space(char *str);
+int		check_position(t_check_struct *ret, t_cub3d *cub);
+
+//parse.c
+void	parse_line_2(t_cub3d *cub, t_check_struct *ret, int i);
+void	parse_line(t_cub3d *cub, t_check_struct *ret);
+void	parse_3(t_cub3d *cub, t_check_struct *ret);
+void	parse_2(t_cub3d *cub, t_check_struct *ret);
+void	start_parsing(int fd, t_cub3d *cub);
+
+//resolution.c
 void	separate_r(char **tab, t_cub3d *ptr, t_check_struct *ret);
 
+//textures.c
 void	separate_texture_no(char **tab, t_cub3d *ptr, t_check_struct *ret);
 void	separate_texture_so(char **tab, t_cub3d *ptr, t_check_struct *ret);
 void	separate_texture_we(char **tab, t_cub3d *ptr, t_check_struct *ret);
 void	separate_texture_ea(char **tab, t_cub3d *ptr, t_check_struct *ret);
 void	separate_texture_s(char **tab, t_cub3d *ptr, t_check_struct *ret);
 
+//init_check_struct.c
 void	init_check_struct(t_check_struct *ret);
 void	init_cub3d(t_cub3d *ptr);
 int		check_struct(t_check_struct *ret);
 
+//sprites.c
 void	check_dist_sprite(t_cub3d *cub, t_player *player);
 void	sort_sprite(t_cub3d*cub, t_player *player);
-void	draw_sprite(t_cub3d *cub, t_player *player, double *zbuffer);
 void	init_sprite(t_cub3d *cub, t_player *player);
 void	init_sprite_2(t_cub3d *cub, t_player *player);
 void	gestion_sprite(t_cub3d *cub, t_player *player, double *zbuffer);
 
+//print.c
 void	draw_plan(t_cub3d *cub, t_player *player);
+void	draw_sprite(t_cub3d *cub, t_player *player, double *zbuffer);
+
+//ray_casting.c
 void 	check_wall_hit_2(t_cub3d*cub, t_player *player);
 void	check_wall_hit(t_cub3d *cub, t_player *player);
 void	get_side_dist(t_cub3d *cub, t_player *player);
 void	init_raycasting(t_cub3d *cub, t_player *player);
 void    start_ray_casting(t_cub3d *cub, t_player *player);
 
+//move.c
 void 	turnRight(t_cub3d *ptr);
 void 	turnLeft(t_cub3d *ptr);
 void 	forward(t_cub3d *ptr);
@@ -233,9 +256,16 @@ void    leftward(t_cub3d *ptr);
 void    set_img(t_cub3d *cub);
 void	put_textures_in_tab(t_cub3d *cub);
 
+//wall_side.c
 void	side_0(t_cub3d *cub, t_player *player);
 void	side_1(t_cub3d *cub, t_player *player);
 void	side_2(t_cub3d *cub, t_player *player);
 void	side_3(t_cub3d *cub, t_player *player);
+
+//free.c
+void	free_double_tab(char **str);
+void	free_tex(t_texture *tex);
+void	free_void(void *ptr);
+void	close_prog(t_cub3d *cub);
 
 #endif

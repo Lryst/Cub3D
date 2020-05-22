@@ -8,6 +8,7 @@ void    get_inf(t_texture *tex, void *mlx_ptr, int **tab)
     }
     tex->texture = mlx_xpm_file_to_image(mlx_ptr, tex->path, &tex->width, &tex->height);
     *tab = (int*) mlx_get_data_addr(tex->texture, &tex->bits_per_pixel, &tex->size_line, &tex->endian);
+    free(tex->path);
 }
 
 void    set_img(t_cub3d *cub)
