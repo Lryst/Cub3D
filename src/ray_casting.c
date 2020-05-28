@@ -40,7 +40,7 @@ void	check_wall_hit(t_cub3d *cub, t_player *player)
 			player->side = 1;
 		}
 		//Check if ray has hit a wall
-		cub->map.line[player->mapx][player->mapy] == '1' ? player->hit = 1 : 0;
+		cub->closed_map[player->mapx][player->mapy] == '1' ? player->hit = 1 : 0;
 	}
 	check_wall_hit_2(cub,player);
 }

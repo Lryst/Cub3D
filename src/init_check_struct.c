@@ -27,9 +27,10 @@ void	init_check_struct(t_check_struct *ret)
 	ret->position = 0;
 }
 
-void	init_cub3d(t_cub3d *ptr)
+void	init_cub3d(t_cub3d *cub)
 {
-	ft_bzero(ptr, sizeof(t_cub3d));
+	ft_bzero(cub, sizeof(t_cub3d));
+	cub->tmp = ft_newstring(0);
 }
 
 int		check_struct(t_check_struct *ret)

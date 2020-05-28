@@ -50,35 +50,30 @@ void	parse_line(t_cub3d *cub, t_check_struct *ret)
 void	parse_3(t_cub3d *cub, t_check_struct *ret)
 {
 	if (ft_strsame(cub->line, FLINE) == 1 && ret->map == 1)
-	{
-		write(1, "ERROR 3 MAP\n", 11);
-		return;
-	}
+		ft_error("ERROR in map line");
 	if (ft_strsame(cub->line, SET) == 1)
 	{
 		cub->tmp = ft_strjoinfree_separate(cub->tmp, cub->line, '*');
 		if (ft_strsame(cub->line, POSITION) == 1)
 		{
-			printf("bad possition, last line\n");
-			return;
+			ft_printf("bad possition, last line\n");
+			system("leaks cub3d");
+			exit(EXIT_FAILURE);
 		}
 		cub->count++;
 		ret->map = 1;
 	}
-	if (ft_strsame(cub->line, SET) == 0 && ret->map == 1)
-	{
-		write(1, "ERROR 4 MAP\n", 10);
-		return;
-	}
+	if (ft_strsame(cub->line, SET) == 0 && ret->map == 1 && check_struct(ret) == 1)
+		ft_error("ERROR bad charactere in map line");
 }
 
 void	parse_2(t_cub3d *cub, t_check_struct *ret)
 {
+	int i;
+
+	i = 0;
 	if (ft_strsame(cub->line, FLINE) == 1 && ret->map == 1)
-	{
-		write(1, "ERROR 1 MAP\n", 11);
-		exit(EXIT_FAILURE);
-	}
+		ft_error("ERROR in map line");
 	if (ft_strsame(cub->line, SET) == 1 && check_struct(ret) == 1)
 	{
 		cub->tmp = ft_strjoinfree_separate(cub->tmp, cub->line, '*');
@@ -88,16 +83,16 @@ void	parse_2(t_cub3d *cub, t_check_struct *ret)
 		ret->map = 1;
 	}
 	if (ft_strsame(cub->line, SET) == 0 && ret->map == 1 && check_struct(ret) == 1)
-	{
-		write(1, "ERROR 2 MAP\n", 10);
-		return;
-	}
+		ft_error("ERROR bad charactere in map line");
 	if (check_struct(ret) == 0)
 	{
+		if (cub->tab != NULL)
+		{
+			free_double_tab(cub->tab);
+		}
 		cub->tab = ft_split_set(cub->line, ISSPACE);
 		parse_line(cub, ret);
 	}
-	cub->line = NULL;
 }
 
 void	start_parsing(int fd, t_cub3d *cub)
@@ -108,9 +103,12 @@ void	start_parsing(int fd, t_cub3d *cub)
 	i = 0;
 	init_cub3d(cub);
 	init_check_struct(&ret);
-	cub->tmp = ft_newstring(0);
 	while (get_next_line(fd, &cub->line) == 1)
+	{
 		parse_2(cub, &ret);
+		free(cub->line);
+		cub->line = NULL;
+	}
 	parse_3(cub, &ret);
 	cub->posX = ret.posX;
 	cub->posY = ret.posY;
@@ -119,9 +117,6 @@ void	start_parsing(int fd, t_cub3d *cub)
 	if (cub->tmp != NULL && check_struct(&ret) == 1 && ret.position == 1)
 		check_map(cub->tmp, cub, cub->count);
 	if (ret.position != 1)
-	{
-		ft_printf("ERROR!!! bad position : [%d]\n", ret.position);
-		exit(EXIT_FAILURE);
-	}
+		ft_error("ERROR no only one position");
 	return;
 }

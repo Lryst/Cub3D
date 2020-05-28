@@ -168,6 +168,7 @@ typedef struct
 	char **tab;
 	char *tmp;
 	int count;
+	int esc;
 }        		t_cub3d;
 
 typedef struct
@@ -253,8 +254,10 @@ void 	forward(t_cub3d *ptr);
 void 	backward(t_cub3d *ptr);
 void	rightward(t_cub3d *ptr);
 void    leftward(t_cub3d *ptr);
+
+//set_texture.c
+void    get_inf(t_cub3d *cub, t_texture *tex, void *mlx_ptr, int **tab);
 void    set_img(t_cub3d *cub);
-void	put_textures_in_tab(t_cub3d *cub);
 
 //wall_side.c
 void	side_0(t_cub3d *cub, t_player *player);
@@ -266,6 +269,7 @@ void	side_3(t_cub3d *cub, t_player *player);
 void	free_double_tab(char **str);
 void	free_tex(t_texture *tex);
 void	free_void(void *ptr);
+void	ft_error(char *str);
 void	close_prog(t_cub3d *cub);
 
 #endif

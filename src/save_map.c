@@ -85,23 +85,24 @@ int 	parcour_closed_map(char **map, int j, int i, int height)
 	);
 }
 
-int		check_closed_map(t_cub3d *c)
+int		check_closed_map(t_cub3d *cub)
 {
 	int i;
 	
-	c->map.sprite.sprite_nbr = 0;
-	c->closed_map = malloc(sizeof(char*) * c->map.height + 1);
-	c->closed_map[c->map.height] = NULL;
+	cub->map.sprite.sprite_nbr = 0;
+	cub->closed_map = malloc(sizeof(char*) * cub->map.height + 1);
+	cub->closed_map[cub->map.height] = NULL;
 	i = -1;
-	while (++i < c->map.height)
-		c->closed_map[i] = ft_strdup(c->map.line[i]);
-	int ret = parcour_closed_map(c->closed_map, c->posX, c->posY, c->map_height);
+	while (++i < cub->map.height)
+		cub->closed_map[i] = ft_strdup(cub->map.line[i]);
+	int ret = parcour_closed_map(cub->closed_map, cub->posX, cub->posY, cub->map_height);
 	i = -1;
-	check_nbr_of_sprite(c);
+	check_nbr_of_sprite(cub);
 	//ft_printf("\n");
 	//ft_printf("nombre sprite [%d]\n", c->map.sprite.sprite_nbr);
 	//while (++i <= c->map_height)
 		//ft_printf("map: %s\n", c->closed_map[i]);
+	//free_double_tab(cub->map.line);
 	return (ret);
 }
 
@@ -120,24 +121,22 @@ void	check_map(char *str, t_cub3d *cub, int count)
 	k = -1;
 	l = 0;
 	tab = ft_split((const char*)str, '*');
-	ft_strlen(str);
+	free(str);
 	cub->map.height = count;
 	if (!(cub->map.line = (char**)malloc(sizeof(cub->map.line) * (count + 1))))
 		return;
 	while (tab[i])
 	{
 		len = ft_strlen(tab[i]);
-		if (!(cub->map.line[j] = (char*)malloc(sizeof(char) * (len + 1))))
+		if (!(cub->map.line[j] = ft_strdup(tab[i])))
 			return;
-		cub->map.line[j] = ft_strdup(tab[i]);
+		//cub->map.line[j] = ft_strdup(tab[i]);
 		//ft_printf("line %s\n", ptr->map.line[j]);
 		i++;
 		j++;
 	}
+	free_double_tab(tab);
 	if (!check_closed_map(cub))
 		ft_printf("AAAAAAAAAHHH!!!!nana NANA\nnot closed map\n");
-	else
-	{
-		//free(cub->map.line);
-	}
+	//free_double_tab(cub->map.line);
 }

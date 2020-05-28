@@ -56,6 +56,7 @@ void	init_player(t_player *player, t_cub3d *cub)
 
 int key_pressed(int key, t_cub3d *cub)
 {
+	key == 53 ?cub->esc = 1 : 0;
 	key == 13 ? cub->move.forward = 1 : 0;
 	key == 1 ? cub->move.backward = 1 : 0;
 	key == 124 ? cub->move.turnright = 1 : 0;
@@ -67,6 +68,7 @@ int key_pressed(int key, t_cub3d *cub)
 
 int key_release(int key, t_cub3d *cub)
 {
+	key == 53 ? cub->esc = 0 : 0;
 	key == 13 ? cub->move.forward = 0 : 0;
 	key == 1 ? cub->move.backward = 0 : 0;
 	key == 124 ? cub->move.turnright = 0 : 0;
@@ -87,10 +89,10 @@ int		print_screen(t_cub3d *cub)
 	cub->move.backward ? backward(cub) : 0;
 	cub->move.rightward ? rightward(cub) : 0;
 	cub->move.leftward ? leftward(cub) : 0;
+	cub->esc ? close_prog(cub) : 0;
 	if (!(mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->img, 0, 0)))
 		printf("mlx_put_image_to_window PAS POSSIBLE !\n");
-	if (cub->img != NULL)
-		mlx_destroy_image(cub->mlx_ptr, cub->img);
+	mlx_destroy_image(cub->mlx_ptr, cub->img);
 	return (1);
 }
 
@@ -98,10 +100,7 @@ void	mlx_handle(t_cub3d *cub, char *av)
 {
     cub->mlx_ptr = mlx_init();
 	if (cub->mlx_ptr == NULL)
-	{
-		printf("mlx_ptr == NULL, alos quil a etait initié");
-		return;
-	}
+		ft_error("mlx_ptr == NULL, alos quil a etait initié");
     cub->win_ptr = mlx_new_window(cub->mlx_ptr, cub->width, cub->height, av);
 	set_img(cub);
 	mlx_hook(cub->win_ptr, 2, 0, key_pressed, cub);
@@ -112,7 +111,7 @@ void	mlx_handle(t_cub3d *cub, char *av)
 		return;
 	}
 	mlx_loop_hook(cub->mlx_ptr, &print_screen, cub);
-    mlx_loop(cub->mlx_ptr);
+	mlx_loop(cub->mlx_ptr);
 }
 
 int main(int ac, char **av)

@@ -91,4 +91,6 @@ void	gestion_sprite(t_cub3d *cub, t_player *player, double *zbuffer)
 		}
 		i++;
 	}
+	free(player->s_order);
+	free(player->s_dist);
 }
