@@ -59,6 +59,7 @@ typedef struct
 	int	red;
 	int	green;
 	int	blue;
+	int color;
 }				t_color;
 
 typedef struct

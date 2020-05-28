@@ -20,7 +20,7 @@ void	side_0(t_cub3d *cub, t_player *player)
 		else
 		{
 			*(int*)(cub->img_ptr + player->y * 4 * cub->width + player->x * 4) = 
-				player->y < player->drawStart ? 0x33D1FF : 0x0BB62F;
+				player->y < player->drawStart ? mlx_get_color_value(cub->mlx_ptr, cub->f.color) : mlx_get_color_value(cub->mlx_ptr, cub->c.color);
 		}
 	}
 }
@@ -45,7 +45,7 @@ void	side_1(t_cub3d *cub, t_player *player)
 		else
 		{
 			*(int*)(cub->img_ptr + player->y * 4 * cub->width + player->x * 4) = 
-				player->y < player->drawStart ? 0x33D1FF : 0x0BB62F;
+				player->y < player->drawStart ? mlx_get_color_value(cub->mlx_ptr, cub->f.color) : mlx_get_color_value(cub->mlx_ptr, cub->c.color);
 		}
 	}
 }
@@ -70,7 +70,7 @@ void	side_2(t_cub3d *cub, t_player* player)
 		else
 		{
 			*(int*)(cub->img_ptr + player->y * 4 * cub->width + player->x * 4) = 
-				player->y < player->drawStart ? 0x33D1FF : 0x0BB62F;
+				player->y < player->drawStart ? mlx_get_color_value(cub->mlx_ptr, cub->f.color) : mlx_get_color_value(cub->mlx_ptr, cub->c.color);
 		}
 	}
 }
@@ -97,7 +97,7 @@ void	side_3(t_cub3d *cub, t_player* player)
 		else
 		{
 			*(int*)(cub->img_ptr + player->y * 4 * cub->width + player->x * 4) =
-			 player->y < player->drawStart ? 0x33D1FF : 0x0BB62F;
+				player->y < player->drawStart ? mlx_get_color_value(cub->mlx_ptr, cub->f.color) : mlx_get_color_value(cub->mlx_ptr, cub->c.color);
 		}
 	}
 }
