@@ -24,6 +24,7 @@
 # define ISSPACE "\t \v \r \f"
 # define FLINE "\t\n"
 # define POSITION "SWEN"
+# define INFO "RSNOWEAFC"
 
 # define GNL_BUF_SIZE 4000
 

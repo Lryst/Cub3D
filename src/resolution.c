@@ -31,6 +31,8 @@ void	separate_r(char **tab, t_cub3d *ptr, t_check_struct *ret)
 			{
 				if (tab[i + 1] >= 0 && tab[i + 2] >= 0 && tab[i + 3] == NULL)
 				{
+					if (ft_atoi(tab[i + 1]) < 0 || ft_atoi(tab[i + 2]) < 0 )
+						ft_error("bad resolution");
 					ptr->width = ft_atoi(tab[i + 1]);
 					ptr->height = ft_atoi(tab[i + 2]);
 					ret->width = 1;

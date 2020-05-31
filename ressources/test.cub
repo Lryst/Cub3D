@@ -1,12 +1,10 @@
-R 1680 1050
+R 1680 800
 S /Users/lulu/Lryst/Cub3D/ressources/barrel.xpm
 
     NO /Users/lulu/Lryst/Cub3D/ressources/tex_mur_brique.xpm
 SO /Users/lulu/Lryst/Cub3D/ressources/texture_mur_fleurs-_1_.xpm
 
-
-
-
+        
 
     WE /Users/lulu/Lryst/Cub3D/ressources/texture_mur_pierre.xpm
 EA /Users/lulu/Lryst/Cub3D/ressources/texture_mur_pierre_grises.xpm

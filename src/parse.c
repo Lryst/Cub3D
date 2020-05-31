@@ -12,6 +12,19 @@
 
 #include "../cub3d.h"
 
+void	check_bad_line(char **tab, int i)
+{
+	if (ft_strcmp("R", (const char *)tab[i]) != 0 &&
+	ft_strcmp("NO", (const char *)tab[i]) != 0 && 
+	ft_strcmp("SO", (const char *)tab[i]) != 0 &&
+	ft_strcmp("WE", (const char *)tab[i]) != 0 &&
+	ft_strcmp("EA", (const char *)tab[i]) != 0 &&
+	ft_strcmp("S", (const char *)tab[i]) != 0 &&
+	ft_strcmp("F", (const char *)tab[i]) != 0 &&
+	ft_strcmp("C", (const char *)tab[i]) != 0)
+		ft_error("bad charactere in .cub");
+}
+
 void	parse_line_2(t_cub3d *cub, t_check_struct *ret, int i)
 {
 	if (ft_strcmp("R", (const char *)cub->tab[i]) == 0)
@@ -30,6 +43,7 @@ void	parse_line_2(t_cub3d *cub, t_check_struct *ret, int i)
 		separate_color_f(cub->tab, cub, ret);
 	if (ft_strcmp("C", (const char *)cub->tab[i]) == 0)
 		separate_color_c(cub->tab, cub, ret);
+	check_bad_line(cub->tab, i);
 }
 
 void	parse_line(t_cub3d *cub, t_check_struct *ret)
@@ -40,11 +54,8 @@ void	parse_line(t_cub3d *cub, t_check_struct *ret)
 	i++;
 	if (cub->tab[i] == NULL)
 		return;
-	if (cub->tab[i] != NULL)
-	{
-		parse_line_2(cub, ret, i);
-		return;
-	}
+	parse_line_2(cub, ret, i);
+	return;
 }
 
 void	parse_3(t_cub3d *cub, t_check_struct *ret)
@@ -87,9 +98,7 @@ void	parse_2(t_cub3d *cub, t_check_struct *ret)
 	if (check_struct(ret) == 0)
 	{
 		if (cub->tab != NULL)
-		{
 			free_double_tab(cub->tab);
-		}
 		cub->tab = ft_split_set(cub->line, ISSPACE);
 		parse_line(cub, ret);
 	}
