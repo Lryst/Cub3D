@@ -137,6 +137,5 @@ void	check_map(char *str, t_cub3d *cub, int count)
 	}
 	free_double_tab(tab);
 	if (!check_closed_map(cub))
-		ft_printf("AAAAAAAAAHHH!!!!nana NANA\nnot closed map\n");
-	//free_double_tab(cub->map.line);
+		ft_error("AAAAAAAAAHHH!!!!nana NANA\nnot closed map\n");
 }

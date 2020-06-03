@@ -157,10 +157,11 @@ typedef struct
 	void *mlx_ptr;
 	void *win_ptr;
 	void *img;
+	int	*img_iadr;
 	void *img_ptr;
-	int sl;
+	int size_line;
 	int endian;
-	int bpp;
+	int bits_per_pixel;
 	t_player player;
 	t_move move;
 	int *tab_textures[5];
@@ -170,6 +171,7 @@ typedef struct
 	char *tmp;
 	int count;
 	int esc;
+	int	save;
 }        		t_cub3d;
 
 typedef struct
@@ -271,6 +273,11 @@ void	free_double_tab(char **str);
 void	free_tex(t_texture *tex);
 void	free_void(void *ptr);
 void	ft_error(char *str);
-void	close_prog(t_cub3d *cub);
+int		close_prog(t_cub3d *cub);
+
+//save_bmp.c
+void	save(t_cub3d *cub);
+unsigned char	*ft_file_header(int size);
+unsigned char	*ft_info_img_header(t_cub3d *cub);
 
 #endif

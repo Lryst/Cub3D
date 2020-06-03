@@ -110,7 +110,6 @@ void	start_parsing(int fd, t_cub3d *cub)
 	int i;
 	
 	i = 0;
-	init_cub3d(cub);
 	init_check_struct(&ret);
 	while (get_next_line(fd, &cub->line) == 1)
 	{

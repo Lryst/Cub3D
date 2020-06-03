@@ -81,7 +81,8 @@ int key_release(int key, t_cub3d *cub)
 int		print_screen(t_cub3d *cub)
 {
 	cub->img = mlx_new_image(cub->mlx_ptr, cub->width, cub->height);
-	cub->img_ptr = mlx_get_data_addr(cub->img, &cub->bpp, &cub->sl, &cub->endian);
+	cub->img_ptr = mlx_get_data_addr(cub->img, &cub->bits_per_pixel, &cub->size_line, &cub->endian);
+	cub->img_iadr = (int*)cub->img_ptr;
 	start_ray_casting(cub, &cub->player);
 	cub->move.turnright ? turnRight(cub) : 0;
 	cub->move.turnleft ? turnLeft(cub) : 0;
@@ -105,6 +106,7 @@ void	mlx_handle(t_cub3d *cub, char *av)
 	set_img(cub);
 	mlx_hook(cub->win_ptr, 2, 0, key_pressed, cub);
 	mlx_hook(cub->win_ptr, 3, 0, key_release, cub);
+	mlx_hook(cub->win_ptr, 17, 1L << 17, close_prog, cub);
 	if (cub->mlx_ptr == NULL || cub->win_ptr == NULL)
 	{
 		printf("mlx_ptr == NULL, alos quil a etait initié");
@@ -118,10 +120,22 @@ int main(int ac, char **av)
 {
 	t_cub3d cub;
 	
-	if (ac != 2)
-		return (0);
-	start_parsing(open(av[1], O_RDONLY), &cub);
-	init_player(&cub.player, &cub);
-	init_position(&cub);
-	mlx_handle(&cub, av[1]);
+	init_cub3d(&cub);
+	cub.save = 0;
+	ft_printf("\n\n--->	START	<---\n\n");
+	if (ac == 2)
+	{
+		start_parsing(open(av[1], O_RDONLY), &cub);
+		init_player(&cub.player, &cub);
+		init_position(&cub);
+		mlx_handle(&cub, av[1]);
+	}
+	if (ac == 3 && ft_strcmp("--save", av[2]) == 0)
+	{
+		cub.save = 1;
+		start_parsing(open(av[1], O_RDONLY), &cub);
+		init_player(&cub.player, &cub);
+		init_position(&cub);
+		mlx_handle(&cub, av[1]);
+	}
 }

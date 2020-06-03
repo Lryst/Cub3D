@@ -101,4 +101,8 @@ void    start_ray_casting(t_cub3d *cub, t_player *player)
 		zbuffer[player->x] = player->perpWallDist;
 	}
 	gestion_sprite(cub, player, zbuffer);
+	if (cub->save == 1)
+	{
+		save(cub);
+	}
 }

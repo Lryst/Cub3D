@@ -26,14 +26,12 @@ void	separate_texture_no(char **tab, t_cub3d *ptr, t_check_struct *ret)
 				ptr->no.path = ft_strdup(tab[i + 1]);
 				ret->no = 1;
 			}
-			//ft_printf("NO %s\n", ptr->no.path);
+			else
+				ft_error("bad line in fd");
 		}
 	}
 	else
-	{
-		//ft_printf("ERREURE TEXTURE no, DESO BRO ...\n");
-		return;
-	}
+		ft_error("multi north texture");
 }
 
 void	separate_texture_so(char **tab, t_cub3d *ptr, t_check_struct *ret)
@@ -50,14 +48,12 @@ void	separate_texture_so(char **tab, t_cub3d *ptr, t_check_struct *ret)
 				ptr->so.path = ft_strdup(tab[i + 1]);
 				ret->so = 1;
 			}
-			//ft_printf("SO %s\n", ptr->so.path);
+			else
+				ft_error("bad line in fd");
 		}
 	}
 	else
-	{
-		//ft_printf("ERREURE TEXTURE so, DESO BRO ...\n");
-		return;
-	}
+		ft_error("multi south texture");
 }
 
 void	separate_texture_we(char **tab, t_cub3d *ptr, t_check_struct *ret)
@@ -74,14 +70,12 @@ void	separate_texture_we(char **tab, t_cub3d *ptr, t_check_struct *ret)
 				ptr->we.path = ft_strdup(tab[i + 1]);
 				ret->we = 1;
 			}
-			//ft_printf("WE %s\n", ptr->we.path);
+			else
+				ft_error("bad line in fd");
 		}
 	}
 	else
-	{
-		//ft_printf("ERREURE TEXTURE we, DESO BRO ...\n");
-		return;
-	}
+		ft_error("multi west texture");
 }
 
 void	separate_texture_ea(char **tab, t_cub3d *ptr, t_check_struct *ret)
@@ -98,14 +92,12 @@ void	separate_texture_ea(char **tab, t_cub3d *ptr, t_check_struct *ret)
 				ptr->ea.path = ft_strdup(tab[i + 1]);
 				ret->ea = 1;
 			}
-			//ft_printf("EA %s\n", ptr->ea.path);
+					else
+				ft_error("bad line in fd");
 		}
 	}
 	else
-	{
-		//ft_printf("ERREURE TEXTURE ea, DESO BRO ...\n");
-		return;
-	}
+		ft_error("multi east texture");
 }
 
 void	separate_texture_s(char **tab, t_cub3d *ptr, t_check_struct *ret)
@@ -122,12 +114,10 @@ void	separate_texture_s(char **tab, t_cub3d *ptr, t_check_struct *ret)
 				ptr->s.path = ft_strdup(tab[i + 1]);
 				ret->s = 1;
 			}
-			//ft_printf("S %s\n", ptr->s.path);
+			else
+				ft_error("bad line in fd");
 		}
 	}
 	else
-	{
-		//ft_printf("ERREURE TEXTURE s, DESO BRO ...\n");
-		return;
-	}
+		ft_error("multi sprite texture");
 }

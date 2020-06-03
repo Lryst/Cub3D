@@ -20,8 +20,7 @@ void	separate_r(char **tab, t_cub3d *ptr, t_check_struct *ret)
 	i = 0;
 	if (ret->width == 1 || ret->height == 1)
 	{
-		ft_printf("IL Y A DEJA UNE resolution POTO\n");
-		return;
+		ft_error("there is not only one resolution");
 	}
 	if (ret->width == -1 || ret->height == -1)
 	{

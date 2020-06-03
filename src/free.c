@@ -39,10 +39,11 @@ void	ft_error(char *str)
 	exit(EXIT_FAILURE);
 }
 
-void	close_prog(t_cub3d *cub)
+int	close_prog(t_cub3d *cub)
 {
 	mlx_clear_window(cub->mlx_ptr, cub->win_ptr);
 	mlx_destroy_window(cub->mlx_ptr, cub->win_ptr);
 	system("leaks Cub3D");
 	exit(EXIT_SUCCESS);
+	return(0);
 }
