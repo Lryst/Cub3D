@@ -251,6 +251,7 @@ void	init_raycasting(t_cub3d *cub, t_player *player);
 void    start_ray_casting(t_cub3d *cub, t_player *player);
 
 //move.c
+void    move(t_cub3d *cub);
 void 	turnRight(t_cub3d *ptr);
 void 	turnLeft(t_cub3d *ptr);
 void 	forward(t_cub3d *ptr);
