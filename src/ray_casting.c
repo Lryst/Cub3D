@@ -98,6 +98,7 @@ void    start_ray_casting(t_cub3d *cub, t_player *player)
 	while (++player->x < cub->width)
 	{
 		init_raycasting(cub, player);
+		//printf("cub->height = [%d]\n", cub->height);
 		zbuffer[player->x] = player->perpWallDist;
 	}
 	gestion_sprite(cub, player, zbuffer);

@@ -13,15 +13,13 @@
 #include "../cub3d.h"
 #include <string.h>
 
-void	separate_r(char **tab, t_cub3d *ptr, t_check_struct *ret)
+void	separate_r(char **tab, t_cub3d *cub, t_check_struct *ret)
 {
 	int i;
 
 	i = 0;
 	if (ret->width == 1 || ret->height == 1)
-	{
 		ft_error("there is not only one resolution");
-	}
 	if (ret->width == -1 || ret->height == -1)
 	{
 		if (ft_strcmp("R", (const char*)tab[i]) == 0)
@@ -30,21 +28,18 @@ void	separate_r(char **tab, t_cub3d *ptr, t_check_struct *ret)
 			{
 				if (tab[i + 1] >= 0 && tab[i + 2] >= 0 && tab[i + 3] == NULL)
 				{
-					if (ft_atoi(tab[i + 1]) < 0 || ft_atoi(tab[i + 2]) < 0 )
+					if (ft_atoi(tab[i + 1]) <= 0 || ft_atoi(tab[i + 2]) <= 0 )
 						ft_error("bad resolution");
-					ptr->width = ft_atoi(tab[i + 1]);
-					ptr->height = ft_atoi(tab[i + 2]);
+					cub->width = ft_atoi(tab[i + 1]);
+					cub->height = ft_atoi(tab[i + 2]);
 					ret->width = 1;
 					ret->height = 1;
-					//ft_printf("Width %d\n",ptr->width);
-					//ft_printf("Height %d\n", ptr->height);
+					ft_printf("Width %d\n",cub->width);
+					ft_printf("Height %d\n", cub->height);
 				}
 			}
 		}
 	}
 	else
-	{
-		ft_printf("EURREURE RESOLUTION DOMMAGE...\n");
-		return;
-	}
+		ft_error("EURREURE RESOLUTION DOMMAGE...\n");
 }

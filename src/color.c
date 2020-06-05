@@ -46,17 +46,10 @@ void	separate_color_f(char **tab, t_cub3d *cub, t_check_struct *ret)
 				}
 				free_double_tab(color);
 			}
-			//ft_printf("F.red %d\n", ptr->f.red);
-			//ft_printf("F.green %d\n", ptr->f.green);
-			//ft_printf("F.blue %d\n", ptr->f.blue);
 		}
 	}
 	else
-	{
-		//ft_printf("EURREURE color f DOMMAGE...\n");
-		return;
-	}
-	//ft_printf("F %s\n", ptr->f);
+		ft_error("EURREURE color f DOMMAGE...\n");
 }
 
 void	separate_color_c(char **tab, t_cub3d *cub, t_check_struct *ret)
@@ -93,15 +86,8 @@ void	separate_color_c(char **tab, t_cub3d *cub, t_check_struct *ret)
 				}
 				free_double_tab(color);
 			}
-			//ft_printf("C.red %d\n", cub->c.red);
-			//ft_printf("C.green %d\n", cub->c.green);
-			//ft_printf("C.blue %d\n", cub->c.blue);
 		}
 	}
 	else
-	{
-		//ft_printf("EURREURE color c DOMMAGE...\n");
-		return;
-	}
-	//ft_printf("F %s\n", cub->f);
+		ft_error("EURREURE color c DOMMAGE...\n");
 }

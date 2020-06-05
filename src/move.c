@@ -14,8 +14,6 @@
 
 void    move(t_cub3d *cub)
 {
-    if (cub->save == 0)
-    {
         cub->move.turnright ? turnRight(cub) : 0;
         cub->move.turnleft ? turnLeft(cub) : 0;
         cub->move.forward ? forward(cub) : 0;
@@ -23,8 +21,6 @@ void    move(t_cub3d *cub)
         cub->move.rightward ? rightward(cub) : 0;
         cub->move.leftward ? leftward(cub) : 0;
         cub->esc ? close_prog(cub) : 0;
-    }
-    return;
 }
 
 void  turnRight(t_cub3d *cub)

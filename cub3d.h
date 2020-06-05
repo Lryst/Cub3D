@@ -193,12 +193,12 @@ typedef struct
 }				t_check_struct;
 
 //color;
-void	separate_color_f(char **tab, t_cub3d *ptr, t_check_struct *ret);
-void	separate_color_c(char **tab, t_cub3d *ptr, t_check_struct *ret);
+void	separate_color_f(char **tab, t_cub3d *cub, t_check_struct *ret);
+void	separate_color_c(char **tab, t_cub3d *cub, t_check_struct *ret);
 
 //save_map.c
-void	init_cub3d(t_cub3d *ptr);
-void	check_map(char *str, t_cub3d *ptr, int count);
+void	init_cub3d(t_cub3d *cub);
+void	check_map(char *str, t_cub3d *cub, int count);
 int		check_closed_map(t_cub3d *c);
 int 	parcour_closed_map(char **map, int j, int i, int height);
 void	check_nbr_of_sprite(t_cub3d *cub);
@@ -218,18 +218,18 @@ void	parse_2(t_cub3d *cub, t_check_struct *ret);
 void	start_parsing(int fd, t_cub3d *cub);
 
 //resolution.c
-void	separate_r(char **tab, t_cub3d *ptr, t_check_struct *ret);
+void	separate_r(char **tab, t_cub3d *cub, t_check_struct *ret);
 
 //textures.c
-void	separate_texture_no(char **tab, t_cub3d *ptr, t_check_struct *ret);
-void	separate_texture_so(char **tab, t_cub3d *ptr, t_check_struct *ret);
-void	separate_texture_we(char **tab, t_cub3d *ptr, t_check_struct *ret);
-void	separate_texture_ea(char **tab, t_cub3d *ptr, t_check_struct *ret);
-void	separate_texture_s(char **tab, t_cub3d *ptr, t_check_struct *ret);
+void	separate_texture_no(char **tab, t_cub3d *cub, t_check_struct *ret);
+void	separate_texture_so(char **tab, t_cub3d *cub, t_check_struct *ret);
+void	separate_texture_we(char **tab, t_cub3d *cub, t_check_struct *ret);
+void	separate_texture_ea(char **tab, t_cub3d *cub, t_check_struct *ret);
+void	separate_texture_s(char **tab, t_cub3d *cub, t_check_struct *ret);
 
 //init_check_struct.c
 void	init_check_struct(t_check_struct *ret);
-void	init_cub3d(t_cub3d *ptr);
+void	init_cub3d(t_cub3d *cub);
 int		check_struct(t_check_struct *ret);
 
 //sprites.c
@@ -252,12 +252,12 @@ void    start_ray_casting(t_cub3d *cub, t_player *player);
 
 //move.c
 void    move(t_cub3d *cub);
-void 	turnRight(t_cub3d *ptr);
-void 	turnLeft(t_cub3d *ptr);
-void 	forward(t_cub3d *ptr);
-void 	backward(t_cub3d *ptr);
-void	rightward(t_cub3d *ptr);
-void    leftward(t_cub3d *ptr);
+void 	turnRight(t_cub3d *cub);
+void 	turnLeft(t_cub3d *cub);
+void 	forward(t_cub3d *cub);
+void 	backward(t_cub3d *cub);
+void	rightward(t_cub3d *cub);
+void    leftward(t_cub3d *cub);
 
 //set_texture.c
 void    get_inf(t_cub3d *cub, t_texture *tex, void *mlx_ptr, int **tab);
@@ -272,13 +272,15 @@ void	side_3(t_cub3d *cub, t_player *player);
 //free.c
 void	free_double_tab(char **str);
 void	free_tex(t_texture *tex);
-void	free_void(void *ptr);
+void	free_void(void *cub);
 void	ft_error(char *str);
 int		close_prog(t_cub3d *cub);
 
 //save_bmp.c
+static void		write_data(int file, t_cub3d *cub);
+static unsigned char	*ft_info_img_header(t_cub3d *cub);
+static unsigned char	*ft_file_header(int filesize);
 void	save(t_cub3d *cub);
-unsigned char	*ft_file_header(int size);
-unsigned char	*ft_info_img_header(t_cub3d *cub);
+//static void				write_data(int file, char *data, t_cub3d *cub);
 
 #endif

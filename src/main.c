@@ -87,7 +87,7 @@ int		print_screen(t_cub3d *cub)
 	move(cub);
 	if (!(mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->img, 0, 0)))
 		printf("mlx_put_image_to_window PAS POSSIBLE !\n");
-	//mlx_destroy_image(cub->mlx_ptr, cub->img);
+	mlx_destroy_image(cub->mlx_ptr, cub->img);
 	return (1);
 }
 
@@ -100,16 +100,13 @@ void	mlx_handle(t_cub3d *cub, char *av)
 	set_img(cub);
 	if (cub->mlx_ptr == NULL || cub->win_ptr == NULL)
 		ft_error("mlx_ptr == NULL, alos quil a etait initié");
-	if (cub->save == 0)
-	{
-		mlx_hook(cub->win_ptr, 2, 0, key_pressed, cub);
-		mlx_hook(cub->win_ptr, 3, 0, key_release, cub);
-		mlx_hook(cub->win_ptr, 17, 1L << 17, close_prog, cub);
-		mlx_loop_hook(cub->mlx_ptr, &print_screen, cub);
-		mlx_loop(cub->mlx_ptr);
-	}
 	if (cub->save == 1)
 		print_screen(cub);
+	mlx_hook(cub->win_ptr, 2, 0, key_pressed, cub);
+	mlx_hook(cub->win_ptr, 3, 0, key_release, cub);
+	mlx_hook(cub->win_ptr, 17, 1L << 17, close_prog, cub);
+	mlx_loop_hook(cub->mlx_ptr, &print_screen, cub);
+	mlx_loop(cub->mlx_ptr);
 }
 
 int main(int ac, char **av)
