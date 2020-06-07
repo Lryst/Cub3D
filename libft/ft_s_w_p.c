@@ -63,6 +63,7 @@ void	ft_s_w_p(t_flags *prt, va_list args, size_t *count)
 {
 	char	*str;
 	char	*null;
+	int		i;
 
 	i = 0;
 	str = va_arg(args, char*);
