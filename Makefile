@@ -20,8 +20,8 @@ sprites.c print.c outils.c free.c save_bmp.c\
 OBJ_PATH = obj
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
-CC = gcc
-CFLAGS = #-Wall -Werror -Wextra
+CC = clang
+CFLAGS = -Wall -Werror -Wextra
 
 LIB_DIR = libft
 LIB = $(LIB_DIR)/libft.a
@@ -40,7 +40,8 @@ $(LIB):
 
 $(NAME): $(OBJ)
 	@printf "\n"
-	@$(CC) -o $(NAME) $(OBJ) $(LIB) $(MLX) -framework OpenGL -framework AppKit
+	clang -Wall -Werror -Wextra - I /usr/local/include -g -L
+ 	/usr/local/lib $(OBJ) $(NAME) -lX11 -lXext -lm -lbsd -lmlx
 	@echo "Compilation of \033[33;1m$(NAME)\033[0;1m: [\033[1;32mOK\033[0;1m]"
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
