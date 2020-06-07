@@ -61,15 +61,13 @@ void	ft_s_w_p3(t_flags *prt, size_t *count, int i, char *str)
 
 void	ft_s_w_p(t_flags *prt, va_list args, size_t *count)
 {
-	int		i;
 	char	*str;
 	char	*null;
 
-	i = 0;
 	str = va_arg(args, char*);
 	null = "(null)";
 	if (str != NULL)
-		ft_s_w_p3(prt, count, i, str);
+		ft_s_w_p3(prt, count, 0, str);
 	if (str == NULL)
-		ft_s_w_p2(prt, count, i, null);
+		ft_s_w_p2(prt, count, 0, null);
 }

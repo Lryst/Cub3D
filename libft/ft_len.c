@@ -41,7 +41,7 @@ int	ft_hexa_len(unsigned int nb)
 
 	len = 0;
 	if (nb == 0)
-		len = 1;
+	len = 1;
 	while (nb > 0)
 	{
 		nb = nb / 16;
