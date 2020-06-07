@@ -41,7 +41,7 @@ void	sort_sprite(t_cub3d*cub, t_player *player)
 	}
 }
 
-void	init_sprite_2(t_cub3d *cub, t_player *player)
+void	init_sprite_2(t_cub3d *cub)
 {
 	cub->map.sprite.height = abs((int)(cub->height / (cub->map.sprite.transY)));
 	cub->map.sprite.drawstartY = -cub->map.sprite.height / 2 + cub->height / 2;
@@ -69,7 +69,7 @@ void	init_sprite(t_cub3d *cub, t_player *player)
 				cub->map.sprite.x + player->planeX * cub->map.sprite.y);
 	cub->map.sprite.screenX = (int)((cub->width / 2) * 
 		(1 + cub->map.sprite.transX / cub->map.sprite.transY));
-	init_sprite_2(cub, player);
+	init_sprite_2(cub);
 }
 
 void	gestion_sprite(t_cub3d *cub, t_player *player, double *zbuffer)

@@ -20,7 +20,7 @@
 # include <stdio.h>
 # include <math.h>
 # include "libft/libft.h"
-# include "ressources/minilibx/mlx.h"
+# include "ressources/minilibx-linux/mlx.h"
 //# include "ressources/minilibx/mlx.h"
 
 # define ABS(x) (x > 0 ? (x) : (-x))
@@ -236,7 +236,7 @@ int		check_struct(t_check_struct *ret);
 void	check_dist_sprite(t_cub3d *cub, t_player *player);
 void	sort_sprite(t_cub3d*cub, t_player *player);
 void	init_sprite(t_cub3d *cub, t_player *player);
-void	init_sprite_2(t_cub3d *cub, t_player *player);
+void	init_sprite_2(t_cub3d *cub);
 void	gestion_sprite(t_cub3d *cub, t_player *player, double *zbuffer);
 
 //print.c
@@ -277,10 +277,9 @@ void	ft_error(char *str);
 int		close_prog(t_cub3d *cub);
 
 //save_bmp.c
-static void		write_data(int file, t_cub3d *cub);
-static unsigned char	*ft_info_img_header(t_cub3d *cub);
-static unsigned char	*ft_file_header(int filesize);
+//static void		write_data(int file, t_cub3d *cub);
+//static unsigned char	*ft_info_img_header(t_cub3d *cub);
+//static unsigned char	*ft_file_header(int size);
 void	save(t_cub3d *cub);
-//static void				write_data(int file, char *data, t_cub3d *cub);
 
 #endif
