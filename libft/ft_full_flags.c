@@ -22,13 +22,9 @@ void	ft_just_flag(t_flags *prt, size_t *count, va_list args)
 
 void	ft_full_flags_m(t_flags *prt, size_t *count, va_list args)
 {
-	int				n;
 	unsigned long	u;
-	size_t			tmp;
 
-	n = 0;
 	u = 0;
-	tmp = 0;
 	ft_precision(prt, &u, args);
 	*count = *count + u;
 	if (u < ((unsigned int)prt->nbr_f))
