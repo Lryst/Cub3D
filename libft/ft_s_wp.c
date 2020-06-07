@@ -64,10 +64,8 @@ void	ft_s_wp(t_flags *prt, va_list args, size_t *count)
 {
 	char	*str;
 	int		len;
-	int		i;
 	char	*null;
 
-	i = -1;
 	len = 0;
 	str = va_arg(args, char *);
 	null = "(null)";

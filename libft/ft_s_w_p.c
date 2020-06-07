@@ -64,10 +64,11 @@ void	ft_s_w_p(t_flags *prt, va_list args, size_t *count)
 	char	*str;
 	char	*null;
 
+	i = 0;
 	str = va_arg(args, char*);
 	null = "(null)";
 	if (str != NULL)
-		ft_s_w_p3(prt, count, 0, str);
+		ft_s_w_p3(prt, count, i, str);
 	if (str == NULL)
-		ft_s_w_p2(prt, count, 0, null);
+		ft_s_w_p2(prt, count, i, null);
 }
