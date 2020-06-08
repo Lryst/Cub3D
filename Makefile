@@ -40,7 +40,7 @@ $(LIB):
 
 $(NAME): $(OBJ)
 	@printf "\n"
-	gcc -Wall -Werror -Wextra -I /usr/local/include -g -L /usr/local/lib$(OBJ) $(NAME) -lX11 -lXext -lm -lbsd -lmlx
+	@$(CC) -o $(NAME) $(OBJ) $(LIB) $(MLX) -framework OpenGL -framework AppKit
 	@echo "Compilation of \033[33;1m$(NAME)\033[0;1m: [\033[1;32mOK\033[0;1m]"
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c

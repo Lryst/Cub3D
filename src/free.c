@@ -32,9 +32,12 @@ void	ft_error(char *str)
 	int i;
 
 	i = ft_strlen(str);
+	write(1, "\n-----------------------------------", 36);
+	write(1, "\nERROR", 6);
 	write(1, "\n------>   ", 11);
 	write(1, str, i);
 	write(1, "   <------\n\n", 12);
+	write(1, "-----------------------------------\n", 36);
 	system("leaks Cub3D");
 	exit(EXIT_FAILURE);
 }

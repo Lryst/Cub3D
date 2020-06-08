@@ -36,9 +36,21 @@
 
 }
 
+void	check_screen_size(t_cub3d *cub)
+{
+	int height;
+	int width;
+
+	height = cub->height;
+	width = cub->width;
+	mlx_mscreen_resolution(&width, &height);
+	width < cub->width ? cub->width = width : 0;
+	height < cub->height ? cub->height = height : 0;
+}
+
 void	init_player(t_player *player, t_cub3d *cub)
 {
-	
+	check_screen_size(cub);
     player->posX = (double)cub->posX + 0.5;
     player->posY = (double)cub->posY + 0.5;
     player->planeX = 0.0;
