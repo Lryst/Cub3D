@@ -26,8 +26,7 @@ void	separate_r(char **tab, t_cub3d *cub, t_check_struct *ret)
 		{
 			if (tab[i + 1] != NULL && tab[i + 2] != NULL && tab[i + 3] == NULL)
 			{
-				if (tab[i + 1] >= 0 && tab[i + 2] >= 0 && tab[i + 3] == NULL)
-				{
+
 					if (ft_atoi(tab[i + 1]) <= 0 || ft_atoi(tab[i + 2]) <= 0 )
 						ft_error("bad resolution");
 					cub->width = ft_atoi(tab[i + 1]);
@@ -36,7 +35,6 @@ void	separate_r(char **tab, t_cub3d *cub, t_check_struct *ret)
 					ret->height = 1;
 					ft_printf("Width %d\n",cub->width);
 					ft_printf("Height %d\n", cub->height);
-				}
 			}
 		}
 	}

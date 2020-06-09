@@ -128,15 +128,9 @@ void	check_map(char *str, t_cub3d *cub, int count)
 	char **tab;
 	int i;
 	int j;
-	int k;
-	int l;
-	int len;
 
 	i = 0;
-	len = 0;
 	j = 0;
-	k = -1;
-	l = 0;
 	tab = ft_split((const char*)str, '*');
 	free(str);
 	cub->map.height = count;
@@ -144,7 +138,6 @@ void	check_map(char *str, t_cub3d *cub, int count)
 		return;
 	while (tab[i])
 	{
-		len = ft_strlen(tab[i]);
 		if (!(cub->map.line[j] = ft_strdup(tab[i])))
 			return;
 		//cub->map.line[j] = ft_strdup(tab[i]);

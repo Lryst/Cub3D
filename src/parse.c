@@ -80,9 +80,6 @@ void	parse_3(t_cub3d *cub, t_check_struct *ret)
 
 void	parse_2(t_cub3d *cub, t_check_struct *ret)
 {
-	int i;
-
-	i = 0;
 	if (ft_strsame(cub->line, FLINE) == 1 && ret->map == 1)
 		ft_error("ERROR in map line");
 	if (ft_strsame(cub->line, SET) == 1 && check_struct(ret) == 1)
@@ -107,9 +104,7 @@ void	parse_2(t_cub3d *cub, t_check_struct *ret)
 void	start_parsing(int fd, t_cub3d *cub)
 {
 	t_check_struct ret;
-	int i;
 	
-	i = 0;
 	init_check_struct(&ret);
 	while (get_next_line(fd, &cub->line) == 1)
 	{

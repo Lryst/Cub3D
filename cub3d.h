@@ -21,9 +21,8 @@
 # include <math.h>
 # include "libft/libft.h"
 # include "ressources/minilibx/mlx.h"
-//# include "ressources/minilibx/mlx.h"
-
 # define ABS(x) (x > 0 ? (x) : (-x))
+
 typedef struct
 {
 	int sprite_nbr;

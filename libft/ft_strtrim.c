@@ -17,10 +17,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	char	*str;
 	int		i;
 	int		n;
-	int		j;
 
 	i = 0;
-	j = 0;
 	if (!s1)
 		return (NULL);
 	while (s1[i] && ft_strspn((char*)set, s1[i]))
