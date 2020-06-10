@@ -1,20 +1,12 @@
-R 3300 2600
-S /Users/lulu/Lryst/Cub3D/ressources/barrel.xpm
-
-    NO /Users/lulu/Lryst/Cub3D/ressources/tex_mur_brique.xpm
-SO /Users/lulu/Lryst/Cub3D/ressources/texture_mur_fleurs-_1_.xpm
-
-        
-    
-    WE /Users/lulu/Lryst/Cub3D/ressources/texture_mur_pierre.xpm
-EA /Users/lulu/Lryst/Cub3D/ressources/texture_mur_pierre_grises.xpm
-
+R 1300 600
+S /home/user42/Cub3D/ressources/barrel.xpm
+NO /home/user42/Cub3D/ressources/tex_mur_brique.xpm
+SO /home/user42/Cub3D/ressources/texture_mur_fleurs-_1_.xpm
+WE /home/user42/Cub3D/ressources/texture_mur_pierre.xpm
+EA /home/user42/Cub3D/ressources/texture_mur_pierre_grises.xpm
 F 0,191,255
 C 225,179,255
-
-
-
-    1111111111111111111
+     1111111111111111111
 11111111100000000000001111111111111111111
 1000000000110000000000000201111
 1011001111111102020200100010001111

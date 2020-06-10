@@ -26,7 +26,7 @@ CFLAGS = -Wall -Werror -Wextra
 LIB_DIR = libft
 LIB = $(LIB_DIR)/libft.a
 
-MLX_DIR = minilibx-linux
+MLX_DIR = ressources/minilibx-linux
 MLX = $(MLX_DIR)/libmlx.a
 MLX_LIBS = -lbsd -lmlx -lXext -lX11
 
