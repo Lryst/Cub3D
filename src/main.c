@@ -43,14 +43,15 @@ void	check_screen_size(t_cub3d *cub)
 
 	height = cub->height;
 	width = cub->width;
+	printf("height = [%d]\n", height);
 	mlx_get_screen_size(cub->mlx_ptr, &width, &height);
+	printf("height = [%d]\n", height);
 	width < cub->width ? cub->width = width : 0;
 	height < cub->height ? cub->height = height : 0;
 }
 
 void	init_player(t_player *player, t_cub3d *cub)
 {
-	//check_screen_size(cub);
 	player->posX = (double)cub->posX + 0.5;
 	player->posY = (double)cub->posY + 0.5;
 	player->planeX = 0.0;
@@ -68,27 +69,25 @@ void	init_player(t_player *player, t_cub3d *cub)
 
 int key_pressed(int key, t_cub3d *cub)
 {
-	printf("key pressed [%d]\n", key);
 	key == 65307 ?cub->esc = 1 : 0;
-	key == 13 ? cub->move.forward = 1 : 0;
-	key == 1 ? cub->move.backward = 1 : 0;
+	key == 119 ? cub->move.forward = 1 : 0;
+	key == 115 ? cub->move.backward = 1 : 0;
 	key == 65363 ? cub->move.turnright = 1 : 0;
-	key == 123 ? cub->move.turnleft = 1 : 0;
-	key == 2 ? cub->move.rightward = 1 : 0;
-	key == 0 ? cub->move.leftward = 1 : 0;
+	key == 65361 ? cub->move.turnleft = 1 : 0;
+	key == 100 ? cub->move.rightward = 1 : 0;
+	key == 97 ? cub->move.leftward = 1 : 0;
 	return (0);
 }
 
 int key_release(int key, t_cub3d *cub)
 {
-	printf("key [%d]\n", key);
 	key == 65307 ? cub->esc = 0 : 0;
-	key == 13 ? cub->move.forward = 0 : 0;
-	key == 1 ? cub->move.backward = 0 : 0;
+	key == 119 ? cub->move.forward = 0 : 0;
+	key == 115 ? cub->move.backward = 0 : 0;
 	key == 65363 ? cub->move.turnright = 0 : 0;
-	key == 123 ? cub->move.turnleft = 0 : 0;
-	key == 2 ? cub->move.rightward = 0 : 0;
-	key == 0 ? cub->move.leftward = 0 : 0;
+	key == 65361 ? cub->move.turnleft = 0 : 0;
+	key == 100 ? cub->move.rightward = 0 : 0;
+	key == 97 ? cub->move.leftward = 0 : 0;
 	return (0);
 }
 
@@ -111,6 +110,7 @@ void	mlx_handle(t_cub3d *cub, char *av)
 	cub->mlx_ptr = mlx_init();
 	if (cub->mlx_ptr == NULL)
 		ft_error("mlx_ptr == NULL, alos quil a etait initié");
+	check_screen_size(cub);
 	cub->win_ptr = mlx_new_window(cub->mlx_ptr, cub->width, cub->height, av);
 	set_img(cub);
 	if (cub->mlx_ptr == NULL || cub->win_ptr == NULL)
