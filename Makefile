@@ -28,7 +28,7 @@ LIB = $(LIB_DIR)/libft.a
 
 MLX_DIR = ressources/minilibx-linux
 MLX = $(MLX_DIR)/libmlx.a
-MLX_LIBS = -lbsd -lmlx -lXext -lX11
+MLX_LIBS = -lbsd -lXext -lX11
 
 SRC = $(addprefix $(SRC_PATH)/,$(SR_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
@@ -40,7 +40,7 @@ $(LIB):
 
 $(NAME): $(OBJ)
 	@printf "\n"
-	@$(CC) -o $(NAME) $(OBJ) $(LIB) $(MLX) -lm -lmlx -lXext -lX11
+	@$(CC) -o $(NAME) $(OBJ) $(LIB) $(MLX) -lm -lXext -lX11
 	@echo "Compilation of \033[33;1m$(NAME)\033[0;1m: [\033[1;32mOK\033[0;1m]"
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
