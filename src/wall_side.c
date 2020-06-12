@@ -1,6 +1,6 @@
 #include "../cub3d.h"
 
-void	side_0(t_cub3d *cub, t_player *player)
+void	side_2(t_cub3d *cub, t_player *player)
 {
 	player->texX = (int)(player->wallX * (double)cub->no.width);
 	player->texX = cub->no.width - player->texX - 1;
@@ -50,7 +50,7 @@ void	side_1(t_cub3d *cub, t_player *player)
 	}
 }
 
-void	side_2(t_cub3d *cub, t_player* player)
+void	side_0(t_cub3d *cub, t_player* player)
 {
 	player->texX = (int)(player->wallX * (double)cub->so.width);
 	player->texX = cub->so.width - player->texX - 1;

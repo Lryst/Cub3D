@@ -12,26 +12,40 @@
 
 #include "../cub3d.h"
 
-void	init_position(t_cub3d *ptr)
+void	init_direction2(t_cub3d *cub)
 {
-	double rotSpeed;
-
-	rotSpeed = 1.5706;
-	if (ptr->orientation == 'W')
+	if (cub->orientation == 'N')
 	{
-		ptr->player.dirX = 0.0;
-		ptr->player.dirY = -1.0;
-		ptr->player.oldplaneX = ptr->player.planeX;
-		ptr->player.planeX = ptr->player.planeX * cos(rotSpeed) - ptr->player.planeY * sin(rotSpeed);
-		ptr->player.planeY = ptr->player.oldplaneX * sin(rotSpeed) + ptr->player.planeY * cos(rotSpeed);
+		cub->player.dirX = -1.0;
+		cub->player.dirY = 0.0;
+		cub->player.planeX = cub->player.dirY * tan(1.25/2);
+		cub->player.planeY = -cub->player.dirX * tan(1.25/2);
 	}
-	if (ptr->orientation == 'E')
+	if (cub->orientation == 'S')
 	{
-		ptr->player.dirX = 0.0;
-		ptr->player.dirY = 1.0;
-		ptr->player.oldplaneX = ptr->player.planeX;
-		ptr->player.planeX = ptr->player.planeX * cos(rotSpeed) - ptr->player.planeY * sin(rotSpeed);
-		ptr->player.planeY = ptr->player.oldplaneX * sin(rotSpeed) + ptr->player.planeY * cos(rotSpeed);
+		cub->player.dirX = 1.0;
+		cub->player.dirY = 0.0;
+		cub->player.planeX = -cub->player.dirY * tan(1.25/2);
+		cub->player.planeY = -cub->player.dirX * tan(1.25/2);
+	}
+}
+
+void	init_direction(t_cub3d *cub)
+{
+	init_direction2(cub);
+	if (cub->orientation == 'W')
+	{
+		cub->player.dirX = 0.0;
+		cub->player.dirY = -1.0;
+		cub->player.planeX = cub->player.dirY * tan(1.25/2);
+		cub->player.planeY = cub->player.dirX * tan(1.25/2);
+	}
+	if (cub->orientation == 'E')
+	{
+		cub->player.dirX = 1.0;
+		cub->player.dirY = 1.0;
+		cub->player.planeX = cub->player.dirY * tan(1.25/2);
+		cub->player.planeY = -cub->player.dirX * tan(1.25/2);
 	}
 
 }
@@ -43,14 +57,12 @@ void	check_screen_size(t_cub3d *cub)
 
 	height = cub->height;
 	width = cub->width;
-	printf("height = [%d]\n", height);
 	mlx_get_screen_size(cub->mlx_ptr, &width, &height);
-	printf("height = [%d]\n", height);
 	width < cub->width ? cub->width = width : 0;
 	height < cub->height ? cub->height = height : 0;
 }
 
-void	init_player(t_player *player, t_cub3d *cub)
+void	init_position(t_player *player, t_cub3d *cub)
 {
 	player->posX = (double)cub->posX + 0.5;
 	player->posY = (double)cub->posY + 0.5;
@@ -58,13 +70,7 @@ void	init_player(t_player *player, t_cub3d *cub)
 	player->planeY = 0.66;
 	player->time = 0.0;
 	player->oldtime = 0.0;
-	if (cub->orientation == 'S')
-	{
-		player->dirX = 1.0;
-		player->dirY = 0.0;
-	}
-	player->dirX = -1.0;
-	player->dirY = 0.0;
+	init_direction(cub);
 }
 
 int key_pressed(int key, t_cub3d *cub)
@@ -105,7 +111,6 @@ int		print_screen(t_cub3d *cub)
 
 void	mlx_handle(t_cub3d *cub, char *av)
 {
-	printf("wesh\n");
 	cub->mlx_ptr = mlx_init();
 	if (cub->mlx_ptr == NULL)
 		ft_error("mlx_ptr == NULL, alos quil a etait initié");
@@ -123,12 +128,32 @@ void	mlx_handle(t_cub3d *cub, char *av)
 	mlx_loop(cub->mlx_ptr);
 }
 
+int		check_is_ptcub(char *av, char *file)
+{
+	int i;
+	int j;
+	int k;
+	
+	i = ft_strlen(av);
+	j = ft_strlen(file);
+	k = i - j;
+	while (i > k)
+	{
+		if (av[i] != file[j])
+			return (0);
+		i--;
+		j--;
+	}
+	return (1);
+}
+
 int main(int ac, char **av)
 {
 	t_cub3d cub;
 	int fd;
 
-	printf("coucou\n");
+	if (check_is_ptcub(av[1], ".cub") == 0)
+		ft_error(" the first argument is not a .cub");
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		ft_error("bad file descriptor");
@@ -138,16 +163,14 @@ int main(int ac, char **av)
 	if (ac == 2)
 	{
 		start_parsing(fd, &cub);
-		init_player(&cub.player, &cub);
-		init_position(&cub);
+		init_position(&cub.player, &cub);
 		mlx_handle(&cub, av[1]);
 	}
 	if (ac == 3 && ft_strcmp("--save", av[2]) == 0)
 	{
 		cub.save = 1;
 		start_parsing(open(av[1], O_RDONLY), &cub);
-		init_player(&cub.player, &cub);
-		init_position(&cub);
+		init_position(&cub.player, &cub);
 		mlx_handle(&cub, av[1]);
 	}
 	ft_error("bad arguments");

@@ -18,10 +18,10 @@ char	*ft_strdup(const char *s1)
 	int		i;
 
 	i = 0;
-	dest = (char *)malloc(sizeof(char) * ft_strlen((char *)s1) + 1);
-	if (dest == 0)
+	
+	if (!(dest = ft_newstring(ft_strlen((char*)s1) + 10)))
 		return (NULL);
-	while (s1[i])
+	while (s1[i] != '\0')
 	{
 		dest[i] = s1[i];
 		i++;

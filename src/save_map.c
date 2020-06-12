@@ -21,22 +21,20 @@ void	get_position_sprite(t_cub3d*cub)
 	a = 0;
 	x = 0;
 	y = 0;
-	if (!(cub->map.sprite.pos_sprite = (int**)malloc(sizeof(int*) * cub->map.sprite.sprite_nbr)))
+	if (!(cub->map.sprite.pos_sprite = (int**)malloc(sizeof(int*) * cub->map.sprite.sprite_nbr + 1)))
 	{
 		return;
 	}
 	while (x < cub->map_height)
 	{
 		y = 0;
-		while (y < cub->map_width)
+		while (y < cub->map_width - 1)
 		{
-			//ft_printf("x[%d], y[%d]\n", x, y);
 			if (cub->map.line[x][y] == '2')
 			{
 				cub->map.sprite.pos_sprite[a] = (int*)malloc(sizeof(int) * 2);
 				cub->map.sprite.pos_sprite[a][0] = x;
 				cub->map.sprite.pos_sprite[a][1] = y;
-				//printf("nbr [%d], x [%d], y [%d]\n", a, cub->map.sprite.pos_sprite[a][0], cub->map.sprite.pos_sprite[a][1]);
 				a++;
 			}
 			y++;
@@ -59,7 +57,7 @@ void	check_nbr_of_sprite(t_cub3d *cub)
 		while (y < cub->map_width)
 		{
 			if (cub->map.line[x][y] == '2')
-				cub->map.sprite.sprite_nbr = cub->map.sprite.sprite_nbr + 1;
+				cub->map.sprite.sprite_nbr += 1;
 			y++;
 		}
 		x++;
@@ -107,11 +105,15 @@ int		check_closed_map(t_cub3d *cub)
 	int ret;
 	
 	cub->map.sprite.sprite_nbr = 0;
+	cub->closed_map = NULL;
 	cub->closed_map = malloc(sizeof(char*) * cub->map.height + 30);
 	cub->closed_map[cub->map.height] = NULL;
 	i = -1;
 	while (++i < cub->map.height)
+	{
+		cub->closed_map[i] = NULL;
 		cub->closed_map[i] = ft_strdup(cub->map.line[i]);
+	}
 	ret = parcour_closed_map(cub->closed_map, cub->posX, cub->posY, cub->map_height);
 	i = -1;
 	check_nbr_of_sprite(cub);
@@ -127,23 +129,19 @@ void	check_map(char *str, t_cub3d *cub, int count)
 {
 	char **tab;
 	int i;
-	int j;
 
-	i = 0;
-	j = 0;
+	i = -1;
 	tab = ft_split((const char*)str, '*');
 	free(str);
+	cub->map.line = NULL;
 	cub->map.height = count;
 	if (!(cub->map.line = (char**)malloc(sizeof(cub->map.line) * (count + 1))))
-		return;
-	while (tab[i])
+		ft_error("malloc abort");
+	while (tab[++i])
 	{
-		if (!(cub->map.line[j] = ft_strdup(tab[i])))
-			return;
-		//cub->map.line[j] = ft_strdup(tab[i]);
-		//ft_printf("line %s\n", ptr->map.line[j]);
-		i++;
-		j++;
+		cub->map.line[i] = NULL;
+		if (!(cub->map.line[i] = ft_strdup(tab[i])))
+			ft_error("ft_strdup failed");
 	}
 	free_double_tab(tab);
 	if (!check_closed_map(cub))

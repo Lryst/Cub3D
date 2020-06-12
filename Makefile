@@ -43,7 +43,7 @@ $(MLX):
 
 $(NAME): $(OBJ)
 	@printf "\n"
-	@$(CC) -o $(NAME) $(OBJ) $(LIB) $(MLX) -lm -lXext -lX11
+	@$(CC) -o $(NAME) $(OBJ) $(LIB) $(MLX) -lm -lXext -lX11 
 	@echo "Compilation of \033[33;1m$(NAME)\033[0;1m: [\033[1;32mOK\033[0;1m]"
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c

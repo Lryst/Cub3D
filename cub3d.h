@@ -192,6 +192,8 @@ typedef struct
 }				t_check_struct;
 
 //color;
+int		check_is_tab_num(char **tab);
+void	put_color_in_struct(int *tex_color, char **color);
 void	separate_color_f(char **tab, t_cub3d *cub, t_check_struct *ret);
 void	separate_color_c(char **tab, t_cub3d *cub, t_check_struct *ret);
 

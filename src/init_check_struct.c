@@ -30,6 +30,11 @@ void	init_check_struct(t_check_struct *ret)
 void	init_cub3d(t_cub3d *cub)
 {
 	ft_bzero(cub, sizeof(t_cub3d));
+	ft_bzero(&cub->closed_map, sizeof(char **));
+	ft_bzero(&cub->no, sizeof(t_texture));
+	ft_bzero(&cub->move, sizeof(t_move));
+	ft_bzero(&cub->map, sizeof(t_map));
+	ft_bzero(&cub->player, sizeof(t_player));
 	cub->tmp = ft_newstring(0);
 }
 

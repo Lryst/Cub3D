@@ -74,12 +74,8 @@ void	parse_3(t_cub3d *cub, t_check_struct *ret)
 		cub->count++;
 		ret->map = 1;
 	}
-	printf("SET = [%s]\n", SET);
 	if (ft_strsame(cub->line, SET) == 0 && ret->map == 1 && check_struct(ret) == 1)
-	{
-		printf("last line = {%s}\n", cub->line);
 		ft_error("ERROR bad charactere in map line");
-	}
 }
 
 void	parse_2(t_cub3d *cub, t_check_struct *ret)

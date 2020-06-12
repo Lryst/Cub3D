@@ -65,6 +65,8 @@ void	separate_color_f(char **tab, t_cub3d *cub, t_check_struct *ret)
 				}
 				free_double_tab(color);
 			}
+			else
+				ft_error("bad color f");
 		}
 	}	
 }
@@ -75,7 +77,6 @@ void	separate_color_c(char **tab, t_cub3d *cub, t_check_struct *ret)
 	char **color = NULL;
 
 	i = 0;
-	printf("ret->c = [%d]\n", ret->c);
 	if (ret->c == 1)
 		ft_error("multi color C");
 	if (ret->c == -1)
@@ -95,6 +96,8 @@ void	separate_color_c(char **tab, t_cub3d *cub, t_check_struct *ret)
 				}
 				free_double_tab(color);
 			}
+			else
+				ft_error("bad color c");
 		}
 	}
 }

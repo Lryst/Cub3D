@@ -46,7 +46,7 @@ int	close_prog(t_cub3d *cub)
 {
 	mlx_clear_window(cub->mlx_ptr, cub->win_ptr);
 	mlx_destroy_window(cub->mlx_ptr, cub->win_ptr);
-	//free_double_tab(cub->closed_map);
+	free_double_tab(cub->closed_map);
 	exit(EXIT_SUCCESS);
 	return(0);
 }
