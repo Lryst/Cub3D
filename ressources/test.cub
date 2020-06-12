@@ -1,8 +1,12 @@
 R 3300 2600
+
+
 S /home/user42/Cub3D/ressources/barrel.xpm
-NO /home/user42/Cub3D/ressources/tex_mur_brique.xpm
+NO      /home/user42/Cub3D/ressources/tex_mur_brique.xpm
 SO /home/user42/Cub3D/ressources/texture_mur_fleurs-_1_.xpm
-WE /home/user42/Cub3D/ressources/texture_mur_pierre.xpm
+         WE /home/user42/Cub3D/ressources/texture_mur_pierre.xpm
+
+
 EA /home/user42/Cub3D/ressources/texture_mur_pierre_grises.xpm
 F 0,191,255
 C 225,179,255

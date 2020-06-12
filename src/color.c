@@ -33,13 +33,10 @@ void	separate_color_f(char **tab, t_cub3d *cub, t_check_struct *ret)
 					{
 						if (ft_atoi(color[a + 1]) > -1 && ft_atoi(color[a + 1]) < 256)
 						{
-							cub->f.red = ft_atoi(color[a]);
-							cub->f.green = ft_atoi(color[a + 1]);
-							cub->f.blue = ft_atoi(color[a + 2]);
 							cub->f.color = 0;
-							cub->f.color += cub->f.red << 16;
-							cub->f.color += cub->f.green << 8;
-							cub->f.color += cub->f.blue;
+							cub->f.color += ft_atoi(color[a]) << 16;
+							cub->f.color += ft_atoi(color[a + 1]) << 8;
+							cub->f.color += ft_atoi(color[a + 2]);
 							ret->f = 1;
 						}
 					}
@@ -49,7 +46,7 @@ void	separate_color_f(char **tab, t_cub3d *cub, t_check_struct *ret)
 		}
 	}
 	else
-		ft_error("EURREURE color f DOMMAGE...\n");
+		ft_error("color f DOMMAGE...\n");
 }
 
 void	separate_color_c(char **tab, t_cub3d *cub, t_check_struct *ret)
@@ -89,5 +86,5 @@ void	separate_color_c(char **tab, t_cub3d *cub, t_check_struct *ret)
 		}
 	}
 	else
-		ft_error("EURREURE color c DOMMAGE...\n");
+		ft_error("color c DOMMAGE...\n");
 }

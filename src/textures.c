@@ -12,7 +12,7 @@
 
 #include "../cub3d.h"
 
-void	separate_texture_no(char **tab, t_cub3d *ptr, t_check_struct *ret)
+void	separate_texture_no(char **tab, t_cub3d *cub, t_check_struct *ret)
 {
 	int i;
 
@@ -23,7 +23,7 @@ void	separate_texture_no(char **tab, t_cub3d *ptr, t_check_struct *ret)
 		{
 			if (tab[i] != NULL && tab[i + 1] != NULL && tab[i + 2] == NULL)
 			{
-				ptr->no.path = ft_strdup(tab[i + 1]);
+				cub->no.path = ft_strdup(tab[i + 1]);
 				ret->no = 1;
 			}
 			else
@@ -34,7 +34,7 @@ void	separate_texture_no(char **tab, t_cub3d *ptr, t_check_struct *ret)
 		ft_error("multi north texture");
 }
 
-void	separate_texture_so(char **tab, t_cub3d *ptr, t_check_struct *ret)
+void	separate_texture_so(char **tab, t_cub3d *cub, t_check_struct *ret)
 {
 	int i;
 
@@ -45,7 +45,7 @@ void	separate_texture_so(char **tab, t_cub3d *ptr, t_check_struct *ret)
 		{
 			if (tab[i] != NULL && tab[i + 1] != NULL && tab[i + 2] == NULL)
 			{
-				ptr->so.path = ft_strdup(tab[i + 1]);
+				cub->so.path = ft_strdup(tab[i + 1]);
 				ret->so = 1;
 			}
 			else
@@ -56,7 +56,7 @@ void	separate_texture_so(char **tab, t_cub3d *ptr, t_check_struct *ret)
 		ft_error("multi south texture");
 }
 
-void	separate_texture_we(char **tab, t_cub3d *ptr, t_check_struct *ret)
+void	separate_texture_we(char **tab, t_cub3d *cub, t_check_struct *ret)
 {
 	int i;
 	
@@ -67,7 +67,7 @@ void	separate_texture_we(char **tab, t_cub3d *ptr, t_check_struct *ret)
 		{
 			if (ft_strcmp("WE", (const char *)tab[i]) == 0)
 			{
-				ptr->we.path = ft_strdup(tab[i + 1]);
+				cub->we.path = ft_strdup(tab[i + 1]);
 				ret->we = 1;
 			}
 			else
@@ -78,7 +78,7 @@ void	separate_texture_we(char **tab, t_cub3d *ptr, t_check_struct *ret)
 		ft_error("multi west texture");
 }
 
-void	separate_texture_ea(char **tab, t_cub3d *ptr, t_check_struct *ret)
+void	separate_texture_ea(char **tab, t_cub3d *cub, t_check_struct *ret)
 {
 	int i;
 	
@@ -89,7 +89,7 @@ void	separate_texture_ea(char **tab, t_cub3d *ptr, t_check_struct *ret)
 		{
 			if (ft_strcmp("EA", (const char *)tab[i]) == 0)
 			{
-				ptr->ea.path = ft_strdup(tab[i + 1]);
+				cub->ea.path = ft_strdup(tab[i + 1]);
 				ret->ea = 1;
 			}
 					else
@@ -100,7 +100,7 @@ void	separate_texture_ea(char **tab, t_cub3d *ptr, t_check_struct *ret)
 		ft_error("multi east texture");
 }
 
-void	separate_texture_s(char **tab, t_cub3d *ptr, t_check_struct *ret)
+void	separate_texture_s(char **tab, t_cub3d *cub, t_check_struct *ret)
 {
 	int i;
 	
@@ -111,7 +111,7 @@ void	separate_texture_s(char **tab, t_cub3d *ptr, t_check_struct *ret)
 		{
 			if (ft_strcmp("S", (const char *)tab[i]) == 0)
 			{
-				ptr->s.path = ft_strdup(tab[i + 1]);
+				cub->s.path = ft_strdup(tab[i + 1]);
 				ret->s = 1;
 			}
 			else

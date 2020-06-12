@@ -107,7 +107,7 @@ int		check_closed_map(t_cub3d *cub)
 	int ret;
 	
 	cub->map.sprite.sprite_nbr = 0;
-	cub->closed_map = malloc(sizeof(char*) * cub->map.height + 1);
+	cub->closed_map = malloc(sizeof(char*) * cub->map.height + 30);
 	cub->closed_map[cub->map.height] = NULL;
 	i = -1;
 	while (++i < cub->map.height)

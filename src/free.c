@@ -38,7 +38,7 @@ void	ft_error(char *str)
 	write(1, str, i);
 	write(1, "   <------\n\n", 12);
 	write(1, "-----------------------------------\n", 36);
-	system("leaks Cub3D");
+	//system("leaks Cub3D");
 	exit(EXIT_FAILURE);
 }
 
@@ -46,7 +46,7 @@ int	close_prog(t_cub3d *cub)
 {
 	mlx_clear_window(cub->mlx_ptr, cub->win_ptr);
 	mlx_destroy_window(cub->mlx_ptr, cub->win_ptr);
-	system("leaks Cub3D");
+	//free_double_tab(cub->closed_map);
 	exit(EXIT_SUCCESS);
 	return(0);
 }

@@ -210,6 +210,7 @@ int		ft_strsame(char *s1, char *s2);
 int		check_position(t_check_struct *ret, t_cub3d *cub);
 
 //parse.c
+void	check_bad_line(char **tab, int i);
 void	parse_line_2(t_cub3d *cub, t_check_struct *ret, int i);
 void	parse_line(t_cub3d *cub, t_check_struct *ret);
 void	parse_3(t_cub3d *cub, t_check_struct *ret);

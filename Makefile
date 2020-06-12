@@ -28,15 +28,18 @@ LIB = $(LIB_DIR)/libft.a
 
 MLX_DIR = ressources/minilibx-linux
 MLX = $(MLX_DIR)/libmlx.a
-MLX_LIBS = -lbsd -lXext -lX11
+#MLX_LIBS = -lbsd -lXext -lX11
 
 SRC = $(addprefix $(SRC_PATH)/,$(SR_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 
-all: $(LIB) $(NAME)
+all: $(LIB) $(MLX) $(NAME)
 
 $(LIB):
 	@make -C $(LIB_DIR)
+
+$(MLX):
+	@make -C $(MLX_DIR)
 
 $(NAME): $(OBJ)
 	@printf "\n"

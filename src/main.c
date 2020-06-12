@@ -99,7 +99,6 @@ int		print_screen(t_cub3d *cub)
 	start_ray_casting(cub, &cub->player);
 	move(cub);
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->img, 0, 0);
-		//ft_error("mlx_put_image_to_window PAS POSSIBLE !\n");
 	mlx_destroy_image(cub->mlx_ptr, cub->img);
 	return (1);
 }
@@ -127,13 +126,18 @@ void	mlx_handle(t_cub3d *cub, char *av)
 int main(int ac, char **av)
 {
 	t_cub3d cub;
+	int fd;
 
+	printf("coucou\n");
+	fd = open(av[1], O_RDONLY);
+	if (fd == -1)
+		ft_error("bad file descriptor");
 	init_cub3d(&cub);
 	cub.save = 0;
 	ft_printf("\n\n--->	START	<---\n\n");
 	if (ac == 2)
 	{
-		start_parsing(open(av[1], O_RDONLY), &cub);
+		start_parsing(fd, &cub);
 		init_player(&cub.player, &cub);
 		init_position(&cub);
 		mlx_handle(&cub, av[1]);

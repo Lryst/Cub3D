@@ -33,11 +33,9 @@ void	separate_r(char **tab, t_cub3d *cub, t_check_struct *ret)
 					cub->height = ft_atoi(tab[i + 2]);
 					ret->width = 1;
 					ret->height = 1;
-					ft_printf("Width %d\n",cub->width);
-					ft_printf("Height %d\n", cub->height);
 			}
 		}
 	}
 	else
-		ft_error("EURREURE RESOLUTION DOMMAGE...\n");
+		ft_error("bad RESOLUTION\n");
 }
