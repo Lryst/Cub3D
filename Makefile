@@ -53,6 +53,7 @@ $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 
 clean:
 	@make -C $(LIB_DIR) clean
+	@make -C $(MLX_DIR) clean
 	@rm -f $(OBJ)
 	@rm -rf $(OBJ_PATH)
 	@echo "\033[33;1m$(NAME)\033[0;1m: objects deleted\033[0m"
