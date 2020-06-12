@@ -119,7 +119,7 @@ void	start_parsing(int fd, t_cub3d *cub)
 		free(cub->line);
 		cub->line = NULL;
 	}
-	//parse_3(cub, &ret);
+	parse_3(cub, &ret);
 	cub->posX = ret.posX;
 	cub->posY = ret.posY;
 	cub->map_height = cub->count - 1;

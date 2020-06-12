@@ -27,19 +27,16 @@ void	separate_color_f(char **tab, t_cub3d *cub, t_check_struct *ret)
 			if (tab[i] != NULL && tab[i + 1] != NULL && tab[i + 2] == NULL)
 			{
 				color = ft_split(tab[i + 1],',');
-				if (ft_atoi(color[a]) > -1 && ft_atoi(color[a]) < 256)
+				if (ft_atoi(color[a]) > -1 &&
+				 ft_atoi(color[a]) < 256 &&
+				  ft_atoi(color[a + 1]) > -1 &&
+				   ft_atoi(color[a + 1]) < 256)
 				{
-					if (ft_atoi(color[a + 1]) > -1 && ft_atoi(color[a + 1]) < 256)
-					{
-						if (ft_atoi(color[a + 1]) > -1 && ft_atoi(color[a + 1]) < 256)
-						{
-							cub->f.color = 0;
-							cub->f.color += ft_atoi(color[a]) << 16;
-							cub->f.color += ft_atoi(color[a + 1]) << 8;
-							cub->f.color += ft_atoi(color[a + 2]);
-							ret->f = 1;
-						}
-					}
+					cub->f.color = 0;
+					cub->f.color += ft_atoi(color[a]) << 16;
+					cub->f.color += ft_atoi(color[a + 1]) << 8;
+					cub->f.color += ft_atoi(color[a + 2]);
+					ret->f = 1;
 				}
 				free_double_tab(color);
 			}
