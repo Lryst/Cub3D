@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ray_casting.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/13 23:23:52 by lryst             #+#    #+#             */
+/*   Updated: 2020/06/13 23:28:51 by lryst            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../Cub3D.h"
 
-void 	check_wall_hit_2(t_cub3d *cub, t_player *player)
+void	check_wall_hit_2(t_cub3d *cub, t_player *player)
 {
 	if (player->side == 1)
 	{
@@ -12,13 +24,12 @@ void 	check_wall_hit_2(t_cub3d *cub, t_player *player)
 		if (player->rayDirx < 0)
 			player->side += 2;
 	}
-	//Calculate distance projected on camera dir
-	if(player->side == 0 || player->side == 2)
+	if (player->side == 0 || player->side == 2)
 		player->perpWallDist = (player->mapx - player->posX +
-			 (1 - player->stepx) / 2) / player->rayDirx;
+		(1 - player->stepx) / 2) / player->rayDirx;
 	else
 		player->perpWallDist = (player->mapy - player->posY +
-			 (1 - player->stepy) / 2) / player->rayDiry;
+		(1 - player->stepy) / 2) / player->rayDiry;
 	draw_plan(cub, player);
 }
 
@@ -26,8 +37,7 @@ void	check_wall_hit(t_cub3d *cub, t_player *player)
 {
 	while (player->hit == 0)
 	{
-		//jump to next map square, OR in x-direction, OR in y-direction
-		if(player->sideDistx < player->sideDisty)
+		if (player->sideDistx < player->sideDisty)
 		{
 			player->sideDistx += player->deltaDistx;
 			player->mapx += player->stepx;
@@ -39,12 +49,11 @@ void	check_wall_hit(t_cub3d *cub, t_player *player)
 			player->mapy += player->stepy;
 			player->side = 1;
 		}
-		//Check if ray has hit a wall
-		cub->closed_map[player->mapx][player->mapy] == '1' ? player->hit = 1 : 0;
+		cub->closed_map[player->mapx][player->mapy] == '1' ?
+		player->hit = 1 : 0;
 	}
-	check_wall_hit_2(cub,player);
+	check_wall_hit_2(cub, player);
 }
-
 
 void	get_side_dist(t_cub3d *cub, t_player *player)
 {
@@ -56,9 +65,10 @@ void	get_side_dist(t_cub3d *cub, t_player *player)
 	else
 	{
 		player->stepx = 1;
-		player->sideDistx = (player->mapx + 1.0 - player->posX) * player->deltaDistx;
+		player->sideDistx = (player->mapx + 1.0 - player->posX) *
+		player->deltaDistx;
 	}
-	if(player->rayDiry < 0)
+	if (player->rayDiry < 0)
 	{
 		player->stepy = -1;
 		player->sideDisty = (player->posY - player->mapy) * player->deltaDisty;
@@ -66,7 +76,8 @@ void	get_side_dist(t_cub3d *cub, t_player *player)
 	else
 	{
 		player->stepy = 1;
-		player->sideDisty = (player->mapy + 1.0 - player->posY) * player->deltaDisty;
+		player->sideDisty = (player->mapy + 1.0 - player->posY) *
+		player->deltaDisty;
 	}
 	check_wall_hit(cub, player);
 }
@@ -80,25 +91,22 @@ void	init_raycasting(t_cub3d *cub, t_player *player)
 	player->mapx = (int)player->posX;
 	player->mapy = (int)player->posY;
 	player->deltaDistx = sqrt(1 + (player->rayDiry * player->rayDiry)
-		 / (player->rayDirx * player->rayDirx));
+		/ (player->rayDirx * player->rayDirx));
 	player->deltaDisty = sqrt(1 + (player->rayDirx * player->rayDirx)
-		 / (player->rayDiry * player->rayDiry));
+		/ (player->rayDiry * player->rayDiry));
 	player->hit = 0;
 	get_side_dist(cub, player);
 }
 
-
-
-void    start_ray_casting(t_cub3d *cub, t_player *player)
+void	start_ray_casting(t_cub3d *cub, t_player *player)
 {
 	double zbuffer[cub->width];
-	
+
 	player->x = -1;
 	player->y = -1;
 	while (++player->x < cub->width)
 	{
 		init_raycasting(cub, player);
-		//printf("cub->height = [%d]\n", cub->height);
 		zbuffer[player->x] = player->perpWallDist;
 	}
 	gestion_sprite(cub, player, zbuffer);

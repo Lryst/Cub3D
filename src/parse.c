@@ -6,24 +6,11 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 21:52:30 by lryst             #+#    #+#             */
-/*   Updated: 2020/06/13 22:12:15 by lryst            ###   ########.fr       */
+/*   Updated: 2020/06/13 23:16:03 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Cub3D.h"
-
-void	check_bad_line(char **tab, int i)
-{
-	if (ft_strcmp("R", (const char *)tab[i]) != 0 &&
-	ft_strcmp("NO", (const char *)tab[i]) != 0 && 
-	ft_strcmp("SO", (const char *)tab[i]) != 0 &&
-	ft_strcmp("WE", (const char *)tab[i]) != 0 &&
-	ft_strcmp("EA", (const char *)tab[i]) != 0 &&
-	ft_strcmp("S", (const char *)tab[i]) != 0 &&
-	ft_strcmp("F", (const char *)tab[i]) != 0 &&
-	ft_strcmp("C", (const char *)tab[i]) != 0)
-		ft_error("bad charactere in .cub");
-}
 
 void	parse_line_2(t_cub3d *cub, t_check_struct *ret, int i)
 {
@@ -53,9 +40,9 @@ void	parse_line(t_cub3d *cub, t_check_struct *ret)
 	i = -1;
 	i++;
 	if (cub->tab[i] == NULL)
-		return;
+		return ;
 	parse_line_2(cub, ret, i);
-	return;
+	return ;
 }
 
 void	parse_3(t_cub3d *cub, t_check_struct *ret)
@@ -74,7 +61,8 @@ void	parse_3(t_cub3d *cub, t_check_struct *ret)
 		cub->count++;
 		ret->map = 1;
 	}
-	if (ft_strsame(cub->line, SET) == 0 && ret->map == 1 && check_struct(ret) == 1)
+	if (ft_strsame(cub->line, SET) == 0 && ret->map == 1 &&
+	check_struct(ret) == 1)
 		ft_error("ERROR bad charactere in map line");
 }
 
@@ -93,7 +81,8 @@ void	parse_2(t_cub3d *cub, t_check_struct *ret)
 		cub->count++;
 		ret->map = 1;
 	}
-	if (ft_strsame(cub->line, SET) == 0 && ret->map == 1 && check_struct(ret) == 1)
+	if (ft_strsame(cub->line, SET) == 0 && ret->map == 1 &&
+	check_struct(ret) == 1)
 		ft_error("ERROR bad charactere in map line");
 	if (check_struct(ret) == 0)
 	{

@@ -6,68 +6,15 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 10:38:37 by lryst             #+#    #+#             */
-/*   Updated: 2020/06/13 22:12:15 by lryst            ###   ########.fr       */
+/*   Updated: 2020/06/14 00:02:14 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Cub3D.h"
 
-void	get_position_sprite(t_cub3d*cub)
-{
-	int a;
-	int x;
-	int y;
-
-	a = 0;
-	x = 0;
-	y = 0;
-	if (!(cub->map.sprite.pos_sprite = (int**)malloc(sizeof(int*) * cub->map.sprite.sprite_nbr + 1)))
-	{
-		return;
-	}
-	while (x < cub->map_height)
-	{
-		y = 0;
-		while (y < cub->map_width - 1)
-		{
-			if (cub->map.line[x][y] == '2')
-			{
-				cub->map.sprite.pos_sprite[a] = (int*)malloc(sizeof(int) * 2);
-				cub->map.sprite.pos_sprite[a][0] = x;
-				cub->map.sprite.pos_sprite[a][1] = y;
-				a++;
-			}
-			y++;
-		}
-		x++;
-	}
-
-}
-
-void	check_nbr_of_sprite(t_cub3d *cub)
-{
-	int x;
-	int y;
-
-	x = 0;
-	y = 0;
-	while (x < cub->map_height)
-	{
-		y = 0;
-		while (y < cub->map_width)
-		{
-			if (cub->map.line[x][y] == '2')
-				cub->map.sprite.sprite_nbr += 1;
-			y++;
-		}
-		x++;
-	}
-	get_position_sprite(cub);
-}
-
 int		check_map_space(char **map, int j, int i)
 {
-	if (map[j - 1][i - 1] == '1' && map[j - 1][i] == '1' 
+	if (map[j - 1][i - 1] == '1' && map[j - 1][i] == '1'
 		&& map[j - 1][i + 1] == '1' && map[j][i + 1] == '1'
 		&& map[j][i - 1] == '1' && map[j + 1][i - 1] == '1'
 		&& map[j + 1][i] == '1' && map[j + 1][i + 1] == '1')
@@ -75,11 +22,12 @@ int		check_map_space(char **map, int j, int i)
 	return (0);
 }
 
-int 	parcour_closed_map(char **map, int j, int i, int height)
+int		parcour_closed_map(char **map, int j, int i, int height)
 {
-	if (map[j][i] == '1'|| map[j][i] == '.')
+	if (map[j][i] == '1' || map[j][i] == '.')
 		return (1);
-	if (map[j][i] != '1' && (i <= 0 || i >= (int)ft_strlen(map[j]) || j <= 0 || j >= height))
+	if (map[j][i] != '1' && (i <= 0 || i >= (int)ft_strlen(map[j]) ||
+	j <= 0 || j >= height))
 		return (0);
 	if (map[j][i] == ' ')
 	{
@@ -95,16 +43,15 @@ int 	parcour_closed_map(char **map, int j, int i, int height)
 	&& parcour_closed_map(map, j, i - 1, height)
 	&& parcour_closed_map(map, j + 1, i - 1, height)
 	&& parcour_closed_map(map, j + 1, i, height)
-	&& parcour_closed_map(map, j + 1, i + 1, height)
-	);
+	&& parcour_closed_map(map, j + 1, i + 1, height));
 }
 
 int		check_closed_map(t_cub3d *cub)
 {
 	int i;
 	int ret;
-	
-	cub->map.sprite.sprite_nbr = 0;
+
+	cub->map.sprite.nbr = 0;
 	cub->closed_map = NULL;
 	cub->closed_map = malloc(sizeof(char*) * cub->map.height + 30);
 	cub->closed_map[cub->map.height] = NULL;
@@ -114,21 +61,19 @@ int		check_closed_map(t_cub3d *cub)
 		cub->closed_map[i] = NULL;
 		cub->closed_map[i] = ft_strdup(cub->map.line[i]);
 	}
-	ret = parcour_closed_map(cub->closed_map, cub->posX, cub->posY, cub->map_height);
+	ret = parcour_closed_map(cub->closed_map, cub->posX, cub->posY,
+	cub->map_height);
 	i = -1;
 	check_nbr_of_sprite(cub);
-	//ft_printf("\n");
-	//ft_printf("nombre sprite [%d]\n", c->map.sprite.sprite_nbr);
 	while (++i <= cub->map_height)
 		ft_printf("map: %s\n", cub->closed_map[i]);
-	//free_double_tab(cub->map.line);
 	return (ret);
 }
 
 void	check_map(char *str, t_cub3d *cub, int count)
 {
-	char **tab;
-	int i;
+	char	**tab;
+	int		i;
 
 	i = -1;
 	tab = ft_split((const char*)str, '*');

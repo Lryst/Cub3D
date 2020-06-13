@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 18:38:04 by lryst             #+#    #+#             */
-/*   Updated: 2020/06/13 22:31:25 by lryst            ###   ########.fr       */
+/*   Updated: 2020/06/14 00:02:14 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 typedef struct
 {
-	int sprite_nbr;
+	int nbr;
 	int **pos_sprite;
 	double y;
 	double x;
@@ -221,10 +221,8 @@ int 	parcour_closed_map(char **map, int j, int i, int height);
 void	check_nbr_of_sprite(t_cub3d *cub);
 void	get_position_sprite(t_cub3d*cub);
 
-//outils.c
+//cub3d_utils.c
 int		ft_strsame(char *s1, char *s2);
-//char	*ft_skip_space_2(char *str, int count);
-//char	*ft_skip_space(char *str);
 int		check_position(t_check_struct *ret, t_cub3d *cub);
 
 //parse.c
@@ -270,8 +268,10 @@ void    start_ray_casting(t_cub3d *cub, t_player *player);
 
 //move.c
 void    move(t_cub3d *cub);
-void 	turnRight(t_cub3d *cub);
-void 	turnLeft(t_cub3d *cub);
+void 	turnright(t_cub3d *cub);
+void 	turnright2(t_cub3d *cub);
+void 	turnleft(t_cub3d *cub);
+void	turnleft2(t_cub3d *cub);
 void 	forward(t_cub3d *cub);
 void 	backward(t_cub3d *cub);
 void	rightward(t_cub3d *cub);

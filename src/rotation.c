@@ -6,59 +6,88 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 22:42:04 by lryst             #+#    #+#             */
-/*   Updated: 2020/06/13 22:45:37 by lryst            ###   ########.fr       */
+/*   Updated: 2020/06/13 23:44:05 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Cub3D.h"
 
-void    turnRight(t_cub3d *cub)
+void	turnright2(t_cub3d *cub)
 {
-	double rotSpeed;
+	double rotspeed;
 
-	rotSpeed = 0.1;
-	if (cub->orientation == 'N' || cub->orientation == 'W' || cub->orientation == 'S')
-	{
-		cub->player.oldDirx = cub->player.dirX;
-		cub->player.dirX = cub->player.dirX * cos(-rotSpeed) - cub->player.dirY * sin(-rotSpeed);
-		cub->player.dirY = cub->player.oldDirx * sin(-rotSpeed) + cub->player.dirY * cos(-rotSpeed);
-		cub->player.oldplaneX = cub->player.planeX;
-		cub->player.planeX = cub->player.planeX * cos(-rotSpeed) - cub->player.planeY * sin(-rotSpeed);
-		cub->player.planeY = cub->player.oldplaneX * sin(-rotSpeed) + cub->player.planeY * cos(-rotSpeed);
-	}
-	else
-	{
-		cub->player.oldDirx = cub->player.dirX;
-		cub->player.dirX = cub->player.dirX * cos(rotSpeed) - cub->player.dirY * sin(rotSpeed);
-		cub->player.dirY = cub->player.oldDirx * sin(rotSpeed) + cub->player.dirY * cos(rotSpeed);
-		cub->player.oldplaneX = cub->player.planeX;
-		cub->player.planeX = cub->player.planeX * cos(rotSpeed) - cub->player.planeY * sin(rotSpeed);
-		cub->player.planeY = cub->player.oldplaneX * sin(rotSpeed) + cub->player.planeY * cos(rotSpeed);
-	}
-	
+	rotspeed = 0.1;
+	cub->player.oldDirx = cub->player.dirX;
+	cub->player.dirX = cub->player.dirX * cos(rotspeed) -
+	cub->player.dirY * sin(rotspeed);
+	cub->player.dirY = cub->player.oldDirx * sin(rotspeed) +
+	cub->player.dirY * cos(rotspeed);
+	cub->player.oldplaneX = cub->player.planeX;
+	cub->player.planeX = cub->player.planeX * cos(rotspeed) -
+	cub->player.planeY * sin(rotspeed);
+	cub->player.planeY = cub->player.oldplaneX * sin(rotspeed) +
+	cub->player.planeY * cos(rotspeed);
 }
 
-void	turnLeft(t_cub3d *cub)
+void	turnright(t_cub3d *cub)
 {
-	double rotSpeed;
+	double rotspeed;
 
-	rotSpeed = 0.1;    
-	if (cub->orientation == 'N' || cub->orientation == 'W' || cub->orientation == 'S')
+	rotspeed = 0.1;
+	if (cub->orientation == 'N' || cub->orientation == 'W' ||
+	cub->orientation == 'S')
 	{
 		cub->player.oldDirx = cub->player.dirX;
-		cub->player.dirX = cub->player.dirX * cos(rotSpeed) - cub->player.dirY * sin(rotSpeed);
-		cub->player.dirY = cub->player.oldDirx * sin(rotSpeed) + cub->player.dirY * cos(rotSpeed);
+		cub->player.dirX = cub->player.dirX * cos(-rotspeed) -
+		cub->player.dirY * sin(-rotspeed);
+		cub->player.dirY = cub->player.oldDirx * sin(-rotspeed) +
+		cub->player.dirY * cos(-rotspeed);
 		cub->player.oldplaneX = cub->player.planeX;
-		cub->player.planeX = cub->player.planeX * cos(rotSpeed) - cub->player.planeY * sin(rotSpeed);
-		cub->player.planeY = cub->player.oldplaneX * sin(rotSpeed) + cub->player.planeY * cos(rotSpeed);
+		cub->player.planeX = cub->player.planeX * cos(-rotspeed) -
+		cub->player.planeY * sin(-rotspeed);
+		cub->player.planeY = cub->player.oldplaneX * sin(-rotspeed) +
+		cub->player.planeY * cos(-rotspeed);
 	}
 	else
+		turnright2(cub);
+}
+
+void	turnleft2(t_cub3d *cub)
+{
+	double rotspeed;
+
+	rotspeed = 0.1;
+	cub->player.oldDirx = cub->player.dirX;
+	cub->player.dirX = cub->player.dirX * cos(-rotspeed) -
+	cub->player.dirY * sin(-rotspeed);
+	cub->player.dirY = cub->player.oldDirx * sin(-rotspeed) +
+	cub->player.dirY * cos(-rotspeed);
+	cub->player.oldplaneX = cub->player.planeX;
+	cub->player.planeX = cub->player.planeX * cos(-rotspeed) -
+	cub->player.planeY * sin(-rotspeed);
+	cub->player.planeY = cub->player.oldplaneX * sin(-rotspeed) +
+	cub->player.planeY * cos(-rotspeed);
+}
+
+void	turnleft(t_cub3d *cub)
+{
+	double rotspeed;
+
+	rotspeed = 0.1;
+	if (cub->orientation == 'N' || cub->orientation == 'W' ||
+	cub->orientation == 'S')
 	{
 		cub->player.oldDirx = cub->player.dirX;
-		cub->player.dirX = cub->player.dirX * cos(-rotSpeed) - cub->player.dirY * sin(-rotSpeed);
-		cub->player.dirY = cub->player.oldDirx * sin(-rotSpeed) + cub->player.dirY * cos(-rotSpeed);
+		cub->player.dirX = cub->player.dirX * cos(rotspeed) -
+		cub->player.dirY * sin(rotspeed);
+		cub->player.dirY = cub->player.oldDirx * sin(rotspeed) +
+		cub->player.dirY * cos(rotspeed);
 		cub->player.oldplaneX = cub->player.planeX;
-		cub->player.planeX = cub->player.planeX * cos(-rotSpeed) - cub->player.planeY * sin(-rotSpeed);
-		cub->player.planeY = cub->player.oldplaneX * sin(-rotSpeed) + cub->player.planeY * cos(-rotSpeed);
+		cub->player.planeX = cub->player.planeX * cos(rotspeed) -
+		cub->player.planeY * sin(rotspeed);
+		cub->player.planeY = cub->player.oldplaneX * sin(rotspeed) +
+		cub->player.planeY * cos(rotspeed);
 	}
+	else
+		turnleft2(cub);
 }

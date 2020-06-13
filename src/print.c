@@ -1,17 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/13 23:16:58 by lryst             #+#    #+#             */
+/*   Updated: 2020/06/13 23:22:43 by lryst            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../Cub3D.h"
 
 void	draw_plan(t_cub3d *cub, t_player *player)
 {
-	//Calculate height of line to draw on screen
 	player->lineHeight = (int)(cub->height / player->perpWallDist);
-	//calculate lowest and highest pixel to fill in current stripe
 	player->drawStart = -player->lineHeight / 2 + cub->height / 2;
-	if(player->drawStart < 0)
+	if (player->drawStart < 0)
 		player->drawStart = 0;
 	player->drawEnd = player->lineHeight / 2 + cub->height / 2;
-	if(player->drawEnd >= cub->height)
+	if (player->drawEnd >= cub->height)
 		player->drawEnd = cub->height - 1;
-	if (player->side == 0 || player-> side == 2)
+	if (player->side == 0 || player->side == 2)
 		player->wallX = player->posY + player->perpWallDist * player->rayDiry;
 	else
 		player->wallX = player->posX + player->perpWallDist * player->rayDirx;
@@ -28,8 +38,10 @@ void	draw_plan(t_cub3d *cub, t_player *player)
 
 void	draw_sprite(t_cub3d *cub, t_player *player, double *zbuffer)
 {
-	cub->map.sprite.texX = (int)((256 * (cub->map.sprite.drawstartX - 
-			(cub->map.sprite.screenX - cub->map.sprite.width / 2 )) * 
+	int d;
+
+	cub->map.sprite.texX = (int)((256 * (cub->map.sprite.drawstartX -
+			(cub->map.sprite.screenX - cub->map.sprite.width / 2)) *
 			cub->s.width / cub->map.sprite.width) / 256);
 	cub->map.sprite.drawstartY = cub->height / 2 - cub->map.sprite.height / 2;
 	if (cub->map.sprite.drawstartY < 0)
@@ -39,14 +51,15 @@ void	draw_sprite(t_cub3d *cub, t_player *player, double *zbuffer)
 		cub->map.sprite.drawstartX < cub->width &&
 		cub->map.sprite.transY < zbuffer[cub->map.sprite.drawstartX])
 	{
-		int d = 256 * cub->map.sprite.drawstartY - cub->height * 128 + cub->map.sprite.height * 128;
-		cub->map.sprite.texY = ((d * cub->s.height) / cub->map.sprite.height) / 256;
-		player->color = cub->tab_textures[4][cub->s.width * cub->map.sprite.texY + cub->map.sprite.texX];
+		d = 256 * cub->map.sprite.drawstartY - cub->height * 128 +
+		cub->map.sprite.height * 128;
+		cub->map.sprite.texY = ((d * cub->s.height) / cub->map.sprite.height) /
+		256;
+		player->color = cub->tab_textures[4][cub->s.width *
+		cub->map.sprite.texY + cub->map.sprite.texX];
 		if ((player->color & 0x00FFFFFF) != 0)
-		{
 			*(int*)(cub->img_ptr + cub->map.sprite.drawstartY * 4 * cub->width
-				 + cub->map.sprite.drawstartX * 4) = player->color;
-		}
+			+ cub->map.sprite.drawstartX * 4) = player->color;
 		cub->map.sprite.drawstartY++;
 	}
 }

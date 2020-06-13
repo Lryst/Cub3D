@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 21:06:00 by lryst             #+#    #+#             */
-/*   Updated: 2020/06/13 22:54:33 by lryst            ###   ########.fr       */
+/*   Updated: 2020/06/13 23:35:38 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	move(t_cub3d *cub)
 {
-	cub->move.turnright ? turnRight(cub) : 0;
-	cub->move.turnleft ? turnLeft(cub) : 0;
+	cub->move.turnright ? turnright(cub) : 0;
+	cub->move.turnleft ? turnleft(cub) : 0;
 	cub->move.forward ? forward(cub) : 0;
 	cub->move.backward ? backward(cub) : 0;
 	cub->move.rightward ? rightward(cub) : 0;

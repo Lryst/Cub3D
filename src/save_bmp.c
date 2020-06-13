@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   save_bmp.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/13 23:44:59 by lryst             #+#    #+#             */
+/*   Updated: 2020/06/13 23:47:15 by lryst            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../Cub3D.h"
 
-static void		write_data(int file, t_cub3d *cub)
+static void				write_data(int file, t_cub3d *cub)
 {
 	int x;
 	int y;
@@ -12,14 +24,14 @@ static void		write_data(int file, t_cub3d *cub)
 		y = 0;
 		while (y < cub->width)
 		{
-			color = *(unsigned int*)(cub->img_ptr + (x * cub->size_line + y * 4));
+			color = *(unsigned int*)(cub->img_ptr +
+			(x * cub->size_line + y * 4));
 			write(file, &color, 4);
 			y++;
 		}
 		x--;
 	}
 }
-
 
 static unsigned char	*ft_info_img_header(t_cub3d *cub)
 {
@@ -38,7 +50,7 @@ static unsigned char	*ft_info_img_header(t_cub3d *cub)
 	header[11] = (unsigned char)(cub->height >> 24);
 	header[12] = 1;
 	header[14] = 32;
-	return(header);
+	return (header);
 }
 
 static unsigned char	*ft_file_header(int size)
@@ -57,8 +69,7 @@ static unsigned char	*ft_file_header(int size)
 	return (header);
 }
 
-
-void	save(t_cub3d *cub)
+void					save(t_cub3d *cub)
 {
 	int				size;
 	int				file;

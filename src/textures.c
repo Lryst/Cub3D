@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 17:11:05 by lryst             #+#    #+#             */
-/*   Updated: 2020/06/13 22:12:15 by lryst            ###   ########.fr       */
+/*   Updated: 2020/06/14 00:08:51 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	separate_texture_so(char **tab, t_cub3d *cub, t_check_struct *ret)
 void	separate_texture_we(char **tab, t_cub3d *cub, t_check_struct *ret)
 {
 	int i;
-	
+
 	i = 0;
 	if (ret->we == -1)
 	{
@@ -81,7 +81,7 @@ void	separate_texture_we(char **tab, t_cub3d *cub, t_check_struct *ret)
 void	separate_texture_ea(char **tab, t_cub3d *cub, t_check_struct *ret)
 {
 	int i;
-	
+
 	i = 0;
 	if (ret->ea == -1)
 	{
@@ -92,7 +92,7 @@ void	separate_texture_ea(char **tab, t_cub3d *cub, t_check_struct *ret)
 				cub->ea.path = ft_strdup(tab[i + 1]);
 				ret->ea = 1;
 			}
-					else
+			else
 				ft_error("bad line in fd");
 		}
 	}
@@ -103,7 +103,7 @@ void	separate_texture_ea(char **tab, t_cub3d *cub, t_check_struct *ret)
 void	separate_texture_s(char **tab, t_cub3d *cub, t_check_struct *ret)
 {
 	int i;
-	
+
 	i = 0;
 	if (ret->s == -1)
 	{
