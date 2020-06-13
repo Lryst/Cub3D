@@ -1,4 +1,4 @@
-#include "../cub3d.h"
+#include "../Cub3D.h"
 
 int	ft_strsame(char *s1, char *s2)
 {

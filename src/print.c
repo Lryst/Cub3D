@@ -1,4 +1,4 @@
-#include "../cub3d.h"
+#include "../Cub3D.h"
 
 void	draw_plan(t_cub3d *cub, t_player *player)
 {

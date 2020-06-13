@@ -1,4 +1,4 @@
-#include "../cub3d.h"
+#include "../Cub3D.h"
 
 void	check_dist_sprite(t_cub3d *cub, t_player *player)
 {

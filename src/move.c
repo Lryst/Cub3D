@@ -6,115 +6,71 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 21:06:00 by lryst             #+#    #+#             */
-/*   Updated: 2020/03/10 15:24:19 by lryst            ###   ########.fr       */
+/*   Updated: 2020/06/13 22:54:33 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../Cub3D.h"
 
-void    move(t_cub3d *cub)
+void	move(t_cub3d *cub)
 {
-        cub->move.turnright ? turnRight(cub) : 0;
-        cub->move.turnleft ? turnLeft(cub) : 0;
-        cub->move.forward ? forward(cub) : 0;
-        cub->move.backward ? backward(cub) : 0;
-        cub->move.rightward ? rightward(cub) : 0;
-        cub->move.leftward ? leftward(cub) : 0;
-        cub->esc ? close_prog(cub) : 0;
+	cub->move.turnright ? turnRight(cub) : 0;
+	cub->move.turnleft ? turnLeft(cub) : 0;
+	cub->move.forward ? forward(cub) : 0;
+	cub->move.backward ? backward(cub) : 0;
+	cub->move.rightward ? rightward(cub) : 0;
+	cub->move.leftward ? leftward(cub) : 0;
+	cub->esc ? close_prog(cub) : 0;
 }
 
-void  turnRight(t_cub3d *cub)
+void	forward(t_cub3d *cub)
 {
-    double rotSpeed;
+	double movespeed;
 
-    rotSpeed = 0.1;
-    if (cub->orientation == 'N' || cub->orientation == 'W' || cub->orientation == 'S')
-    {
-        cub->player.oldDirx = cub->player.dirX;
-        cub->player.dirX = cub->player.dirX * cos(-rotSpeed) - cub->player.dirY * sin(-rotSpeed);
-        cub->player.dirY = cub->player.oldDirx * sin(-rotSpeed) + cub->player.dirY * cos(-rotSpeed);
-        cub->player.oldplaneX = cub->player.planeX;
-        cub->player.planeX = cub->player.planeX * cos(-rotSpeed) - cub->player.planeY * sin(-rotSpeed);
-        cub->player.planeY = cub->player.oldplaneX * sin(-rotSpeed) + cub->player.planeY * cos(-rotSpeed);
-    }
-    else
-    {
-        cub->player.oldDirx = cub->player.dirX;
-        cub->player.dirX = cub->player.dirX * cos(rotSpeed) - cub->player.dirY * sin(rotSpeed);
-        cub->player.dirY = cub->player.oldDirx * sin(rotSpeed) + cub->player.dirY * cos(rotSpeed);
-        cub->player.oldplaneX = cub->player.planeX;
-        cub->player.planeX = cub->player.planeX * cos(rotSpeed) - cub->player.planeY * sin(rotSpeed);
-        cub->player.planeY = cub->player.oldplaneX * sin(rotSpeed) + cub->player.planeY * cos(rotSpeed);
-    }
-    
+	movespeed = 0.2;
+	if (cub->closed_map[(int)(cub->player.posX + cub->player.dirX *
+	movespeed)][(int)cub->player.posY] == '.')
+		cub->player.posX += cub->player.dirX * movespeed;
+	if (cub->closed_map[(int)cub->player.posX][(int)(cub->player.posY +
+	cub->player.dirY * movespeed)] == '.')
+		cub->player.posY += cub->player.dirY * movespeed;
 }
 
-void turnLeft(t_cub3d *cub)
+void	backward(t_cub3d *cub)
 {
-    double rotSpeed;
+	double movespeed;
 
-    rotSpeed = 0.1;    
-      //both camera direction and camera plane must be rotated
-    if (cub->orientation == 'N' || cub->orientation == 'W' || cub->orientation == 'S')
-    {
-        cub->player.oldDirx = cub->player.dirX;
-        cub->player.dirX = cub->player.dirX * cos(rotSpeed) - cub->player.dirY * sin(rotSpeed);
-        cub->player.dirY = cub->player.oldDirx * sin(rotSpeed) + cub->player.dirY * cos(rotSpeed);
-        cub->player.oldplaneX = cub->player.planeX;
-        cub->player.planeX = cub->player.planeX * cos(rotSpeed) - cub->player.planeY * sin(rotSpeed);
-        cub->player.planeY = cub->player.oldplaneX * sin(rotSpeed) + cub->player.planeY * cos(rotSpeed);
-    }
-    else
-    {
-        cub->player.oldDirx = cub->player.dirX;
-        cub->player.dirX = cub->player.dirX * cos(-rotSpeed) - cub->player.dirY * sin(-rotSpeed);
-        cub->player.dirY = cub->player.oldDirx * sin(-rotSpeed) + cub->player.dirY * cos(-rotSpeed);
-        cub->player.oldplaneX = cub->player.planeX;
-        cub->player.planeX = cub->player.planeX * cos(-rotSpeed) - cub->player.planeY * sin(-rotSpeed);
-        cub->player.planeY = cub->player.oldplaneX * sin(-rotSpeed) + cub->player.planeY * cos(-rotSpeed);
-    }
+	movespeed = 0.2;
+	if (cub->closed_map[(int)(cub->player.posX - cub->player.dirX *
+	movespeed)][(int)cub->player.posY] == '.')
+		cub->player.posX -= cub->player.dirX * movespeed;
+	if (cub->closed_map[(int)cub->player.posX][(int)(cub->player.posY -
+	cub->player.dirY * movespeed)] == '.')
+		cub->player.posY -= cub->player.dirY * movespeed;
 }
 
-void forward(t_cub3d *cub)
+void	rightward(t_cub3d *cub)
 {
-    double moveSpeed = 0.2;
-    if(cub->closed_map[(int)(cub->player.posX + cub->player.dirX * moveSpeed)][(int)cub->player.posY] == '.')
-        cub->player.posX += cub->player.dirX * moveSpeed;
-    if(cub->closed_map[(int)cub->player.posX][(int)(cub->player.posY + cub->player.dirY * moveSpeed)] == '.')
-        cub->player.posY += cub->player.dirY * moveSpeed;
+	double movespeed;
+
+	movespeed = 0.2;
+	if (cub->closed_map[(int)(cub->player.posX + cub->player.planeX *
+	movespeed)][(int)cub->player.posY] == '.')
+		cub->player.posX += cub->player.planeX * movespeed;
+	if (cub->closed_map[(int)cub->player.posX][(int)(cub->player.posY +
+	cub->player.planeY * movespeed)] == '.')
+		cub->player.posY += cub->player.planeY * movespeed;
 }
 
-void backward(t_cub3d *cub)
+void	leftward(t_cub3d *cub)
 {
-    double moveSpeed = 0.2;
-    if(cub->closed_map[(int)(cub->player.posX - cub->player.dirX * moveSpeed)][(int)cub->player.posY] == '.')
-        cub->player.posX -= cub->player.dirX * moveSpeed;
-    if(cub->closed_map[(int)cub->player.posX][(int)(cub->player.posY - cub->player.dirY * moveSpeed)] == '.')
-        cub->player.posY -= cub->player.dirY * moveSpeed;
-}
+	double movespeed;
 
-void rightward(t_cub3d *cub)
-{
-    double moveSpeed = 0.2;
-    if(cub->closed_map[(int)(cub->player.posX + cub->player.planeX * moveSpeed)][(int)cub->player.posY] == '.')
-        cub->player.posX += cub->player.planeX * moveSpeed;
-    if(cub->closed_map[(int)cub->player.posX][(int)(cub->player.posY + cub->player.planeY * moveSpeed)] == '.')
-        cub->player.posY += cub->player.planeY * moveSpeed;
+	movespeed = 0.2;
+	if (cub->closed_map[(int)(cub->player.posX - cub->player.planeX *
+	movespeed)][(int)cub->player.posY] == '.')
+		cub->player.posX -= cub->player.planeX * movespeed;
+	if (cub->closed_map[(int)cub->player.posX][(int)(cub->player.posY -
+	cub->player.planeY * movespeed)] == '.')
+		cub->player.posY -= cub->player.planeY * movespeed;
 }
-
-void    leftward(t_cub3d *cub)
-{
-    double moveSpeed = 0.2;
-    if(cub->closed_map[(int)(cub->player.posX - cub->player.planeX * moveSpeed)][(int)cub->player.posY] == '.')
-        cub->player.posX -= cub->player.planeX * moveSpeed;
-    if(cub->closed_map[(int)cub->player.posX][(int)(cub->player.posY - cub->player.planeY * moveSpeed)] == '.')
-        cub->player.posY -= cub->player.planeY * moveSpeed;
-}
-
-/*
-reculer
-if (keyDown (SDLK_DOWN))
-    {
-      if (worldMap [int (posX - dirX * moveSpeed)] [int (posY)] == false) posX - = dirX * moveSpeed;
-      if (worldMap [int (posX)] [int (posY - dirY * moveSpeed)] == false) posY - = dirY * moveSpeed;
-    }*/

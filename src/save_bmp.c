@@ -1,4 +1,4 @@
-#include "../cub3d.h"
+#include "../Cub3D.h"
 
 static void		write_data(int file, t_cub3d *cub)
 {
@@ -75,8 +75,6 @@ void	save(t_cub3d *cub)
 	write(file, bmpinfoheader, 40);
 	free(bmpinfoheader);
 	write_data(file, cub);
-	system("cd screenshot && pwd");
-	system("open screenshot/screenshot.bmp");
 	if (cub->save == 1)
 		exit(EXIT_SUCCESS);
 }

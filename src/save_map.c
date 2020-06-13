@@ -6,11 +6,11 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 10:38:37 by lryst             #+#    #+#             */
-/*   Updated: 2020/03/06 20:48:40 by lryst            ###   ########.fr       */
+/*   Updated: 2020/06/13 22:12:15 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../Cub3D.h"
 
 void	get_position_sprite(t_cub3d*cub)
 {

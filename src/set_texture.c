@@ -1,4 +1,4 @@
-#include "../cub3d.h"
+#include "../Cub3D.h"
 
 void    get_inf(t_cub3d *cub, t_texture *tex, void *mlx_ptr, int **tab)
 {

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                         :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/11 11:09:51 by lryst             #+#    #+#             */
-/*   Updated: 2020/03/06 20:47:14 by lryst            ###   ########.fr       */
+/*   Created: 2020/06/13 21:52:30 by lryst             #+#    #+#             */
+/*   Updated: 2020/06/13 22:12:15 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../Cub3D.h"
 
 void	check_bad_line(char **tab, int i)
 {
@@ -116,13 +116,17 @@ void	start_parsing(int fd, t_cub3d *cub)
 		cub->line = NULL;
 	}
 	parse_3(cub, &ret);
-	cub->posX = ret.posX;
-	cub->posY = ret.posY;
-	cub->map_height = cub->count - 1;
-	cub->map_width = ft_strlen(cub->line);
-	if (cub->tmp != NULL && check_struct(&ret) == 1 && ret.position == 1)
-		check_map(cub->tmp, cub, cub->count);
-	if (ret.position != 1)
-		ft_error("ERROR no only one position");
-	return;
+	if (check_struct(&ret) == 1 && ret.map == 1)
+	{
+		cub->posX = ret.posX;
+		cub->posY = ret.posY;
+		cub->map_height = cub->count - 1;
+		cub->map_width = ft_strlen(cub->line);
+		if (cub->tmp != NULL && check_struct(&ret) == 1 && ret.position == 1)
+			check_map(cub->tmp, cub, cub->count);
+		if (ret.position != 1)
+			ft_error("no only one position");
+	}
+	else
+		ft_error("bad/empty file descriptor");
 }

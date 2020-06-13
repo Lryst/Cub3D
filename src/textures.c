@@ -6,11 +6,11 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 17:11:05 by lryst             #+#    #+#             */
-/*   Updated: 2020/02/21 14:33:44 by lryst            ###   ########.fr       */
+/*   Updated: 2020/06/13 22:12:15 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../Cub3D.h"
 
 void	separate_texture_no(char **tab, t_cub3d *cub, t_check_struct *ret)
 {

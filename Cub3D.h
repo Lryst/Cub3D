@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   Cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 18:38:04 by lryst             #+#    #+#             */
-/*   Updated: 2020/03/10 15:24:27 by lryst            ###   ########.fr       */
+/*   Updated: 2020/06/13 22:31:25 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,6 +196,22 @@ int		check_is_tab_num(char **tab);
 void	put_color_in_struct(int *tex_color, char **color);
 void	separate_color_f(char **tab, t_cub3d *cub, t_check_struct *ret);
 void	separate_color_c(char **tab, t_cub3d *cub, t_check_struct *ret);
+
+//init_player.c
+void	init_direction2(t_cub3d *cub);
+void	init_direction(t_cub3d *cub);
+void	init_position(t_player *player, t_cub3d *cub);
+
+//mlx_handle.c
+int		key_pressed(int key, t_cub3d *cub);
+int		key_release(int key, t_cub3d *cub);
+int		print_screen(t_cub3d *cub);
+void	mlx_handle(t_cub3d *cub, char *av);
+
+//main_utils.c
+void	check_screen_size(t_cub3d *cub);
+int		check_is_ptcub(char *av, char *file);
+void	check_args(t_cub3d *cub, int ac, char **av, int fd);
 
 //save_map.c
 void	init_cub3d(t_cub3d *cub);

@@ -1,4 +1,16 @@
-#include "../cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/13 21:52:48 by lryst             #+#    #+#             */
+/*   Updated: 2020/06/13 22:12:15 by lryst            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../Cub3D.h"
 
 void	free_double_tab(char **tab)
 {
@@ -38,15 +50,14 @@ void	ft_error(char *str)
 	write(1, str, i);
 	write(1, "   <------\n\n", 12);
 	write(1, "-----------------------------------\n", 36);
-	//system("leaks Cub3D");
 	exit(EXIT_FAILURE);
 }
 
-int	close_prog(t_cub3d *cub)
+int		close_prog(t_cub3d *cub)
 {
 	mlx_clear_window(cub->mlx_ptr, cub->win_ptr);
 	mlx_destroy_window(cub->mlx_ptr, cub->win_ptr);
 	free_double_tab(cub->closed_map);
 	exit(EXIT_SUCCESS);
-	return(0);
+	return (0);
 }
