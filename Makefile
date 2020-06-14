@@ -6,7 +6,7 @@
 #    By: lryst <lryst@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/12 18:37:25 by lryst             #+#    #+#              #
-#    Updated: 2020/06/14 00:50:22 by lryst            ###   ########.fr        #
+#    Updated: 2020/06/14 02:36:19 by lryst            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ LIB = $(LIB_DIR)/libft.a
 
 MLX_DIR = ressources/minilibx-linux
 MLX = $(MLX_DIR)/libmlx.a
-#MLX_LIBS = -lbsd -lXext -lX11
+MLX_LIBS = -lbsd -lXext -lX11
 
 SRC = $(addprefix $(SRC_PATH)/,$(SR_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
@@ -40,7 +40,7 @@ $(LIB):
 	@make -C $(LIB_DIR)
 
 $(MLX):
-	@make -C $(MLX_DIR)
+	@make -C $(MLX_DIR) $(MLX_LIBS)
 
 $(NAME): $(OBJ)
 	@printf "\n"
