@@ -6,11 +6,11 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 17:12:03 by lryst             #+#    #+#             */
-/*   Updated: 2020/06/13 23:32:16 by lryst            ###   ########.fr       */
+/*   Updated: 2020/06/14 01:09:58 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Cub3D.h"
+#include "../cub3d.h"
 
 int		check_line_is_num(char *str)
 {

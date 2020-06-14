@@ -6,11 +6,11 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 22:14:08 by lryst             #+#    #+#             */
-/*   Updated: 2020/06/13 23:35:38 by lryst            ###   ########.fr       */
+/*   Updated: 2020/06/14 01:45:53 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Cub3D.h"
+#include "../cub3d.h"
 
 int		key_pressed(int key, t_cub3d *cub)
 {

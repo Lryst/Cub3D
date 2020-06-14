@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 13:42:22 by lryst             #+#    #+#             */
-/*   Updated: 2020/02/26 20:03:53 by lryst            ###   ########.fr       */
+/*   Updated: 2020/06/14 00:43:12 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_x_l(t_flags *prt, char q, va_list args, size_t *count)
 	c = ft_hexa_len(u);
 	if (u == 0 && prt->nbr_p == 0)
 	{
-		return;
+		return ;
 	}
 	if (c < prt->nbr_f)
 	{
@@ -63,7 +63,7 @@ void	ft_x_l_p(t_flags *prt, char q, va_list args, size_t *count)
 	u = va_arg(args, unsigned int);
 	c = ft_hexa_len(u);
 	if (u == 0 && prt->nbr_p == 0)
-		return;
+		return ;
 	if (c < prt->nbr_p)
 	{
 		while (n + c < ((unsigned int)prt->nbr_p))
@@ -109,7 +109,7 @@ void	ft_x_width_p(t_flags *prt, va_list args, size_t *count)
 		i = 0;
 		while (i++ < prt->nbr_f)
 			ft_putchar_c(' ', count);
-		return;
+		return ;
 	}
 	if (prt->nbr_f > 0)
 		ft_x_width_p2(prt, len, count);

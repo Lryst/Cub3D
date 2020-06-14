@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 13:41:23 by lryst             #+#    #+#             */
-/*   Updated: 2020/02/26 20:03:53 by lryst            ###   ########.fr       */
+/*   Updated: 2020/06/14 00:54:42 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_putstr_c(char *str, size_t *count)
 	if (str == NULL)
 	{
 		ft_putstr_c("(null)", count);
-		return;
+		return ;
 	}
 	i = ft_strlen(str);
 	write(1, str, i);

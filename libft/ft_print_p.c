@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 13:41:52 by lryst             #+#    #+#             */
-/*   Updated: 2020/02/26 20:03:53 by lryst            ###   ########.fr       */
+/*   Updated: 2020/06/14 00:42:25 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	ft_p_left(t_flags *prt, char q, va_list args, size_t *count)
 		while (n++ < (prt->nbr_f) - 2)
 			ft_putchar_c(q, count);
 		ft_putstr_c("0x", count);
-		return;
+		return ;
 	}
 	len = ft_p_len(adres) + 2;
 	while (n++ < (prt->nbr_f) - len)

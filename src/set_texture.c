@@ -6,11 +6,11 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 23:56:58 by lryst             #+#    #+#             */
-/*   Updated: 2020/06/14 00:00:18 by lryst            ###   ########.fr       */
+/*   Updated: 2020/06/14 01:09:58 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Cub3D.h"
+#include "../cub3d.h"
 
 void	get_inf(t_cub3d *cub, t_texture *tex, void *mlx_ptr, int **tab)
 {

@@ -6,11 +6,11 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/14 00:00:52 by lryst             #+#    #+#             */
-/*   Updated: 2020/06/14 00:07:03 by lryst            ###   ########.fr       */
+/*   Updated: 2020/06/14 01:11:21 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Cub3D.h"
+#include "../cub3d.h"
 
 void	check_dist_sprite(t_cub3d *cub, t_player *player)
 {
@@ -22,10 +22,10 @@ void	check_dist_sprite(t_cub3d *cub, t_player *player)
 	while (i < cub->map.sprite.nbr)
 	{
 		player->s_order[i] = i;
-		player->s_dist[i] = ((player->posX - cub->map.sprite.pos_sprite[i][0])
-		* (player->posX - cub->map.sprite.pos_sprite[i][0]) + (player->posY -
+		player->s_dist[i] = ((player->posx - cub->map.sprite.pos_sprite[i][0])
+		* (player->posx - cub->map.sprite.pos_sprite[i][0]) + (player->posy -
 		cub->map.sprite.pos_sprite[i][1]) *
-		(player->posY - cub->map.sprite.pos_sprite[i][1]));
+		(player->posy - cub->map.sprite.pos_sprite[i][1]));
 		i++;
 	}
 }
@@ -56,34 +56,34 @@ void	sort_sprite(t_cub3d *cub, t_player *player)
 
 void	init_sprite_2(t_cub3d *cub)
 {
-	cub->map.sprite.height = abs((int)(cub->height / (cub->map.sprite.transY)));
-	cub->map.sprite.drawstartY = -cub->map.sprite.height / 2 + cub->height / 2;
-	if (cub->map.sprite.drawstartY < 0)
-		cub->map.sprite.drawstartY = 0;
-	cub->map.sprite.drawendY = cub->map.sprite.height / 2 + cub->height / 2;
-	if (cub->map.sprite.drawendY >= cub->height)
-		cub->map.sprite.drawendY = cub->height - 1;
-	cub->map.sprite.width = abs((int)(cub->height / (cub->map.sprite.transY)));
-	cub->map.sprite.drawstartX = -cub->map.sprite.width / 2 +
-	cub->map.sprite.screenX;
-	if (cub->map.sprite.drawstartX < 0)
-		cub->map.sprite.drawstartX = 0;
-	cub->map.sprite.drawendX = cub->map.sprite.width / 2 +
-	cub->map.sprite.screenX;
-	if (cub->map.sprite.drawendX >= cub->width)
-		cub->map.sprite.drawendX = cub->width - 1;
+	cub->map.sprite.height = abs((int)(cub->height / (cub->map.sprite.transy)));
+	cub->map.sprite. drawstarty = -cub->map.sprite.height / 2 + cub->height / 2;
+	if (cub->map.sprite. drawstarty < 0)
+		cub->map.sprite. drawstarty = 0;
+	cub->map.sprite.drawendy = cub->map.sprite.height / 2 + cub->height / 2;
+	if (cub->map.sprite.drawendy >= cub->height)
+		cub->map.sprite.drawendy = cub->height - 1;
+	cub->map.sprite.width = abs((int)(cub->height / (cub->map.sprite.transy)));
+	cub->map.sprite. drawstartx = -cub->map.sprite.width / 2 +
+	cub->map.sprite.screenx;
+	if (cub->map.sprite. drawstartx < 0)
+		cub->map.sprite. drawstartx = 0;
+	cub->map.sprite.drawendx = cub->map.sprite.width / 2 +
+	cub->map.sprite.screenx;
+	if (cub->map.sprite.drawendx >= cub->width)
+		cub->map.sprite.drawendx = cub->width - 1;
 }
 
 void	init_sprite(t_cub3d *cub, t_player *player)
 {
-	cub->map.sprite.inDet = 1.0 / (player->planeX * player->dirY -
-	player->dirX * player->planeY);
-	cub->map.sprite.transX = cub->map.sprite.inDet * (player->dirY *
-				cub->map.sprite.x - player->dirX * cub->map.sprite.y);
-	cub->map.sprite.transY = cub->map.sprite.inDet * (-player->planeY *
-				cub->map.sprite.x + player->planeX * cub->map.sprite.y);
-	cub->map.sprite.screenX = (int)((cub->width / 2) *
-		(1 + cub->map.sprite.transX / cub->map.sprite.transY));
+	cub->map.sprite.indet = 1.0 / (player->planex * player->diry -
+	player->dirx * player->planey);
+	cub->map.sprite.transx = cub->map.sprite.indet * (player->diry *
+				cub->map.sprite.x - player->dirx * cub->map.sprite.y);
+	cub->map.sprite.transy = cub->map.sprite.indet * (-player->planey *
+				cub->map.sprite.x + player->planex * cub->map.sprite.y);
+	cub->map.sprite.screenx = (int)((cub->width / 2) *
+		(1 + cub->map.sprite.transx / cub->map.sprite.transy));
 	init_sprite_2(cub);
 }
 
@@ -97,14 +97,14 @@ void	gestion_sprite(t_cub3d *cub, t_player *player, double *zbuffer)
 	while (i < cub->map.sprite.nbr)
 	{
 		cub->map.sprite.x = cub->map.sprite.pos_sprite[player->s_order[i]][0] -
-		player->posX + 0.5;
+		player->posx + 0.5;
 		cub->map.sprite.y = cub->map.sprite.pos_sprite[player->s_order[i]][1] -
-		player->posY + 0.5;
+		player->posy + 0.5;
 		init_sprite(cub, player);
-		while (cub->map.sprite.drawstartX < cub->map.sprite.drawendX)
+		while (cub->map.sprite. drawstartx < cub->map.sprite.drawendx)
 		{
 			draw_sprite(cub, player, zbuffer);
-			cub->map.sprite.drawstartX++;
+			cub->map.sprite. drawstartx++;
 		}
 		i++;
 	}

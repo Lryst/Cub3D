@@ -6,11 +6,11 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 22:11:10 by lryst             #+#    #+#             */
-/*   Updated: 2020/06/13 22:13:48 by lryst            ###   ########.fr       */
+/*   Updated: 2020/06/14 01:09:58 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Cub3D.h"
+#include "../cub3d.h"
 
 void	check_screen_size(t_cub3d *cub)
 {

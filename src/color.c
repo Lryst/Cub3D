@@ -6,11 +6,11 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 17:09:41 by lryst             #+#    #+#             */
-/*   Updated: 2020/06/13 22:12:15 by lryst            ###   ########.fr       */
+/*   Updated: 2020/06/14 01:09:58 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Cub3D.h"
+#include "../cub3d.h"
 
 int		check_is_tab_num(char **tab)
 {

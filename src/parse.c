@@ -6,11 +6,11 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 21:52:30 by lryst             #+#    #+#             */
-/*   Updated: 2020/06/13 23:16:03 by lryst            ###   ########.fr       */
+/*   Updated: 2020/06/14 01:09:58 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Cub3D.h"
+#include "../cub3d.h"
 
 void	parse_line_2(t_cub3d *cub, t_check_struct *ret, int i)
 {
@@ -107,8 +107,8 @@ void	start_parsing(int fd, t_cub3d *cub)
 	parse_3(cub, &ret);
 	if (check_struct(&ret) == 1 && ret.map == 1)
 	{
-		cub->posX = ret.posX;
-		cub->posY = ret.posY;
+		cub->posx = ret.posx;
+		cub->posy = ret.posy;
 		cub->map_height = cub->count - 1;
 		cub->map_width = ft_strlen(cub->line);
 		if (cub->tmp != NULL && check_struct(&ret) == 1 && ret.position == 1)

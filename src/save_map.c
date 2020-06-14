@@ -6,11 +6,11 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 10:38:37 by lryst             #+#    #+#             */
-/*   Updated: 2020/06/14 00:02:14 by lryst            ###   ########.fr       */
+/*   Updated: 2020/06/14 01:09:58 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Cub3D.h"
+#include "../cub3d.h"
 
 int		check_map_space(char **map, int j, int i)
 {
@@ -61,7 +61,7 @@ int		check_closed_map(t_cub3d *cub)
 		cub->closed_map[i] = NULL;
 		cub->closed_map[i] = ft_strdup(cub->map.line[i]);
 	}
-	ret = parcour_closed_map(cub->closed_map, cub->posX, cub->posY,
+	ret = parcour_closed_map(cub->closed_map, cub->posx, cub->posy,
 	cub->map_height);
 	i = -1;
 	check_nbr_of_sprite(cub);

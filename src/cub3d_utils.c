@@ -6,11 +6,11 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 23:06:16 by lryst             #+#    #+#             */
-/*   Updated: 2020/06/13 23:16:29 by lryst            ###   ########.fr       */
+/*   Updated: 2020/06/14 01:09:58 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Cub3D.h"
+#include "../cub3d.h"
 
 void	check_bad_line(char **tab, int i)
 {
@@ -63,9 +63,9 @@ int		check_position(t_check_struct *ret, t_cub3d *cub)
 		if (ft_strspn(POSITION, cub->line[i]) == 1)
 		{
 			++ret->position;
-			ret->posY = i;
+			ret->posy = i;
 			cub->orientation = cub->line[i];
-			ret->posX = ret->count;
+			ret->posx = ret->count;
 		}
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 14:11:35 by lryst             #+#    #+#             */
-/*   Updated: 2020/02/25 17:04:22 by lryst            ###   ########.fr       */
+/*   Updated: 2020/06/14 00:23:34 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		ft_intline(char **line, char **tmp)
 {
 	char	*str;
 	int		i;
-	
+
 	i = ft_strspm(*tmp, '\n');
 	if (i != -1)
 	{
@@ -63,7 +63,8 @@ int		get_next_line(int fd, char **line)
 		return (-1);
 	if (!tmp)
 		tmp = ft_newstring(0);
-	while (ft_strspm(tmp, '\n') == -1 && (ret = read(fd, buf, GNL_BUF_SIZE)) > 0)
+	while (ft_strspm(tmp, '\n') == -1 && (ret = read(fd,
+	buf, GNL_BUF_SIZE)) > 0)
 	{
 		buf[ret] = '\0';
 		if (!(tmp = ft_strjoinfree(tmp, buf)))

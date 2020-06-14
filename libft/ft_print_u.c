@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 13:42:10 by lryst             #+#    #+#             */
-/*   Updated: 2020/02/26 20:03:53 by lryst            ###   ########.fr       */
+/*   Updated: 2020/06/14 00:53:52 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_u_left(t_flags *prt, char q, va_list args, size_t *count)
 	u = va_arg(args, unsigned int);
 	c = ft_unsigned_len(u);
 	if (u == 0 && prt->nbr_p == 0)
-		return;
+		return ;
 	if ((unsigned int)(prt->nbr_f) > c)
 	{
 		i = (prt->nbr_f) - c;
@@ -57,7 +57,7 @@ void	ft_u_left_p(t_flags *prt, char q, va_list args, size_t *count)
 	u = va_arg(args, unsigned int);
 	c = ft_unsigned_len(u);
 	if (u == 0 && prt->nbr_p == 0)
-		return;
+		return ;
 	if (c < (unsigned int)prt->nbr_p)
 	{
 		while (n++ < ((unsigned int)(prt->nbr_p) - c))
@@ -99,7 +99,7 @@ void	ft_u_width_p(t_flags *prt, va_list args, size_t *count)
 	{
 		while (i++ < prt->nbr_f)
 			ft_putchar_c(' ', count);
-		return;
+		return ;
 	}
 	if (prt->nbr_f > 0)
 		ft_u_width_p2(prt, len, count);

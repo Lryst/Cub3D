@@ -6,7 +6,7 @@
 /*   By: lryst <lryst@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 17:59:39 by lryst             #+#    #+#             */
-/*   Updated: 2019/12/17 11:18:23 by lryst            ###   ########.fr       */
+/*   Updated: 2020/06/14 00:25:53 by lryst            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ char			*ft_itoa_base(long value, char *base)
 	char	*ret;
 	int		number_size;
 	int		i;
-    int     base_size;
+	int		base_size;
 
-    base_size = ft_strlen(base);
-    value < 0 ? value = 4294967295 - value : 0;
+	base_size = ft_strlen(base);
+	value < 0 ? value = 4294967295 - value : 0;
 	number_size = digit_count(value, base_size);
 	ret = (char *)malloc(sizeof(char) * (number_size + 1));
 	i = 1;

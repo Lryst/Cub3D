@@ -6,7 +6,7 @@
 #    By: lryst <lryst@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/12 18:37:25 by lryst             #+#    #+#              #
-#    Updated: 2020/06/13 23:06:36 by lryst            ###   ########.fr        #
+#    Updated: 2020/06/14 00:50:22 by lryst            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRC_PATH = src
 SRC_NAME = main.c parse.c color.c init_check_struct.c resolution.c\
 save_map.c textures.c ray_casting.c move.c set_texture.c wall_side.c\
 sprites.c print.c cub3d_utils.c free.c save_bmp.c init_player.c main_utils.c\
-mlx_handle.c rotation.c\
+mlx_handle.c rotation.c get_sprite.c\
 
 OBJ_PATH = obj
 OBJ_NAME = $(SRC_NAME:.c=.o)
